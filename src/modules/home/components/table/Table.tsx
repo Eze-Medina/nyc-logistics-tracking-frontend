@@ -1,5 +1,5 @@
 import type { Item } from '../../../../interfaces/item.interface'
-import style from './table.module.css'
+// import style from './table.module.css'
 
 interface Props {
   items: Item[]

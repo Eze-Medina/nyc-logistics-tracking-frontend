@@ -1,0 +1,17 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  padding-left:30px;
+}
+
+.navbar h1 {
+  font-size: 1.8em;
+}
+
+.list {
+  list-style: none;
+}
+
+.list_item {
+  border-bottom: 2px solid black;
+}

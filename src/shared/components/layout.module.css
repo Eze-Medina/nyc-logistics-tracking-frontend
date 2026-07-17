@@ -1,0 +1,5 @@
+.layout_main {
+  display: grid;
+  grid-template-columns: 0.05fr 1fr 0.05fr;
+  background-color: #F8F9FF;
+}

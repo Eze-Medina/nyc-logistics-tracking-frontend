@@ -1,0 +1,11 @@
+.container h2{
+  margin-left: 25px;
+}
+
+.guide_forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 25px;
+  margin: 25px;
+}

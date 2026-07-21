@@ -4,7 +4,7 @@ interface Props {
   labelName: string,
   name: string,
   value: string,
-  list: string[][],
+  list: string[],
   onInputChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -15,7 +15,7 @@ export const InputSelect = (props: Props) => {
       <select className={style.guide_form__input} name={props.name} value={props.value} onChange={props.onInputChange}>
         {
           props.list.map((element, idx) => (
-            <option key={idx} value={element[0]}>{element[1]}</option>
+            <option key={idx} value={element}>{element}</option>
           ))
         }
       </select>

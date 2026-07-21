@@ -3,18 +3,26 @@ import type { Item } from "../../interfaces/item.interface";
 
 export class DataGuide implements CreateGuideDto {
 
-  senderName!: string;
-  senderAddress!: string;
-  senderNumber!: number;
-  senderDirection!: string;
-  receiverName!: string;
-  receiverAddress!: string;
-  receiverNumber!: number;
-  receiverDirection!: string;
-  provinceOrigin!: string;
-  cityOrigin!: string;
-  provinceDestination!: string;
-  cityDestination!: string;
+  sender!: {
+    name: string,
+    email: string,
+    phone: string,
+    address: string
+  }
+  receiver!: {
+    name: string,
+    email: string,
+    phone: string,
+    address: string
+  }
+  origin!: {
+    province: string,
+    city: string
+  }
+  destination!: {
+    province: string,
+    city: string
+  }
   items!: Item[];
 
   constructor(data: CreateGuideDto) {

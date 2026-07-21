@@ -14,19 +14,26 @@ import { Guide } from '../../../../../shared/components/guideShipment/Guide';
 import style from './guideform.module.css'
 
 const formData: Form = {
-  senderName: 'Ezequiel Medina',
-  senderAddress: 'tec.medinaeze@gmail.com',
-  senderNumber: 3425502666,
-  senderDirection: 'Las heras 7460',
-  provinceOrigin: 'STE',
-  cityOrigin: 'STO',
-
-  receiverName: 'Pochito Lopez',
-  receiverAddress: 'poc.lopez@gmail.com',
-  receiverNumber: 3425406333,
-  receiverDirection: 'Los granitos 1430',
-  provinceDestination: 'STE',
-  cityDestination: 'STO',
+  sender: {
+    name: 'Ezequiel Medina',
+    email: 'tec.medinaeze@gmail.com',
+    phone: '3425502666',
+    address: 'Las heras 7460',
+  },
+  receiver: {
+    name: 'Pochito Lopez',
+    email: 'poc.lopez@gmail.com',
+    phone: '3425406333',
+    address: 'Los granitos 1430',
+  },
+  origin: {
+    province: "Santa Fe",
+    city: "Santa Fe"
+  },
+  destination: {
+    province: "Santa Fe",
+    city: "Santo Tomé"
+  }
 }
 
 const items: Item[] = [
@@ -57,10 +64,10 @@ export const GuideForm = () => {
   const [newItems, setNewItems] = useState<Item[]>(items);
   const [data, setData] = useState<DataGuide>(new DataGuide({
     ...formState,
-    senderNumber: Number(formState.senderNumber),
-    receiverNumber: Number(formState.receiverNumber),
     items: [],
   }));
+
+  const [first, setfirst] = useState({})
 
   const handleAddItem = (newItem: Item) => {
     setNewItems(prev => [...prev, newItem]);
@@ -70,8 +77,6 @@ export const GuideForm = () => {
     setData(
       new DataGuide({
         ...formState,
-        senderNumber: Number(formState.senderNumber),
-        receiverNumber: Number(formState.receiverNumber),
         items: newItems.map(item => ({
           ...item,
           quantity: Number(item.quantity),
@@ -88,6 +93,11 @@ export const GuideForm = () => {
 
     createGuide(data)
 
+    setfirst({
+      ...data
+    })
+
+    console.log(first)
     // generar pdf a partir del objeto respuesta del createGuide, utilizando un useEffecte para dispara comportamiento al recibirlo
 
     onResetForm();
@@ -98,20 +108,20 @@ export const GuideForm = () => {
       <h2>Create guide</h2>
       <form className={style.forms} onSubmit={sendForm}>
         <SenderForm
-          senderName={formState.senderName}
-          senderAddress={formState.senderAddress}
-          senderNumber={formState.senderNumber}
-          senderDirection={formState.senderDirection}
-          provinceOrigin={formState.provinceOrigin}
-          cityOrigin={formState.cityOrigin}
+          senderName={formState.sender.name}
+          senderEmail={formState.sender.email}
+          senderPhone={formState.sender.phone}
+          senderAddress={formState.sender.address}
+          provinceOrigin={formState.origin.province}
+          cityOrigin={formState.origin.city}
           onInputChange={onInputChange} />
         <ReceiverForm
-          receiverName={formState.receiverName}
-          receiverAddress={formState.receiverAddress}
-          receiverNumber={formState.receiverNumber}
-          receiverDirection={formState.receiverDirection}
-          provinceDestination={formState.provinceDestination}
-          cityDestination={formState.cityDestination}
+          receiverName={formState.receiver.name}
+          receiverEmail={formState.receiver.email}
+          receiverPhone={formState.receiver.phone}
+          receiverAddress={formState.receiver.address}
+          provinceDestination={formState.destination.province}
+          cityDestination={formState.destination.city}
           onInputChange={onInputChange} />
         <ItemsForm
           onAddItem={handleAddItem}

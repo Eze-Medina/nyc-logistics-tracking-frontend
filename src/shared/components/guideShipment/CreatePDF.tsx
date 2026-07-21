@@ -157,21 +157,21 @@ export const CreatePDF = (props: dataType) => {
             <Text style={styles.boxTitle}>Origen / Remitente</Text>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
-              <Text style={styles.fieldValue}>{props.data.senderName}</Text>
+              <Text style={styles.fieldValue}>{props.data.sender.name}</Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
-              <Text style={styles.fieldValue}>{props.data.senderDirection}</Text>
+              <Text style={styles.fieldValue}>{props.data.sender.address}</Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.cityOrigin}, {props.data.provinceOrigin}
+                {props.data.origin.city}, {props.data.origin.province}
               </Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Teléfono:</Text>
-              <Text style={styles.fieldValue}>{props.data.senderNumber}</Text>
+              <Text style={styles.fieldValue}>{props.data.sender.phone}</Text>
             </View>
           </View>
 
@@ -179,21 +179,21 @@ export const CreatePDF = (props: dataType) => {
             <Text style={styles.boxTitle}>Destino / Destinatario</Text>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
-              <Text style={styles.fieldValue}>{props.data.receiverName}</Text>
+              <Text style={styles.fieldValue}>{props.data.sender.name}</Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
-              <Text style={styles.fieldValue}>{props.data.senderDirection}</Text>
+              <Text style={styles.fieldValue}>{props.data.sender.address}</Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.cityDestination}, {props.data.provinceDestination}
+                {props.data.destination.city}, {props.data.destination.province}
               </Text>
             </View>
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Teléfono:</Text>
-              <Text style={styles.fieldValue}>{props.data.receiverNumber}</Text>
+              <Text style={styles.fieldValue}>{props.data.receiver.phone}</Text>
             </View>
           </View>
         </View>

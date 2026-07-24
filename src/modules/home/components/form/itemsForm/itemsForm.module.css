@@ -1,0 +1,15 @@
+.itemForm { 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
+  margin-bottom: 25px;
+  gap: 15px;
+}
+
+.itemForm_button { 
+  border: 0px solid;
+  background-color: #2e2e2e; 
+  color: #dfdfdf;
+  border-radius: 5px; 
+  padding: 10px;
+  margin: 0px 0px 15px 0px 
+}

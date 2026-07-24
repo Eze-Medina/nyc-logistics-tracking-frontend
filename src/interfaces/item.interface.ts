@@ -3,4 +3,5 @@ export interface Item {
   description: string;
   paid: number | '';
   remainingAmount: number | '';
+  currentAccount: boolean,
 }

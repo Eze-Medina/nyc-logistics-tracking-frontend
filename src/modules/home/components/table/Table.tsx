@@ -14,10 +14,10 @@ export const Table = (props: Props) => {
       <table style={{ borderCollapse: 'collapse' }}>
         <thead>
           <tr style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', border: '1px solid #ccc' }}>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>QUANTITY</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>DESCRIPTION</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>PAID</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>REMAINING AMOUNT</th>
+            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>CANTIDAD</th>
+            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>DESCRIPCION</th>
+            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>PAGADO</th>
+            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>A COBRAR</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@ export const Table = (props: Props) => {
                 <td style={{ border: '1px solid #ccc', padding: '5px' }}>{item.quantity}</td>
                 <td style={{ border: '1px solid #ccc', padding: '5px' }}>{item.description}</td>
                 <td style={{ border: '1px solid #ccc', padding: '5px', textAlign: 'end' }}>$ {item.paid}</td>
-                <td style={{ border: '1px solid #ccc', padding: '5px', textAlign: 'end' }}>$ {item.remainingAmount}</td>
+                <td style={{ border: '1px solid #ccc', padding: '5px', textAlign: 'end' }}>{item.currentAccount ? 'Cuenta corriente' : `$ ${item.remainingAmount}`}</td>
               </tr>
             )
             )

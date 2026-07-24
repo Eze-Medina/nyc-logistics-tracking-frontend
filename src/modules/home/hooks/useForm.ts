@@ -1,29 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-// Agregamos <T extends object> para capturar la estructura exacta que le pases
 export const useForm = <T extends object>(initialForm: T) => {
-
   const [formState, setFormState] = useState<T>(initialForm);
 
-  // Mantenemos sincronizado el estado si el initialForm cambia externamente
   useEffect(() => {
     setFormState(initialForm);
   }, [initialForm]);
 
-  // Tipamos el target correctamente admitiendo inputs, selects y textareas
-  const onInputChange = ({ target }: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = target;
-    setFormState({
-      ...formState,
-      [name]: value
-    });
+  const onInputChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value, type } = event.target;
+
+    const input = event.target as HTMLInputElement;
+
+    setFormState((prev) => ({
+      ...prev,
+      [name]:
+        type === "radio" || type === "checkbox"
+          ? input.checked
+          : value,
+    }));
   };
 
   const onResetForm = () => {
     setFormState(initialForm);
   };
 
-  // Retornamos el estado esparcido conservando los tipos exactos de T
   return {
     ...formState,
     formState,

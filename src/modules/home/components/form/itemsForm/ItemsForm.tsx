@@ -1,7 +1,8 @@
-import { useForm } from "../../../hooks/useForm";
 import type { Item } from "../../../../../interfaces/item.interface";
-
+import { useForm } from "../../../hooks/useForm";
 import { InputText } from "../../input/text/InputText"
+
+import style from './itemsForm.module.css'
 
 interface Props {
   onAddItem: (item: Item) => void;
@@ -12,6 +13,7 @@ const formData: Item = {
   description: '',
   paid: '',
   remainingAmount: '',
+  currentAccount: false,
 }
 
 export const ItemsForm = (props: Props) => {
@@ -25,16 +27,29 @@ export const ItemsForm = (props: Props) => {
 
   return (
     <div>
-      <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: '1fr 1fr 1fr 1fr', marginBottom: '25px' }}>
-        <InputText type='number' labelName='QUANTITY' name='quantity' value={formState.quantity} placeholder='Items quantity' onInputChange={onInputChange} />
-        <InputText type='text' labelName='DESCRIPTION' name='description' value={formState.description} placeholder='Item description' onInputChange={onInputChange} />
-        <InputText type='number' labelName='PAID' name='paid' value={formState.paid} placeholder='Paid amount' onInputChange={onInputChange} />
-        <InputText type='number' labelName='REMAINING AMOUNT' name='remainingAmount' value={formState.remainingAmount} placeholder='Remaining Amount' onInputChange={onInputChange} />
+      <div className={style.itemForm} >
+        <InputText type='number' labelName='Cantidad' name='quantity' value={formState.quantity} placeholder='Cantidad de items' onInputChange={onInputChange} />
+        <InputText type='text' labelName='Descripción' name='description' value={formState.description} placeholder='Descripción de items' onInputChange={onInputChange} />
+        <InputText type='number' labelName='Pagado' name='paid' value={formState.paid} placeholder='Cantidad a pagar' onInputChange={onInputChange} />
+        <InputText type='number' labelName='A cobrar' name='remainingAmount' value={formState.remainingAmount} placeholder='Cantidad a cobrar' onInputChange={onInputChange} />
       </div>
-      <button
-        style={{ border: '0px solid', backgroundColor: '#2e2e2e', color: '#dfdfdf', borderRadius: '5px', padding: '10px', margin: '0px 0px 15px 0px' }}
-        type='button'
-        onClick={addItem}>Agregar</button>
-    </div>
+      <div>
+        <label>
+          <input
+            type="radio"
+            name="currentAccount"
+            checked={formState.currentAccount}
+            onChange={onInputChange}
+          />
+
+          Cuenta corriente
+        </label>
+        <button
+          className={style.itemForm_button}
+          type='button'
+          onClick={addItem}>Agregar
+        </button>
+      </div>
+    </div >
   )
 }

@@ -5,7 +5,7 @@ import style from './homepage.module.css'
 export const HomePage = () => {
   return (
     <section className={style.container}>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <GuideForm />
     </section>
   )

@@ -19,4 +19,9 @@ export interface Form {
     province: string,
     city: string
   }
+  sure: {
+    secure: false,
+    declaredValue: number,
+    sureValue: number
+  }
 }

@@ -12,6 +12,7 @@ import { Table } from '../../table/Table';
 import { Guide } from '../../../../../shared/components/guideShipment/Guide';
 
 import style from './guideform.module.css'
+import { InputText } from '../../input/text/InputText';
 
 const formData: Form = {
   sender: {
@@ -33,6 +34,11 @@ const formData: Form = {
   destination: {
     province: "Santa Fe",
     city: "Santo Tomé"
+  },
+  sure: {
+    secure: false,
+    declaredValue: 3000,
+    sureValue: 0
   }
 }
 
@@ -41,19 +47,22 @@ const items: Item[] = [
     quantity: 10,
     description: 'Item 1',
     paid: 10000,
-    remainingAmount: 4500
+    remainingAmount: 4500,
+    currentAccount: false,
   },
   {
     quantity: 10,
     description: 'Item 2',
     paid: 14000,
-    remainingAmount: 5050
+    remainingAmount: 5050,
+    currentAccount: false,
   },
   {
     quantity: 10,
     description: 'Item 3',
     paid: 3000,
-    remainingAmount: 500
+    remainingAmount: 500,
+    currentAccount: true,
   }
 ]
 
@@ -105,7 +114,7 @@ export const GuideForm = () => {
 
   return (
     <section className={style.container}>
-      <h2>Create guide</h2>
+      <h2>Generar guia</h2>
       <form className={style.forms} onSubmit={sendForm}>
         <SenderForm
           senderName={formState.sender.name}
@@ -128,6 +137,14 @@ export const GuideForm = () => {
         />
 
         <Table items={newItems} />
+
+        <InputText
+          type='text'
+          labelName='Valor declarado'
+          name='declaredValue'
+          placeholder='valor total declarado'
+          value={formState.sure.declaredValue}
+          onInputChange={onInputChange} />
 
         <div style={{
           gridColumnStart: '1',

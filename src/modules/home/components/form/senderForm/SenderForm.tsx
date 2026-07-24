@@ -1,6 +1,8 @@
 import { InputText } from '../../input/text/InputText'
 import { InputSelect } from '../../input/select/InputSelect'
 
+import style from './senderForm.module.css'
+
 interface Props {
   senderName: string,
   senderEmail: string,
@@ -15,13 +17,13 @@ const locations = ['Santo Tome', 'Santa Fe', 'Rafaela', 'Sunchales', 'San Franci
 
 export const SenderForm = (props: Props) => {
   return (
-    <div style={{ display: 'grid', gap: '15px', gridTemplateColumns: '1fr 1fr 1fr', marginBottom: '25px' }}>
-      <InputText type='text' labelName='SENDER NAME' name='senderName' value={props.senderName} placeholder='Full name or Company' onInputChange={props.onInputChange} />
-      <InputText type='text' labelName='SENDER EMAIL' name='senderEmail' value={props.senderEmail} placeholder='Full email' onInputChange={props.onInputChange} />
-      <InputText type='tel' labelName='SENDER PHONE' name='senderPhone' value={props.senderPhone} placeholder='Celphone number' onInputChange={props.onInputChange} />
-      <InputSelect labelName='PROVINCE ORIGIN' name='provinceOrigin' value={props.provinceOrigin} onInputChange={props.onInputChange} list={locations} />
-      <InputSelect labelName='CITY ORIGIN' name='cityOrigin' value={props.cityOrigin} onInputChange={props.onInputChange} list={locations} />
-      <InputText type='text' labelName='SENDER ADDRESS' name='senderAddress' value={props.senderAddress} placeholder='full Address' onInputChange={props.onInputChange} />
+    <div className={style.senderForm}>
+      <InputText type='text' labelName='Nombre' name='senderName' value={props.senderName} placeholder='Nombre completo o empresa' onInputChange={props.onInputChange} />
+      <InputText type='text' labelName='Email' name='senderEmail' value={props.senderEmail} placeholder='Correo electronico' onInputChange={props.onInputChange} />
+      <InputText type='tel' labelName='Telefono' name='senderPhone' value={props.senderPhone} placeholder='Número de telefono' onInputChange={props.onInputChange} />
+      <InputSelect labelName='Provincia' name='provinceOrigin' value={props.provinceOrigin} onInputChange={props.onInputChange} list={locations} />
+      <InputSelect labelName='Ciudad' name='cityOrigin' value={props.cityOrigin} onInputChange={props.onInputChange} list={locations} />
+      <InputText type='text' labelName='Dirección' name='senderAddress' value={props.senderAddress} placeholder='Dirección de remitente' onInputChange={props.onInputChange} />
     </div>
   )
 }

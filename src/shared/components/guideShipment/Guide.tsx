@@ -4,14 +4,15 @@ import type { DataGuide } from "../../helpers/DataGuide";
 
 interface dataType {
   data: DataGuide
+  numero: number
 }
 
 export const Guide = (data: dataType) => {
   return (
     <div>
       <PDFDownloadLink
-        document={<CreatePDF data={data.data} />}
-        fileName={`guia-envio-0003.pdf`}
+        document={<CreatePDF data={data.data} numero={data.numero} />}
+        fileName={`guia-envio-${data.numero}.pdf`}
         style={{
           padding: "12px 24px",
           backgroundColor: "#1a1a1a",

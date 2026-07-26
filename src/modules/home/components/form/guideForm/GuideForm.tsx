@@ -6,6 +6,7 @@ import { DataGuide } from '../../../../../shared/helpers/DataGuide';
 import type { Form, Item } from '../../../../../interfaces/index';
 
 import { ItemsForm, ReceiverForm, SenderForm, SureForm } from '../index';
+import { InputText } from '../../input';
 import { Guide } from '../../../../../shared/components/guideShipment/Guide';
 
 import style from './guideform.module.css'
@@ -36,6 +37,9 @@ const formData: Form = {
     declaredValue: 0,
     sureValue: 0,
   },
+  guia: {
+    numero: 0
+  }
 };
 
 const items: Item[] = [];
@@ -131,8 +135,10 @@ export const GuideForm = () => {
           onInputChange={onInputChange} />
 
         <div className={style.div_button} >
-          <Guide data={data} />
+          <InputText type='number' labelName='Número guia' name='guia.numero' placeholder='numero de guia' value={formState.guia.numero} onInputChange={onInputChange} />
+          <Guide data={data} numero={formState.guia.numero} />
           <button
+            style={{ display: 'none' }}
             className={style.button}
             type='submit'>
             Crear guia

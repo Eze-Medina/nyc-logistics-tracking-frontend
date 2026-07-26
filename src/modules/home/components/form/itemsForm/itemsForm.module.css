@@ -4,14 +4,14 @@
   padding: 15px;
 }
 
-.itemForm { 
+.item_form { 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr; 
   margin-bottom: 25px;
   gap: 15px;
 }
 
-.itemForm_button { 
+.item_form_button { 
   border: 0px solid;
   background-color: #2e2e2e; 
   color: #dfdfdf;
@@ -27,4 +27,12 @@
   align-items: center;
   gap: 10px;
   margin: 20px 0px;
+}
+
+
+@media (max-width: 768px) {
+  .item_form {
+   display: flex;
+   flex-direction: column;
+  }
 }

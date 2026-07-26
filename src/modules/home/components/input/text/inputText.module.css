@@ -14,3 +14,10 @@
   padding: 10px;
   font-family: "Geist";
 }
+
+@media (max-width: 768px) {
+  .guide_form__field{
+   display: flex;
+   flex-direction: column;
+  }
+}

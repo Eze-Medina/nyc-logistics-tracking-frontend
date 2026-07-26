@@ -17,9 +17,9 @@ export const SureForm = (props: Props) => {
           <label> Contratar seguro </label>
           <input type="checkbox" name="sure.secure" checked={props.secure} onChange={props.onCheckboxChange} />
         </div>
-        <div className={style.guide_form__field}>
-          <label className={style.guide_form__label}>Valor declarado</label>
-          <input className={style.guide_form__input} type='number' placeholder='Valor declarado' name='sure.declaredValue' value={props.declaredValue} onChange={props.onInputChange} />
+        <div className={style.sure_form__field}>
+          <label className={style.sure_form__label}>Valor declarado</label>
+          <input className={style.sure_form__input} type='number' placeholder='Valor declarado' name='sure.declaredValue' value={props.declaredValue} onChange={props.onInputChange} />
         </div>
       </div>
       <p>Valor seguro: {Math.round(props.declaredValue * 0.05)}</p>

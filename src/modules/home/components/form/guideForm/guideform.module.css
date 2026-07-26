@@ -26,3 +26,16 @@
   font-family: "JetBrainsMono";
   font-size: 0.95em;
 }
+
+@media (max-width: 768px) {
+  .container {
+    width: 80vw;
+   display: flex;
+   flex-direction: column;
+  }
+
+  .div_button {
+    display: flex;
+    flex-direction: column;
+  }
+}

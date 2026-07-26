@@ -15,20 +15,33 @@
   gap: 25px;
 }
 
-.guide_form__field {
+.sure_form__field {
   display: flex;
   gap: 10px;
 }
 
-.guide_form__label {
+.sure_form__label {
   display: flex;
   align-items: center;
 }
 
-.guide_form__input {
+.sure_form__input {
   outline: none;
   border-radius: 3px;
   border: 1px solid rgb(190, 190, 190);
   padding: 10px;
   font-family: "Geist";
+}
+
+@media (max-width: 768px) {
+  .sure_form {
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+  }
+
+  .sure_form__field {
+    display: flex;
+    flex-direction: column;
+  }
 }

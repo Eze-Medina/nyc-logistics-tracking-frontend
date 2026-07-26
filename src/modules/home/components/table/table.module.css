@@ -1,6 +1,12 @@
+.table_container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .table {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
 }
 
 .table_tr { 
@@ -16,6 +22,8 @@
 }
 
 .table_td { 
+  display: flex;
+  align-items: center;
   text-align: start;
   border-bottom: 1px solid #ccc;
   border-left: 1px solid #ccc;
@@ -26,6 +34,7 @@
 .table_td_number {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #ccc;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
@@ -43,6 +52,11 @@
   align-items: center;
 }
 
+.table_th:last-child,
+.table_td:last-child {
+  width: 50px;
+  min-width: 50px;
+}
 .delete_button {
   background-color: rgba(255, 255, 255, 0);
   border: 1px solid;

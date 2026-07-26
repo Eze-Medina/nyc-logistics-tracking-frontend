@@ -5,6 +5,7 @@ import { styles } from './createPDF.styles'
 
 interface dataType {
   data: DataGuide;
+  numero: number;
 }
 
 export const CreatePDF = (props: dataType) => {
@@ -43,7 +44,7 @@ export const CreatePDF = (props: dataType) => {
 
           <View style={styles.docTitleBlock}>
             <Text style={styles.docTitle}>Guía de Envío</Text>
-            <Text style={styles.docNumber}> N° 'falta implementar' </Text>
+            <Text style={styles.docNumber}> N° {props.numero} </Text>
             <Text style={styles.docNumber}> Fecha: {new Date().toLocaleDateString('es-AR')} </Text>
 
             <View style={styles.badge}> <Text>Documento no válido como factura</Text> </View>
@@ -51,9 +52,9 @@ export const CreatePDF = (props: dataType) => {
         </View>
 
         {/* Tracking */}
-        <Text style={{ fontSize: 8, marginBottom: 8, color: '#333' }}>
-          N° de Seguimiento de envío: 'falta implementar'
-        </Text>
+        {/* <Text style={{ fontSize: 8, marginBottom: 8, color: '#333' }}>
+          N° de Seguimiento de envío: {props.numero}
+        </Text> */}
 
         {/* Origen / Destino */}
         <View style={styles.section}>

@@ -10,8 +10,8 @@ interface Props {
 
 export const Table = (props: Props) => {
   return (
-    <div className={style.table}>
-      <table style={{ borderCollapse: 'collapse' }}>
+    <div className={style.table_container}>
+      <table className={style.table}>
         <thead>
           <tr className={style.table_tr}>
             <th className={style.table_th}>CANTIDAD</th>
@@ -21,32 +21,36 @@ export const Table = (props: Props) => {
             <th className={style.table_th}></th>
           </tr>
         </thead>
+
         <tbody>
-          {
-            props.items.map((item, idx) => (
-              <tr key={idx} className={style.table_tr}>
-                <td className={style.table_td} style={{ textAlign: 'center' }}>{item.quantity}</td>
-                <td className={style.table_td}>{item.description}</td>
-                <td className={style.table_td_number}><p>$</p> {item.paid}</td>
-                <td className={style.table_td_number}>{item.currentAccount
+          {props.items.map((item, idx) => (
+            <tr key={idx} className={style.table_tr}>
+              <td className={style.table_td} style={{ textAlign: 'center' }}> {item.quantity} </td>
+              <td className={style.table_td}> {item.description} </td>
+              <td className={style.table_td_number}> <p>$</p> {item.paid} </td>
+              <td className={style.table_td_number}>
+                {item.currentAccount
                   ? 'Cuenta corriente'
-                  : <div> <p>$</p> {item.remainingAmount} </div>
+                  : (<div> <p>$</p> {item.remainingAmount} </div>)
                 }
-                </td>
-                <td className={style.table_td} style={{ textAlign: 'center' }}>
-                  <button
-                    className={style.delete_button}
-                    type='button'
-                    onClick={() => props.onDelete(idx)}
-                  >
-                    <X width={15} color="#e21919" stroke-width="5" />
-                  </button>
-                </td>
-              </tr>
-            ))
-          }
+              </td>
+              <td className={style.table_td} style={{ textAlign: 'center' }}>
+                <button
+                  className={style.delete_button}
+                  type="button"
+                  onClick={() => props.onDelete(idx)}
+                >
+                  <X
+                    width={15}
+                    color="#e21919"
+                    strokeWidth="5"
+                  />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
-    </div >
+    </div>
   )
 }

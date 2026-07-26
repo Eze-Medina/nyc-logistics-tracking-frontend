@@ -31,7 +31,7 @@ export const ItemsForm = (props: Props) => {
 
   return (
     <div className={style.items}>
-      <div className={style.itemForm} >
+      <div className={style.item_form} >
         <InputText type='number' labelName='Cantidad' name='quantity' value={formState.quantity} placeholder='Cantidad de items' onInputChange={onInputChange} />
         <InputText type='text' labelName='Descripción' name='description' value={formState.description} placeholder='Descripción de items' onInputChange={onInputChange} />
         <InputText type='number' labelName='Pagado' name='paid' value={formState.paid} placeholder='Cantidad a pagar' onInputChange={onInputChange} />
@@ -41,7 +41,7 @@ export const ItemsForm = (props: Props) => {
       <div className={style.items_div}>
         <Checkbox labelName='Cuenta corriente' name='currentAccount' value={formState.currentAccount} onCheckboxChange={onCheckboxChange} />
         <button
-          className={style.itemForm_button}
+          className={style.item_form_button}
           type='button'
           onClick={addItem}>Agregar
         </button>

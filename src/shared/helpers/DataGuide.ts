@@ -23,7 +23,12 @@ export class DataGuide implements CreateGuideDto {
     province: string,
     city: string
   }
-  items!: Item[];
+  sure!: {
+    secure: false,
+    declaredValue: number,
+    sureValue: number
+  }
+  items!: Item[]
 
   constructor(data: CreateGuideDto) {
     Object.assign(this, data);

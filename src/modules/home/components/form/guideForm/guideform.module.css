@@ -1,11 +1,28 @@
-.container h2{
-  margin-left: 25px;
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-.guide_forms {
+.forms {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 25px;
-  margin: 25px;
+}
+
+.div_button {
+  display: flex;
+  align-items: center;  
+  gap: 25px;   
+}
+
+.button {
+  color: #fff;
+  background-color: #1a1a1a;
+  border: 0px solid;
+  border-radius: 6px;
+  padding: 12px 24px;
+  margin: 15px 0px 15px 0px;
+  font-family: "JetBrainsMono";
+  font-size: 0.95em;
 }

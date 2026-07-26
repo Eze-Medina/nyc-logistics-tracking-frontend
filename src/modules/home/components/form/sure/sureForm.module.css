@@ -1,0 +1,34 @@
+.sure {
+  border: 2px solid rgb(196, 195, 195);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.sure h2 {
+  font-size: 1.3em;
+  margin: 0px 0px 15px;
+}
+
+.sure_form {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.guide_form__field {
+  display: flex;
+  gap: 10px;
+}
+
+.guide_form__label {
+  display: flex;
+  align-items: center;
+}
+
+.guide_form__input {
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  font-family: "Geist";
+}

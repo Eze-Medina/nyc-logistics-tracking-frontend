@@ -1,6 +1,16 @@
-.receiverForm { 
+.receiver {
+  border: 2px solid rgb(196, 195, 195);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.receiver h2{
+  font-size: 1.3em;
+  margin: 0px 0px 15px;
+}
+
+.receiver_form { 
   display: grid;
   gap: 15px; 
   grid-template-columns: 1fr 1fr 1fr;
-  margin-bottom: 25px
 }

@@ -21,5 +21,10 @@ export interface CreateGuideDto {
     province: string,
     city: string
   }
+  sure: {
+    secure: boolean,
+    declaredValue: number,
+    sureValue: number
+  }
   items: Item[];
 }

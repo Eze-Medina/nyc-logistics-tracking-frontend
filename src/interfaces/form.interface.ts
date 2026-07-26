@@ -20,7 +20,7 @@ export interface Form {
     city: string
   }
   sure: {
-    secure: false,
+    secure: boolean,
     declaredValue: number,
     sureValue: number
   }

@@ -17,13 +17,16 @@ const locations = ['Santo Tome', 'Santa Fe', 'Rafaela', 'Sunchales', 'San Franci
 
 export const ReceiverForm = (props: Props) => {
   return (
-    <div className={style.receiverForm}>
-      <InputText type='text' labelName='Nombre' name='receiverName' value={props.receiverName} placeholder='Nombre completo o empresa' onInputChange={props.onInputChange} />
-      <InputText type='text' labelName='Email' name='receiverEmail' value={props.receiverEmail} placeholder='Correo electronico' onInputChange={props.onInputChange} />
-      <InputText type='tel' labelName='Telefono' name='receiverPhone' value={props.receiverPhone} placeholder='Número de telefono' onInputChange={props.onInputChange} />
-      <InputSelect labelName='Provincia' name='provinceDestination' value={props.provinceDestination} onInputChange={props.onInputChange} list={locations} />
-      <InputSelect labelName='Ciudad' name='cityDestination' value={props.cityDestination} onInputChange={props.onInputChange} list={locations} />
-      <InputText type='text' labelName='Dirección' name='receiverAddress' value={props.receiverAddress} placeholder='Dirección de destinaratio' onInputChange={props.onInputChange} />
+    <div className={style.receiver}>
+      <h2>Destinatario</h2>
+      <div className={style.receiver_form}>
+        <InputText type='text' labelName='Nombre' name='receiver.name' value={props.receiverName} placeholder='Nombre completo o empresa' onInputChange={props.onInputChange} />
+        <InputText type='text' labelName='Email' name='receiver.email' value={props.receiverEmail} placeholder='Correo electronico' onInputChange={props.onInputChange} />
+        <InputText type='tel' labelName='Telefono' name='receiver.phone' value={props.receiverPhone} placeholder='Número de telefono' onInputChange={props.onInputChange} />
+        <InputSelect labelName='Provincia' name='destination.province' value={props.provinceDestination} onInputChange={props.onInputChange} list={locations} />
+        <InputSelect labelName='Ciudad' name='destination.city' value={props.cityDestination} onInputChange={props.onInputChange} list={locations} />
+        <InputText type='text' labelName='Dirección' name='receiver.address' value={props.receiverAddress} placeholder='Dirección de destinaratio' onInputChange={props.onInputChange} />
+      </div>
     </div>
   )
 }

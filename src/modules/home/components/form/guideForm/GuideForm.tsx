@@ -2,73 +2,47 @@ import { useEffect, useState } from 'react';
 import { useForm } from '../../../hooks/useForm';
 import { createGuide } from '../../../helpers/create-guide';
 import { DataGuide } from '../../../../../shared/helpers/DataGuide';
-import type { Form } from '../../../../../interfaces/form.interface';
-import type { Item } from '../../../../../interfaces/item.interface';
 
-import { SenderForm } from '../senderForm/SenderForm';
-import { ReceiverForm } from '../receiverForm/ReceiverForm';
-import { ItemsForm } from '../itemsForm/ItemsForm';
-import { Table } from '../../table/Table';
+import type { Form, Item } from '../../../../../interfaces/index';
+
+import { ItemsForm, ReceiverForm, SenderForm, SureForm } from '../index';
 import { Guide } from '../../../../../shared/components/guideShipment/Guide';
 
 import style from './guideform.module.css'
-import { InputText } from '../../input/text/InputText';
 
 const formData: Form = {
   sender: {
-    name: 'Ezequiel Medina',
-    email: 'tec.medinaeze@gmail.com',
-    phone: '3425502666',
-    address: 'Las heras 7460',
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
   },
   receiver: {
-    name: 'Pochito Lopez',
-    email: 'poc.lopez@gmail.com',
-    phone: '3425406333',
-    address: 'Los granitos 1430',
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
   },
   origin: {
-    province: "Santa Fe",
-    city: "Santa Fe"
+    province: '',
+    city: '',
   },
   destination: {
-    province: "Santa Fe",
-    city: "Santo Tomé"
+    province: '',
+    city: '',
   },
   sure: {
     secure: false,
-    declaredValue: 3000,
-    sureValue: 0
-  }
-}
+    declaredValue: 0,
+    sureValue: 0,
+  },
+};
 
-const items: Item[] = [
-  {
-    quantity: 10,
-    description: 'Item 1',
-    paid: 10000,
-    remainingAmount: 4500,
-    currentAccount: false,
-  },
-  {
-    quantity: 10,
-    description: 'Item 2',
-    paid: 14000,
-    remainingAmount: 5050,
-    currentAccount: false,
-  },
-  {
-    quantity: 10,
-    description: 'Item 3',
-    paid: 3000,
-    remainingAmount: 500,
-    currentAccount: true,
-  }
-]
+const items: Item[] = [];
 
 export const GuideForm = () => {
 
-  const { formState, onInputChange, onResetForm } = useForm(formData);
+  const { formState, onInputChange, onCheckboxChange, onResetForm } = useForm(formData);
 
   const [newItems, setNewItems] = useState<Item[]>(items);
   const [data, setData] = useState<DataGuide>(new DataGuide({
@@ -82,6 +56,12 @@ export const GuideForm = () => {
     setNewItems(prev => [...prev, newItem]);
   };
 
+  const handleDeleteItem = (index: number) => {
+    setNewItems(prevItems =>
+      prevItems.filter((_, idx) => idx !== index)
+    );
+  };
+
   useEffect(() => {
     setData(
       new DataGuide({
@@ -92,6 +72,10 @@ export const GuideForm = () => {
           paid: Number(item.paid),
           remainingAmount: Number(item.remainingAmount),
         })),
+        sure: {
+          ...formState.sure,
+          sureValue: formState.sure.declaredValue * 0.05,
+        },
       })
     );
   }, [formState, newItems]);
@@ -124,6 +108,7 @@ export const GuideForm = () => {
           provinceOrigin={formState.origin.province}
           cityOrigin={formState.origin.city}
           onInputChange={onInputChange} />
+
         <ReceiverForm
           receiverName={formState.receiver.name}
           receiverEmail={formState.receiver.email}
@@ -132,50 +117,28 @@ export const GuideForm = () => {
           provinceDestination={formState.destination.province}
           cityDestination={formState.destination.city}
           onInputChange={onInputChange} />
+
         <ItemsForm
           onAddItem={handleAddItem}
-        />
+          onDeleteItem={handleDeleteItem}
+          items={newItems} />
 
-        <Table items={newItems} />
-
-        <InputText
-          type='text'
-          labelName='Valor declarado'
-          name='declaredValue'
-          placeholder='valor total declarado'
-          value={formState.sure.declaredValue}
+        <SureForm
+          secure={formState.sure.secure}
+          declaredValue={formState.sure.declaredValue}
+          sureValue={formState.sure.sureValue}
+          onCheckboxChange={onCheckboxChange}
           onInputChange={onInputChange} />
 
-        <div style={{
-          gridColumnStart: '1',
-          gridColumnEnd: '3',
-          gap: '15px',
-          display: 'flex'
-        }}>
-          <div style={{
-            display: 'flex',
-            gap: '15px',
-            alignItems: 'center'
-
-          }}>
-            <p style={{ margin: '5px' }}>TOTAL AMOUT</p>
-            <p style={{ margin: '5px' }}>$1000</p>
-          </div>
+        <div className={style.div_button} >
+          <Guide data={data} />
           <button
-            type='submit'
-            style={{
-              border: '0px solid',
-              backgroundColor: '#2e2e2e',
-              color: '#dfdfdf',
-              borderRadius: '5px',
-              padding: '10px',
-              margin: '15px 0px 15px 0px'
-            }}>
-            Create guide
+            className={style.button}
+            type='submit'>
+            Crear guia
           </button>
         </div>
       </form>
-      <Guide data={data} />
     </section >
   )
 }

@@ -1,11 +1,15 @@
 import type { Item } from "../../../../../interfaces/item.interface";
 import { useForm } from "../../../hooks/useForm";
+import { Checkbox } from "../../input/checkbox/Checkbox";
 import { InputText } from "../../input/text/InputText"
+import { Table } from "../../table/Table";
 
 import style from './itemsForm.module.css'
 
 interface Props {
   onAddItem: (item: Item) => void;
+  onDeleteItem: (index: number) => void;
+  items: Item[]
 }
 
 const formData: Item = {
@@ -18,7 +22,7 @@ const formData: Item = {
 
 export const ItemsForm = (props: Props) => {
 
-  const { formState, onInputChange, onResetForm } = useForm(formData);
+  const { formState, onInputChange, onCheckboxChange, onResetForm } = useForm(formData);
 
   const addItem = () => {
     props.onAddItem(formState);
@@ -26,30 +30,25 @@ export const ItemsForm = (props: Props) => {
   };
 
   return (
-    <div>
+    <div className={style.items}>
       <div className={style.itemForm} >
         <InputText type='number' labelName='Cantidad' name='quantity' value={formState.quantity} placeholder='Cantidad de items' onInputChange={onInputChange} />
         <InputText type='text' labelName='Descripción' name='description' value={formState.description} placeholder='Descripción de items' onInputChange={onInputChange} />
         <InputText type='number' labelName='Pagado' name='paid' value={formState.paid} placeholder='Cantidad a pagar' onInputChange={onInputChange} />
         <InputText type='number' labelName='A cobrar' name='remainingAmount' value={formState.remainingAmount} placeholder='Cantidad a cobrar' onInputChange={onInputChange} />
       </div>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="currentAccount"
-            checked={formState.currentAccount}
-            onChange={onInputChange}
-          />
 
-          Cuenta corriente
-        </label>
+      <div className={style.items_div}>
+        <Checkbox labelName='Cuenta corriente' name='currentAccount' value={formState.currentAccount} onCheckboxChange={onCheckboxChange} />
         <button
           className={style.itemForm_button}
           type='button'
           onClick={addItem}>Agregar
         </button>
       </div>
+
+      <Table items={props.items} onDelete={props.onDeleteItem} />
+
     </div >
   )
 }

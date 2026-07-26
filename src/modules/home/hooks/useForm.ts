@@ -1,27 +1,59 @@
-import { useEffect, useState } from "react";
+import { useState } from 'react';
 
 export const useForm = <T extends object>(initialForm: T) => {
   const [formState, setFormState] = useState<T>(initialForm);
 
-  useEffect(() => {
-    setFormState(initialForm);
-  }, [initialForm]);
-
   const onInputChange = (
     event: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+      HTMLInputElement |
+      HTMLSelectElement |
+      HTMLTextAreaElement
     >
   ) => {
-    const { name, value, type } = event.target;
+    const { name, value } = event.target;
 
-    const input = event.target as HTMLInputElement;
+    const [parent, child] = name.split('.');
 
-    setFormState((prev) => ({
+    if (child) {
+      setFormState(prev => ({
+        ...prev,
+        [parent]: {
+          ...(prev as any)[parent],
+          [child]: value,
+        },
+      }));
+
+      return;
+    }
+
+    setFormState(prev => ({
       ...prev,
-      [name]:
-        type === "radio" || type === "checkbox"
-          ? input.checked
-          : value,
+      [name]: value,
+    }));
+  };
+
+  const onCheckboxChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, checked } = event.target;
+
+    const [parent, child] = name.split('.');
+
+    if (child) {
+      setFormState(prev => ({
+        ...prev,
+        [parent]: {
+          ...(prev as any)[parent],
+          [child]: checked,
+        },
+      }));
+
+      return;
+    }
+
+    setFormState(prev => ({
+      ...prev,
+      [name]: checked,
     }));
   };
 
@@ -30,9 +62,9 @@ export const useForm = <T extends object>(initialForm: T) => {
   };
 
   return {
-    ...formState,
     formState,
     onInputChange,
+    onCheckboxChange,
     onResetForm,
   };
 };

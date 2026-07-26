@@ -110,64 +110,139 @@ export const CreatePDF = (props: dataType) => {
 
         {/* Tabla de items */}
         <View style={styles.table}>
+
+          {/* Header */}
           <View style={styles.tableHeaderRow}>
-            <Text style={[styles.th, styles.colCant]}> Cantidad </Text>
-            <Text style={[styles.th, styles.colDesc]}> Descripción </Text>
-            <Text style={[styles.th, styles.colImp]}> Pagado </Text>
-            <Text style={[styles.th, styles.colImp]}> A Cobrar </Text>
+            <Text style={[styles.th, styles.colCant]}>
+              Cantidad
+            </Text>
+
+            <Text style={[styles.th, styles.colDesc]}>
+              Descripción
+            </Text>
+
+            <Text style={[styles.th, styles.colImp]}>
+              Pagado
+            </Text>
+
+            <Text style={[styles.th, styles.colImp, styles.lastColumn]}>
+              A Cobrar
+            </Text>
           </View>
 
-          {props.data.items.map((item, i) => {
-            return (
-              <View style={styles.tableRow} key={i}>
-                <Text style={[styles.td, styles.colCant]}> {item.quantity} </Text>
-                <Text style={[styles.td, styles.colDesc]}> {item.description} </Text>
-                <View style={[styles.td, styles.colImp, styles.price]}>
-                  <Text>$</Text>
-                  <Text>{item.paid}</Text>
-                </View>
+          {/* Items */}
+          {props.data.items.map((item, i) => (
+            <View style={styles.tableRow} key={i}>
 
-                <View style={[styles.td, styles.colImp, styles.price]}>
-                  {item.currentAccount ? (
-                    <Text style={{ width: '100%', textAlign: 'center' }}>
-                      Cuenta corriente
-                    </Text>
-                  ) : (
-                    <>
-                      <Text>$</Text>
-                      <Text>{item.remainingAmount}</Text>
-                    </>
-                  )}
-                </View>
+              <Text style={[styles.td, styles.colCant]}>
+                {item.quantity}
+              </Text>
+
+              <Text style={[styles.td, styles.colDesc]}>
+                {item.description}
+              </Text>
+
+              <View style={[styles.td, styles.colImp, styles.price]}>
+                <Text style={styles.currencySymbol}>
+                  $
+                </Text>
+
+                <Text style={styles.currencyValue}>
+                  {item.paid}
+                </Text>
               </View>
-            );
-          })}
-        </View>
-        <View style={styles.table}>
+
+              <View style={[styles.td, styles.colImp, styles.price, styles.lastColumn]}>
+                {item.currentAccount ? (
+                  <Text style={styles.currentAccount}>
+                    Cuenta corriente
+                  </Text>
+                ) : (
+                  <>
+                    <Text style={styles.currencySymbol}>
+                      $
+                    </Text>
+
+                    <Text style={styles.currencyValue}>
+                      {item.remainingAmount}
+                    </Text>
+                  </>
+                )}
+              </View>
+
+            </View>
+          ))}
+
+
+          {/* Totales */}
+
           <View style={styles.tableHeaderRow}>
-            <Text style={[styles.th, styles.colCant]}> {totalQuantity} </Text>
-            <Text style={[styles.th, styles.colDesc]}>  </Text>
-            <View style={[styles.td, styles.colImp, styles.price]}>
+
+            <Text style={[
+              styles.totalsCell,
+              styles.totalsCant
+            ]}>
+              {totalQuantity}
+            </Text>
+
+            <Text style={[
+              styles.totalsCell,
+              styles.totalsDesc
+            ]}>
+            </Text>
+
+            <View style={[
+              styles.totalsCell,
+              styles.totalsAmount
+            ]}>
               <Text>$</Text>
               <Text>{totalPaid}</Text>
             </View>
-            <View style={[styles.td, styles.colImp, styles.price]}>
+
+            <View style={[
+              styles.totalsCell,
+              styles.totalsAmount,
+              styles.lastColumn
+            ]}>
               <Text>$</Text>
               <Text>{totalRemainingAmount}</Text>
             </View>
+
           </View>
         </View>
 
-        {/* Total general */}
-        <View style={styles.totalsRow}>
-          <Text style={styles.totalLabel}>
-            TOTAL
-          </Text>
+        {/* Seguro y total a pagar */}
+        <View style={styles.totalInsuranceSection}>
 
-          <Text style={styles.totalValue}>
-            $ {totalRemainingAmount + totalPaid}
-          </Text>
+          {/* Información del seguro */}
+          <View style={styles.insuranceSection}>
+            <Text style={styles.insuranceText}>
+              Seguro: {props.data.sure.secure ? 'Si' : 'No'}
+
+              {props.data.sure.secure && (
+                <>
+                  {'  |  '}
+                  Valor declarado: $ {props.data.sure.declaredValue}
+                  {'  |  '}
+                  Valor seguro: $ {props.data.sure.sureValue}
+                </>
+              )}
+            </Text>
+          </View>
+
+          {/* Total a pagar */}
+          <View style={styles.totalToPaySection}>
+            <Text style={styles.totalToPayLabel}>
+              Total a pagar:
+            </Text>
+
+            <Text style={styles.totalToPayValue}>
+              $ {totalPaid + totalRemainingAmount}
+            </Text>
+          </View>
+
         </View>
+
 
         {/* Firma */}
         <View style={styles.footerSection}>

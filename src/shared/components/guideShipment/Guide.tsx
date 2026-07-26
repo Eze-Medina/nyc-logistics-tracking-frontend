@@ -18,7 +18,7 @@ export const Guide = (data: dataType) => {
           color: "#fff",
           textDecoration: "none",
           borderRadius: 6,
-          fontFamily: "sans-serif",
+          fontFamily: "JetBrainsMono",
           fontSize: 15,
         }}
       >

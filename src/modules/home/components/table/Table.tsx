@@ -1,36 +1,49 @@
+import { X } from 'lucide-react'
 import type { Item } from '../../../../interfaces/item.interface'
-// import style from './table.module.css'
+
+import style from './table.module.css'
 
 interface Props {
   items: Item[]
+  onDelete: (index: number) => void;
 }
 
 export const Table = (props: Props) => {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column'
-    }}>
+    <div className={style.table}>
       <table style={{ borderCollapse: 'collapse' }}>
         <thead>
-          <tr style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', border: '1px solid #ccc' }}>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>CANTIDAD</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>DESCRIPCION</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>PAGADO</th>
-            <th style={{ textAlign: 'center', border: '1px solid #ccc', padding: '8px' }}>A COBRAR</th>
+          <tr className={style.table_tr}>
+            <th className={style.table_th}>CANTIDAD</th>
+            <th className={style.table_th}>DESCRIPCION</th>
+            <th className={style.table_th}>PAGADO</th>
+            <th className={style.table_th}>A COBRAR</th>
+            <th className={style.table_th}></th>
           </tr>
         </thead>
         <tbody>
           {
             props.items.map((item, idx) => (
-              <tr key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr' }}>
-                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{item.quantity}</td>
-                <td style={{ border: '1px solid #ccc', padding: '5px' }}>{item.description}</td>
-                <td style={{ border: '1px solid #ccc', padding: '5px', textAlign: 'end' }}>$ {item.paid}</td>
-                <td style={{ border: '1px solid #ccc', padding: '5px', textAlign: 'end' }}>{item.currentAccount ? 'Cuenta corriente' : `$ ${item.remainingAmount}`}</td>
+              <tr key={idx} className={style.table_tr}>
+                <td className={style.table_td} style={{ textAlign: 'center' }}>{item.quantity}</td>
+                <td className={style.table_td}>{item.description}</td>
+                <td className={style.table_td_number}><p>$</p> {item.paid}</td>
+                <td className={style.table_td_number}>{item.currentAccount
+                  ? 'Cuenta corriente'
+                  : <div> <p>$</p> {item.remainingAmount} </div>
+                }
+                </td>
+                <td className={style.table_td} style={{ textAlign: 'center' }}>
+                  <button
+                    className={style.delete_button}
+                    type='button'
+                    onClick={() => props.onDelete(idx)}
+                  >
+                    <X width={15} color="#e21919" stroke-width="5" />
+                  </button>
+                </td>
               </tr>
-            )
-            )
+            ))
           }
         </tbody>
       </table>

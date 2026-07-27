@@ -248,7 +248,7 @@ export const CreatePDF = (props: dataType) => {
               styles.totalsCell,
               styles.totalsCant
             ]}>
-              {totalQuantity}
+              Total: {totalQuantity}
             </Text>
 
             <Text style={[

@@ -13,36 +13,58 @@ import style from './guideform.module.css'
 
 const formData: Form = {
   sender: {
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
+    name: 'Ezequiel Medina',
+    email: 'tec.medinaeze@gmail.com',
+    phone: '3425502666',
+    address: 'Las heras 7460',
   },
   receiver: {
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
+    name: 'Pochito Lopez',
+    email: 'poc.lopez@gmail.com',
+    phone: '3425406333',
+    address: 'Los granitos 1430',
   },
   origin: {
-    province: '',
-    city: '',
+    province: "Santa Fe",
+    city: "Santa Fe"
   },
   destination: {
-    province: '',
-    city: '',
+    province: "Santa Fe",
+    city: "Santo Tomé"
   },
   sure: {
-    secure: false,
-    declaredValue: 0,
-    sureValue: 0,
+    secure: true,
+    declaredValue: 50000,
+    sureValue: 2500
   },
   guia: {
     numero: 0
   }
-};
+}
 
-const items: Item[] = [];
+const items: Item[] = [
+  {
+    quantity: 10,
+    description: 'Item 1',
+    paid: 10000,
+    remainingAmount: 4500,
+    currentAccount: false,
+  },
+  {
+    quantity: 10,
+    description: 'Item 2',
+    paid: 14000,
+    remainingAmount: 5050,
+    currentAccount: false,
+  },
+  {
+    quantity: 10,
+    description: 'Item 3',
+    paid: 3000,
+    remainingAmount: 500,
+    currentAccount: true,
+  }
+]
 
 export const GuideForm = () => {
 

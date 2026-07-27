@@ -44,9 +44,6 @@ export const CreatePDF = (props: dataType) => {
           <View style={styles.companyBlock}>
             <Text style={styles.companyName}>N.Y.C Logística</Text>
             <Text style={styles.smallText}>
-              Razón Social: Entrega OK S.R.L.
-            </Text>
-            <Text style={styles.smallText}>
               Av. Ejercito Arg 3343 - Santo Tome
             </Text>
             <Text style={styles.smallText}>

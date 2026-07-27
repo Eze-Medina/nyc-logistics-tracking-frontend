@@ -135,7 +135,7 @@ export const CreatePDF = (props: dataType) => {
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
-              <Text style={styles.fieldValue}> {props.data.origin.city} </Text>
+              <Text style={styles.fieldValue}> {props.data.origin.city}, {props.data.origin.city} </Text>
             </View>
 
             <View style={styles.fieldRow}>
@@ -200,7 +200,7 @@ export const CreatePDF = (props: dataType) => {
           {props.data.items.map((item, i) => (
             <View style={styles.tableRow} key={i}>
 
-              <Text style={[styles.td, styles.colCant]}>
+              <Text style={[styles.tdFirst, styles.colCant]}>
                 {item.quantity}
               </Text>
 

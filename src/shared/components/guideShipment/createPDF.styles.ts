@@ -45,6 +45,13 @@ export const styles = StyleSheet.create({
     borderTop: '1px solid #ccc',
   },
 
+  tdFirst: {
+    padding: 4,
+    fontSize: 8.5,
+    borderRight: '1px solid #ccc',
+    borderTop: '1px solid #ccc',
+    textAlign: 'center',
+  },
   lastColumn: {
     borderRight: 'none',
   },

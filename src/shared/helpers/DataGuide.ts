@@ -6,7 +6,7 @@ type IdType = 'dni' | 'cuit' | 'cuil';
 export class DataGuide implements CreateGuideDto {
 
   sender!: {
-    id: number,
+    id: number | '',
     idType: IdType,
     name: string,
     email: string,
@@ -14,7 +14,7 @@ export class DataGuide implements CreateGuideDto {
     address: string
   }
   receiver!: {
-    id: number,
+    id: number | '',
     idType: IdType,
     name: string,
     email: string,

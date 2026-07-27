@@ -4,7 +4,7 @@ import { InputSelect } from '../../input/select/InputSelect'
 import style from './receiverForm.module.css'
 
 interface Props {
-  receiverId: number,
+  receiverId: number | '',
   receiverIdType: string,
   receiverName: string,
   receiverEmail: string,

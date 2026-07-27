@@ -13,7 +13,7 @@ import style from './guideform.module.css'
 
 const formData: Form = {
   sender: {
-    id: 0,
+    id: '',
     idType: '',
     name: '',
     email: '',
@@ -21,7 +21,7 @@ const formData: Form = {
     address: '',
   },
   receiver: {
-    id: 0,
+    id: '',
     idType: '',
     name: '',
     email: '',
@@ -154,7 +154,7 @@ export const GuideForm = () => {
           <InputText type='number' labelName='Número guia' name='guia.numero' placeholder='numero de guia' value={formState.guia.numero} onInputChange={onInputChange} />
           <Guide data={data} numero={formState.guia.numero} />
           <button
-            // style={{ display: 'none' }}
+            style={{ display: 'none' }}
             className={style.button}
             type='submit'>
             Crear guia

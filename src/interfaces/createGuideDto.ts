@@ -2,14 +2,14 @@ import type { Item } from "./item.interface";
 
 export interface CreateGuideDto {
   sender: {
-    id: number,
+    id: number | '',
     name: string,
     email: string,
     phone: string,
     address: string
   }
   receiver: {
-    id: number,
+    id: number | '',
     name: string,
     email: string,
     phone: string,

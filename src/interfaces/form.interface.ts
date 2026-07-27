@@ -1,6 +1,6 @@
 export interface Form {
   sender: {
-    id: number,
+    id: number | '',
     idType: string
     name: string,
     email: string,
@@ -8,7 +8,7 @@ export interface Form {
     address: string,
   }
   receiver: {
-    id: number,
+    id: number | '',
     idType: string,
     name: string,
     email: string,

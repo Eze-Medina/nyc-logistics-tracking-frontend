@@ -4,7 +4,7 @@ import { InputSelect } from '../../input/select/InputSelect'
 import style from './senderForm.module.css'
 
 interface Props {
-  senderId: number,
+  senderId: number | '',
   senderIdType: string,
   senderName: string,
   senderEmail: string,

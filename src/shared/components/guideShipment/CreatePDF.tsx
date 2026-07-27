@@ -1,6 +1,7 @@
-import { Document, Page, Text, View } from '@react-pdf/renderer';
+import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
 import type { DataGuide } from '../../helpers/DataGuide';
 
+import logo from '../../../assets/icon-black.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {
@@ -28,27 +29,67 @@ export const CreatePDF = (props: dataType) => {
     0
   );
 
+  const formatNumber = (value: number | string): string => {
+    return Number(value).toLocaleString('es-AR');
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
 
         {/* Header */}
         <View style={styles.headerRow}>
+
+          {/* Información de la empresa */}
           <View style={styles.companyBlock}>
             <Text style={styles.companyName}>N.Y.C Logística</Text>
-            <Text style={styles.smallText}> Razón Social: Entrega OK S.R.L. </Text>
-            <Text style={styles.smallText}> Av. Ejercito Arg 3343 - Santo Tome </Text>
-            <Text style={styles.smallText}> Bv. 9 de Julio 2272 - San Francisco </Text>
-            <Text style={styles.smallText}> Tel: 3425965538 / 3425540969 | nyclogistica.st@gmail.com </Text>
+            <Text style={styles.smallText}>
+              Razón Social: Entrega OK S.R.L.
+            </Text>
+            <Text style={styles.smallText}>
+              Av. Ejercito Arg 3343 - Santo Tome
+            </Text>
+            <Text style={styles.smallText}>
+              Bv. 9 de Julio 2272 - San Francisco
+            </Text>
+            <Text style={styles.smallText}>
+              Tel: 3425965538 / 3425540969 | nyclogistica.st@gmail.com
+            </Text>
           </View>
 
+          {/* Logo */}
+          <View style={styles.logoBlock}>
+            <Image
+              src={logo}
+              style={styles.logo}
+            />
+          </View>
+
+          {/* Información del documento */}
           <View style={styles.docTitleBlock}>
-            <Text style={styles.docTitle}>Guía de Envío</Text>
-            <Text style={styles.docNumber}> N° {props.numero} </Text>
-            <Text style={styles.docNumber}> Fecha: {new Date().toLocaleDateString('es-AR')} </Text>
 
-            <View style={styles.badge}> <Text>Documento no válido como factura</Text> </View>
+            <View style={styles.docTitleRow}>
+              <Text style={styles.docTitle}>
+                Guía de Envío
+              </Text>
+
+              <Text style={styles.docTitle}>
+                N° {props.numero}
+              </Text>
+            </View>
+
+            <Text style={styles.docNumber}>
+              Fecha: {new Date().toLocaleDateString('es-AR')}
+            </Text>
+
+            <View style={styles.badge}>
+              <Text>
+                Documento no válido como factura
+              </Text>
+            </View>
+
           </View>
+
         </View>
 
         {/* Tracking */}
@@ -149,7 +190,7 @@ export const CreatePDF = (props: dataType) => {
                 </Text>
 
                 <Text style={styles.currencyValue}>
-                  {item.paid}
+                  {formatNumber(item.paid)}
                 </Text>
               </View>
 
@@ -165,7 +206,7 @@ export const CreatePDF = (props: dataType) => {
                     </Text>
 
                     <Text style={styles.currencyValue}>
-                      {item.remainingAmount}
+                      {formatNumber(item.remainingAmount)}
                     </Text>
                   </>
                 )}
@@ -197,7 +238,7 @@ export const CreatePDF = (props: dataType) => {
               styles.totalsAmount
             ]}>
               <Text>$</Text>
-              <Text>{totalPaid}</Text>
+              <Text>{formatNumber(totalPaid)}</Text>
             </View>
 
             <View style={[
@@ -206,7 +247,7 @@ export const CreatePDF = (props: dataType) => {
               styles.lastColumn
             ]}>
               <Text>$</Text>
-              <Text>{totalRemainingAmount}</Text>
+              <Text>{formatNumber(totalRemainingAmount)}</Text>
             </View>
 
           </View>
@@ -223,9 +264,9 @@ export const CreatePDF = (props: dataType) => {
               {props.data.sure.secure && (
                 <>
                   {'  |  '}
-                  Valor declarado: $ {props.data.sure.declaredValue}
+                  Valor declarado: $ {formatNumber(props.data.sure.declaredValue)}
                   {'  |  '}
-                  Valor seguro: $ {props.data.sure.sureValue}
+                  Valor seguro: $ {formatNumber(props.data.sure.sureValue)}
                 </>
               )}
             </Text>
@@ -238,7 +279,7 @@ export const CreatePDF = (props: dataType) => {
             </Text>
 
             <Text style={styles.totalToPayValue}>
-              $ {totalPaid + totalRemainingAmount}
+              $ {formatNumber(totalRemainingAmount + props.data.sure.sureValue)}
             </Text>
           </View>
 
@@ -269,9 +310,9 @@ export const CreatePDF = (props: dataType) => {
           y no verificado.
         </Text>
 
-        <Text style={styles.trackingFooter}>
+        {/* <Text style={styles.trackingFooter}>
           Para seguimiento de su envío, ingrese el número de tracking en nuestro sitio web.
-        </Text>
+        </Text> */}
 
       </Page>
     </Document>

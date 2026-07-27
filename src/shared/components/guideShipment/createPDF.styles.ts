@@ -128,10 +128,8 @@ export const styles = StyleSheet.create({
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    borderBottom: '2px solid #1a1a1a',
-    paddingBottom: 8,
-    marginBottom: 8,
+    alignItems: 'center',
+    marginBottom: 15,
   },
 
   companyBlock: {
@@ -143,6 +141,16 @@ export const styles = StyleSheet.create({
     fontWeight: 700,
     marginBottom: 2,
   },
+
+  logoBlock: {
+    width: '20%',
+  },
+
+  logo: {
+    width: 50,
+    height: 50,
+  },
+
 
   smallText: {
     fontSize: 7.5,
@@ -160,6 +168,12 @@ export const styles = StyleSheet.create({
     marginBottom: 2,
   },
 
+  docTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
   docNumber: {
     fontSize: 9,
     marginBottom: 2,

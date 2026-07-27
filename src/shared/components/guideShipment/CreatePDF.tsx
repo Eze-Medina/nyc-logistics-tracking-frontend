@@ -123,7 +123,7 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.sender.name}, {props.data.sender.idType.toUpperCase()}: {' '}
+                {props.data.sender.name} - {props.data.sender.idType.toUpperCase()}: {' '}
                 {formatId(props.data.sender.id, props.data.sender.idType)}
               </Text>
             </View>
@@ -150,7 +150,7 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.receiver.name}, {props.data.receiver.idType.toUpperCase()}: {' '}
+                {props.data.receiver.name} - {props.data.receiver.idType.toUpperCase()}: {' '}
                 {formatId(props.data.receiver.id, props.data.receiver.idType)}
               </Text>
             </View>

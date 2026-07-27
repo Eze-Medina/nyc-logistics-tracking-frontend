@@ -259,6 +259,9 @@ export const styles = StyleSheet.create({
     fontSize: 9,
   },
 
+  bold: {
+    fontWeight: 'bold',
+  },
   totalToPaySection: {
     width: '30%',
     flexDirection: 'row',

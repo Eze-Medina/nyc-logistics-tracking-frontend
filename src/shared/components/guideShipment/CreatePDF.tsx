@@ -283,14 +283,17 @@ export const CreatePDF = (props: dataType) => {
           {/* Información del seguro */}
           <View style={styles.insuranceSection}>
             <Text style={styles.insuranceText}>
-              Seguro: {props.data.sure.secure ? 'Si' : 'No'}
+              <Text style={styles.bold}>Seguro:</Text>{' '}
+              {props.data.sure.secure ? 'Si' : 'No'}
 
               {props.data.sure.secure && (
                 <>
                   {'  |  '}
-                  Valor declarado: $ {formatNumber(props.data.sure.declaredValue)}
+                  <Text style={styles.bold}>Valor declarado:</Text>{' '}
+                  $ {formatNumber(props.data.sure.declaredValue)}
                   {'  |  '}
-                  Valor seguro: $ {formatNumber(props.data.sure.sureValue)}
+                  <Text style={styles.bold}>Valor seguro:</Text>{' '}
+                  $ {formatNumber(props.data.sure.sureValue)}
                 </>
               )}
             </Text>

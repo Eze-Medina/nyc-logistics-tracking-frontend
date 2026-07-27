@@ -13,12 +13,16 @@ import style from './guideform.module.css'
 
 const formData: Form = {
   sender: {
+    id: 0,
+    idType: '',
     name: '',
     email: '',
     phone: '',
     address: '',
   },
   receiver: {
+    id: 0,
+    idType: '',
     name: '',
     email: '',
     phone: '',
@@ -70,6 +74,14 @@ export const GuideForm = () => {
     setData(
       new DataGuide({
         ...formState,
+        sender: {
+          ...formState.sender,
+          id: Number(formState.sender.id),
+        },
+        receiver: {
+          ...formState.receiver,
+          id: Number(formState.receiver.id),
+        },
         items: newItems.map(item => ({
           ...item,
           quantity: Number(item.quantity),
@@ -105,6 +117,8 @@ export const GuideForm = () => {
       <h2>Generar guia</h2>
       <form className={style.forms} onSubmit={sendForm}>
         <SenderForm
+          senderId={formState.sender.id}
+          senderIdType={formState.sender.idType}
           senderName={formState.sender.name}
           senderEmail={formState.sender.email}
           senderPhone={formState.sender.phone}
@@ -114,6 +128,8 @@ export const GuideForm = () => {
           onInputChange={onInputChange} />
 
         <ReceiverForm
+          receiverId={formState.receiver.id}
+          receiverIdType={formState.receiver.idType}
           receiverName={formState.receiver.name}
           receiverEmail={formState.receiver.email}
           receiverPhone={formState.receiver.phone}
@@ -138,7 +154,7 @@ export const GuideForm = () => {
           <InputText type='number' labelName='Número guia' name='guia.numero' placeholder='numero de guia' value={formState.guia.numero} onInputChange={onInputChange} />
           <Guide data={data} numero={formState.guia.numero} />
           <button
-            style={{ display: 'none' }}
+            // style={{ display: 'none' }}
             className={style.button}
             type='submit'>
             Crear guia

@@ -1,15 +1,19 @@
 export interface Form {
   sender: {
+    id: number,
+    idType: string
     name: string,
     email: string,
     phone: string,
-    address: string
+    address: string,
   }
   receiver: {
+    id: number,
+    idType: string,
     name: string,
     email: string,
     phone: string,
-    address: string
+    address: string,
   }
   origin: {
     province: string,

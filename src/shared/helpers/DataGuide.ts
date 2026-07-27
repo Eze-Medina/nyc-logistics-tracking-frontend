@@ -1,15 +1,21 @@
 import type { CreateGuideDto } from "../../interfaces/createGuideDto";
 import type { Item } from "../../interfaces/item.interface";
 
+type IdType = 'dni' | 'cuit' | 'cuil';
+
 export class DataGuide implements CreateGuideDto {
 
   sender!: {
+    id: number,
+    idType: IdType,
     name: string,
     email: string,
     phone: string,
     address: string
   }
   receiver!: {
+    id: number,
+    idType: IdType,
     name: string,
     email: string,
     phone: string,

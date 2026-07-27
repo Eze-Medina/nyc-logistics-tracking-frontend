@@ -33,6 +33,27 @@ export const CreatePDF = (props: dataType) => {
     return Number(value).toLocaleString('es-AR');
   };
 
+  const formatId = (
+    id: string | number,
+    idType: 'dni' | 'cuit' | 'cuil'
+  ) => {
+    const value = String(id).replace(/\D/g, '');
+
+    if (idType === 'dni') {
+      return value;
+    }
+
+    if (idType === 'cuit' || idType === 'cuil') {
+      if (value.length !== 11) {
+        return value;
+      }
+
+      return `${value.slice(0, 2)}-${value.slice(2, 10)}-${value.slice(10)}`;
+    }
+
+    return value;
+  };
+
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -101,7 +122,10 @@ export const CreatePDF = (props: dataType) => {
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
-              <Text style={styles.fieldValue}> {props.data.sender.name} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.sender.name}, {props.data.sender.idType.toUpperCase()}: {' '}
+                {formatId(props.data.sender.id, props.data.sender.idType)}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>
@@ -111,7 +135,7 @@ export const CreatePDF = (props: dataType) => {
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
-              <Text style={styles.fieldValue}> {props.data.origin.city}, {props.data.origin.province} </Text>
+              <Text style={styles.fieldValue}> {props.data.origin.city} </Text>
             </View>
 
             <View style={styles.fieldRow}>
@@ -125,7 +149,10 @@ export const CreatePDF = (props: dataType) => {
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
-              <Text style={styles.fieldValue}> {props.data.receiver.name} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.receiver.name}, {props.data.receiver.idType.toUpperCase()}: {' '}
+                {formatId(props.data.receiver.id, props.data.receiver.idType)}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>

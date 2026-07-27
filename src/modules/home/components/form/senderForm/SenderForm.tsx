@@ -4,6 +4,8 @@ import { InputSelect } from '../../input/select/InputSelect'
 import style from './senderForm.module.css'
 
 interface Props {
+  senderId: number,
+  senderIdType: string,
   senderName: string,
   senderEmail: string,
   senderPhone: string,
@@ -15,6 +17,7 @@ interface Props {
 
 const provinces = ['Santa Fe', 'Cordoba', 'Entre Rios', 'Buenos aires'];
 const citys = ['Santo Tome', 'Santa Fe', 'Rafaela', 'Sunchales', 'San Francisco'];
+const types = ['DNI', 'CUIL', 'CUIT'];
 
 export const SenderForm = (props: Props) => {
   return (
@@ -27,6 +30,8 @@ export const SenderForm = (props: Props) => {
         <InputSelect labelName='Provincia' name='origin.province' value={props.provinceOrigin} onInputChange={props.onInputChange} list={provinces} />
         <InputSelect labelName='Ciudad' name='origin.city' value={props.cityOrigin} onInputChange={props.onInputChange} list={citys} />
         <InputText type='text' labelName='Dirección' name='sender.address' value={props.senderAddress} placeholder='Dirección de remitente' onInputChange={props.onInputChange} />
+        <InputSelect labelName='DNI/CUIL/CUIT' name='sender.idType' value={props.senderIdType} onInputChange={props.onInputChange} list={types} />
+        <InputText type='number' labelName='DNI/CUIT' name='sender.id' value={props.senderId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
       </div>
     </div>
   )

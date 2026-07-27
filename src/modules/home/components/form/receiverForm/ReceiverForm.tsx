@@ -4,6 +4,8 @@ import { InputSelect } from '../../input/select/InputSelect'
 import style from './receiverForm.module.css'
 
 interface Props {
+  receiverId: number,
+  receiverIdType: string,
   receiverName: string,
   receiverEmail: string,
   receiverPhone: string,
@@ -15,6 +17,7 @@ interface Props {
 
 const provinces = ['Santa Fe', 'Cordoba', 'Entre Rios', 'Buenos aires'];
 const citys = ['Santo Tome', 'Santa Fe', 'Rafaela', 'Sunchales', 'San Francisco'];
+const types = ['DNI', 'CUIL', 'CUIT'];
 
 export const ReceiverForm = (props: Props) => {
   return (
@@ -27,6 +30,8 @@ export const ReceiverForm = (props: Props) => {
         <InputSelect labelName='Provincia' name='destination.province' value={props.provinceDestination} onInputChange={props.onInputChange} list={provinces} />
         <InputSelect labelName='Ciudad' name='destination.city' value={props.cityDestination} onInputChange={props.onInputChange} list={citys} />
         <InputText type='text' labelName='Dirección' name='receiver.address' value={props.receiverAddress} placeholder='Dirección de destinaratio' onInputChange={props.onInputChange} />
+        <InputSelect labelName='DNI/CUIL/CUIT' name='receiver.idType' value={props.receiverIdType} onInputChange={props.onInputChange} list={types} />
+        <InputText type='number' labelName='DNI/CUIT' name='receiver.id' value={props.receiverId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
       </div>
     </div>
   )

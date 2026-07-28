@@ -115,7 +115,7 @@ export const GuideForm = () => {
   return (
     <section className={style.container}>
       <h2>Generar guia</h2>
-      <form className={style.forms} onSubmit={sendForm}>
+      <form className={style.forms} onSubmit={sendForm} >
         <SenderForm
           senderId={formState.sender.id}
           senderIdType={formState.sender.idType}

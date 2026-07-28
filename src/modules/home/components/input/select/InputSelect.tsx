@@ -12,13 +12,13 @@ export const InputSelect = (props: Props) => {
   return (
     <div className={style.guide_form__field}>
       <label className={style.guide_form__label}>{props.labelName}</label>
-      <select className={style.guide_form__input} name={props.name} value={props.value} onChange={props.onInputChange}>
+      <select className={style.guide_form__input} name={props.name} value={props.value} onChange={props.onInputChange} autoComplete="off">
         <option>Seleccionar</option>
-        {
-          props.list.map((element, idx) => (
-            <option key={idx} value={element}>{element}</option>
-          ))
-        }
+        {props.list.map(element => (
+          <option key={element} value={element}>
+            {element}
+          </option>
+        ))}
       </select>
     </div>
   )

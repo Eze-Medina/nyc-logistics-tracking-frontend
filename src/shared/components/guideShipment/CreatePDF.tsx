@@ -33,22 +33,24 @@ export const CreatePDF = (props: dataType) => {
     return Number(value).toLocaleString('es-AR');
   };
 
-  const formatId = (
-    id: string | number,
-    idType: 'dni' | 'cuit' | 'cuil'
-  ) => {
+  const formatId = (id: string | number, idType: string) => {
     const value = String(id).replace(/\D/g, '');
+    const type = idType.toLowerCase();
 
-    if (idType === 'dni') {
-      return value;
+    if (type === 'dni') {
+      return Number(value).toLocaleString('es-AR');
     }
 
-    if (idType === 'cuit' || idType === 'cuil') {
-      if (value.length !== 11) {
+    if (type === 'cuit' || type === 'cuil') {
+      if (value.length < 3) {
         return value;
       }
 
-      return `${value.slice(0, 2)}-${value.slice(2, 10)}-${value.slice(10)}`;
+      const firstTwo = value.slice(0, 2);
+      const last = value.slice(-1);
+      const middle = value.slice(2, -1);
+
+      return `${firstTwo}-${middle}-${last}`;
     }
 
     return value;
@@ -123,24 +125,39 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.sender.name} - {props.data.sender.idType.toUpperCase()}: {' '}
-                {formatId(props.data.sender.id, props.data.sender.idType)}
+                {props.data.sender.name}
+              </Text>
+            </View>
+
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>{props.data.sender.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldValue}>
+                {formatId(
+                  props.data.sender.id,
+                  props.data.sender.idType
+                )}
               </Text>
             </View>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
-              <Text style={styles.fieldValue}> {props.data.sender.address} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.sender.address}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
-              <Text style={styles.fieldValue}> {props.data.origin.city}, {props.data.origin.city} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.origin.city}, {props.data.origin.province}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Teléfono:</Text>
-              <Text style={styles.fieldValue}> {props.data.sender.phone} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.sender.phone}
+              </Text>
             </View>
           </View>
 
@@ -150,19 +167,33 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Nombre:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.receiver.name} - {props.data.receiver.idType.toUpperCase()}: {' '}
-                {formatId(props.data.receiver.id, props.data.receiver.idType)}
+                {props.data.receiver.name}
+              </Text>
+            </View>
+
+            <View style={styles.fieldRow}>
+              <Text style={styles.fieldLabel}>{props.data.receiver.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldValue}>
+                {formatId(
+                  props.data.receiver.id,
+                  props.data.receiver.idType
+                )}
               </Text>
             </View>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
-              <Text style={styles.fieldValue}> {props.data.receiver.address} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.receiver.address}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Localidad:</Text>
-              <Text style={styles.fieldValue}> {props.data.destination.city}, {props.data.destination.province} </Text>
+              <Text style={styles.fieldValue}>
+                {props.data.destination.city},{' '}
+                {props.data.destination.province}
+              </Text>
             </View>
 
             <View style={styles.fieldRow}>
@@ -242,7 +273,7 @@ export const CreatePDF = (props: dataType) => {
 
           {/* Totales */}
 
-          <View style={styles.tableHeaderRow}>
+          <View style={styles.totalsRow}>
 
             <Text style={[
               styles.totalsCell,

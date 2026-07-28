@@ -103,6 +103,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     backgroundColor: '#e8e8e8',
+    borderTop: '1px solid #1a1a1a',
   },
 
   totalsCell: {
@@ -225,18 +226,19 @@ export const styles = StyleSheet.create({
 
   fieldRow: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
     marginBottom: 2,
   },
 
   fieldLabel: {
-    width: 65,
     fontSize: 8,
     color: '#555',
+    marginRight: 4,
   },
 
   fieldValue: {
-    fontSize: 8.5,
     flex: 1,
+    fontSize: 8.5,
     fontWeight: 500,
   },
 

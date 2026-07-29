@@ -30,8 +30,8 @@ export const SenderForm = (props: Props) => {
         <InputSelect labelName='Provincia' name='origin.province' value={props.provinceOrigin} onInputChange={props.onInputChange} list={provinces} />
         <InputSelect labelName='Ciudad' name='origin.city' value={props.cityOrigin} onInputChange={props.onInputChange} list={citys} />
         <InputText type='text' labelName='Dirección' name='sender.address' value={props.senderAddress} placeholder='Dirección de remitente' onInputChange={props.onInputChange} />
-        <InputSelect labelName='DNI/CUIL/CUIT' name='sender.idType' value={props.senderIdType} onInputChange={props.onInputChange} list={types} />
-        <InputText type='number' labelName='DNI/CUIT' name='sender.id' value={props.senderId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
+        <InputSelect labelName='Identificación' name='sender.idType' value={props.senderIdType} onInputChange={props.onInputChange} list={types} />
+        <InputText type='number' labelName='DNI/CUIL/CUIT' name='sender.id' value={props.senderId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
       </div>
     </div>
   )

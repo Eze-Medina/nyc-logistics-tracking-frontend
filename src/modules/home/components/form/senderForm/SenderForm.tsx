@@ -16,7 +16,7 @@ interface Props {
 }
 
 const provinces = ['Santa Fe', 'Cordoba', 'Entre Rios', 'Buenos aires'];
-const citys = ['Santo Tome', 'Santa Fe', 'Rosario', 'Cordoba', 'Rafaela', 'Sunchales', 'San Francisco', 'Tacural', 'Esperanza', 'Coronda', 'CABA', 'GBA'];
+const citys = ['Santo Tome', 'Santa Fe', 'Rosario', 'Cordoba', 'Rafaela', 'Sunchales', 'Humboldt', 'San Francisco', 'Tacural', 'Esperanza', 'Coronda', 'CABA', 'GBA'];
 const types = ['DNI', 'CUIL', 'CUIT'];
 
 export const SenderForm = (props: Props) => {

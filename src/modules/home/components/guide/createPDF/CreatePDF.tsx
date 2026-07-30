@@ -1,11 +1,11 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import type { DataGuide } from '../../../helpers/guide';
+import type { GuideDto } from '../../../../../interfaces';
 
 import logo from '../../../../../assets/icon-black.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {
-  data: DataGuide;
+  data: GuideDto;
 }
 
 export const CreatePDF = (props: dataType) => {

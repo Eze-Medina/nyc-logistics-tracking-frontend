@@ -1,9 +1,9 @@
-import type { CreateGuideDto } from "../../interfaces/createGuideDto";
-import type { Item } from "../../interfaces/item.interface";
+import type { GuideDto } from "../../interfaces";
+import type { Item } from "../../interfaces/guide/item.interface";
 
 type IdType = 'dni' | 'cuit' | 'cuil';
 
-export class DataGuide implements CreateGuideDto {
+export class DataGuide implements GuideDto {
 
   sender!: {
     id: number | '',
@@ -36,7 +36,7 @@ export class DataGuide implements CreateGuideDto {
   }
   items!: Item[]
 
-  constructor(data: CreateGuideDto) {
+  constructor(data: GuideDto) {
     Object.assign(this, data);
   }
 

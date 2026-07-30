@@ -1,113 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from '../../../hooks/useForm';
 import { createGuide } from '../../../helpers/create-guide';
-import { DataGuide } from '../../../../../shared/helpers/DataGuide';
 
-import type { Form, Item } from '../../../../../interfaces/index';
+import type { Item } from '../../../../../interfaces/index';
+import { formData } from '../../../data/formData';
 
 import { ItemsForm, ReceiverForm, SenderForm, SureForm } from '../index';
-import { InputText } from '../../input';
 import { Guide } from '../../../../../shared/components/guideShipment/Guide';
 
 import style from './guideform.module.css'
-
-const formData: Form = {
-  sender: {
-    id: '',
-    idType: '',
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-  },
-  receiver: {
-    id: '',
-    idType: '',
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-  },
-  origin: {
-    province: '',
-    city: '',
-  },
-  destination: {
-    province: '',
-    city: '',
-  },
-  sure: {
-    secure: false,
-    declaredValue: 0,
-    sureValue: 0,
-  },
-  guia: {
-    numero: 0
-  }
-};
-
-const items: Item[] = [];
+import { mapFormToDataGuide } from '../../../helpers/mapFormForDataGuide';
 
 export const GuideForm = () => {
 
-  const { formState, onInputChange, onCheckboxChange, onResetForm } = useForm(formData);
+  const { formState, setFormState, onInputChange, onCheckboxChange, onResetForm } = useForm(formData);
 
-  const [newItems, setNewItems] = useState<Item[]>(items);
-  const [data, setData] = useState<DataGuide>(new DataGuide({
-    ...formState,
-    items: [],
-  }));
-
-  const [first, setfirst] = useState({})
+  const [data, setData] = useState({});
 
   const handleAddItem = (newItem: Item) => {
-    setNewItems(prev => [...prev, newItem]);
+    setFormState(prev => ({
+      ...prev,
+      items: [...prev.items, newItem],
+    }));
   };
 
   const handleDeleteItem = (index: number) => {
-    setNewItems(prevItems =>
-      prevItems.filter((_, idx) => idx !== index)
-    );
+    setFormState(prev => ({
+      ...prev,
+      items: prev.items.filter((_, idx) => idx !== index),
+    }));
   };
-
-  useEffect(() => {
-    setData(
-      new DataGuide({
-        ...formState,
-        sender: {
-          ...formState.sender,
-          id: Number(formState.sender.id),
-        },
-        receiver: {
-          ...formState.receiver,
-          id: Number(formState.receiver.id),
-        },
-        items: newItems.map(item => ({
-          ...item,
-          quantity: Number(item.quantity),
-          paid: Number(item.paid),
-          remainingAmount: Number(item.remainingAmount),
-        })),
-        sure: {
-          ...formState.sure,
-          sureValue: formState.sure.declaredValue * 0.05,
-        },
-      })
-    );
-  }, [formState, newItems]);
-
 
   const sendForm = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    createGuide(data)
+    const data = mapFormToDataGuide(formState)
 
-    setfirst({
+    setData({
       ...data
     })
 
-    console.log(first)
-    // generar pdf a partir del objeto respuesta del createGuide, utilizando un useEffecte para dispara comportamiento al recibirlo
+    createGuide(data)
 
     onResetForm();
   }
@@ -141,7 +74,7 @@ export const GuideForm = () => {
         <ItemsForm
           onAddItem={handleAddItem}
           onDeleteItem={handleDeleteItem}
-          items={newItems} />
+          items={formState.items} />
 
         <SureForm
           secure={formState.sure.secure}
@@ -151,14 +84,12 @@ export const GuideForm = () => {
           onInputChange={onInputChange} />
 
         <div className={style.div_button} >
-          <InputText type='number' labelName='Número guia' name='guia.numero' placeholder='numero de guia' value={formState.guia.numero} onInputChange={onInputChange} />
-          <Guide data={data} numero={formState.guia.numero} />
           <button
-            style={{ display: 'none' }}
             className={style.button}
             type='submit'>
             Crear guia
           </button>
+          <Guide data={data} />
         </div>
       </form>
     </section >

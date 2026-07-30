@@ -15,17 +15,50 @@
   gap: 25px;
 }
 
-.sure_form__field {
+.show {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: opacity1 0.3s ease-in-out;
+}
+
+.hide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: opacity2 0.3s ease-in-out;
+}
+
+@keyframes opacity1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity2 {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.sure_form_field {
   display: flex;
   gap: 10px;
 }
 
-.sure_form__label {
+.sure_form_label {
   display: flex;
   align-items: center;
 }
 
-.sure_form__input {
+.sure_form_input {
   outline: none;
   border-radius: 3px;
   border: 1px solid rgb(190, 190, 190);

@@ -1,19 +1,23 @@
-export interface Form {
+import type { Item } from "./item.interface";
+
+type IdType = 'dni' | 'cuit' | 'cuil';
+
+export interface GuideDto {
   sender: {
     id: number | '',
-    idType: string
+    idType: IdType,
     name: string,
     email: string,
     phone: string,
-    address: string,
+    address: string
   }
   receiver: {
     id: number | '',
-    idType: string,
+    idType: IdType,
     name: string,
     email: string,
     phone: string,
-    address: string,
+    address: string
   }
   origin: {
     province: string,
@@ -28,7 +32,5 @@ export interface Form {
     declaredValue: number,
     sureValue: number
   }
-  guia: {
-    numero: number
-  }
+  items: Item[];
 }

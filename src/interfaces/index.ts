@@ -1,3 +1,2 @@
-export * from './createGuideDto'
-export * from './form.interface'
-export * from './item.interface'
+export * from './guide/guideDto'
+export * from './guide/item.interface'

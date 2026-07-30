@@ -6,7 +6,6 @@ import { styles } from './createPDF.styles'
 
 interface dataType {
   data: DataGuide;
-  numero: number;
 }
 
 export const CreatePDF = (props: dataType) => {
@@ -94,7 +93,7 @@ export const CreatePDF = (props: dataType) => {
               </Text>
 
               <Text style={styles.docTitle}>
-                N° {props.numero}
+                N° 'falta implementar'
               </Text>
             </View>
 
@@ -114,7 +113,7 @@ export const CreatePDF = (props: dataType) => {
 
         {/* Tracking */}
         {/* <Text style={{ fontSize: 8, marginBottom: 8, color: '#333' }}>
-          N° de Seguimiento de envío: {props.numero}
+          N° de Seguimiento de envío: 'falta implementar'
         </Text> */}
 
         {/* Origen / Destino */}

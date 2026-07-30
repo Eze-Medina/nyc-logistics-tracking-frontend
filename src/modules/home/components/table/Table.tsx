@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import type { Item } from '../../../../interfaces/item.interface'
+import type { Item } from '../../../../interfaces/guide/item.interface'
 
 import style from './table.module.css'
 

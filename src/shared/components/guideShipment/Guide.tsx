@@ -1,32 +1,96 @@
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
+
 import { CreatePDF } from "./CreatePDF";
 import type { DataGuide } from "../../helpers/DataGuide";
+import style from "./guide.module.css";
 
-interface dataType {
-  data: DataGuide
-  numero: number
+interface DataType {
+  data: DataGuide;
+  numero: number;
 }
 
-export const Guide = (data: dataType) => {
+export const Guide = ({ data, numero }: DataType) => {
+
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerateGuide = async () => {
+    try {
+      setLoading(true);
+
+      // =========================
+      // 1. Generar PDF
+      // =========================
+
+      const pdfDocument = (
+        <CreatePDF
+          data={data}
+          numero={numero}
+        />
+      );
+
+      const blob = await pdf(pdfDocument).toBlob();
+
+      // =========================
+      // 2. Descargar PDF
+      // =========================
+
+      const url = URL.createObjectURL(blob);
+
+      const downloadLink = window.document.createElement("a");
+
+      downloadLink.href = url;
+      downloadLink.download = `guia-envio-${numero}.pdf`;
+
+      window.document.body.appendChild(downloadLink);
+
+      downloadLink.click();
+
+      window.document.body.removeChild(downloadLink);
+
+      URL.revokeObjectURL(url);
+
+      // =========================
+      // 3. Enviar JSON por email
+      // =========================
+
+      await emailjs.send(
+        'service_tkr61ei',
+        'template_hrgwbaj',
+        {
+          guide_number: numero,
+          guide_data: JSON.stringify(data, null, 2),
+        },
+        {
+          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        }
+      );
+
+      console.log("Guía enviada generada correctamente");
+
+    } catch (error) {
+      console.error(
+        "Error generando o enviando la guía:",
+        error
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
-      <PDFDownloadLink
-        document={<CreatePDF data={data.data} numero={data.numero} />}
-        fileName={`guia-envio-${data.numero}.pdf`}
-        style={{
-          padding: "12px 24px",
-          backgroundColor: "#1a1a1a",
-          color: "#fff",
-          textDecoration: "none",
-          borderRadius: 6,
-          fontFamily: "JetBrainsMono",
-          fontSize: 15,
-        }}
+      <button
+        className={style.button}
+        type="button"
+        onClick={handleGenerateGuide}
+        disabled={loading}
       >
-        {({ loading }) =>
-          loading ? "Generando PDF..." : "Descargar Guía de Envío"
-        }
-      </PDFDownloadLink>
+        {loading
+          ? "Generando guía..."
+          : "Descargar Guía de Envío"}
+      </button>
     </div>
   );
-}
+};

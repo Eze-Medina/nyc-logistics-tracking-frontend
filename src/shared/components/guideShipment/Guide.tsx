@@ -63,7 +63,7 @@ export const Guide = ({ data, numero }: DataType) => {
           guide_data: JSON.stringify(data, null, 2),
         },
         {
-          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+          publicKey: 'E3Rnosq-APmm1cMRh',
         }
       );
 

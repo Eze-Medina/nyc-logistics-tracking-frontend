@@ -1,17 +1,23 @@
 import { PDFDownloadLink } from "@react-pdf/renderer";
-import { CreatePDF } from "./CreatePDF";
-import type { DataGuide } from "../../helpers/DataGuide";
+import { CreatePDF } from "../createPDF/CreatePDF";
 
-interface dataType {
-  data: DataGuide
+import type { GuideDto } from "../../../../../interfaces";
+
+interface Props {
+  data: GuideDto | null;
 }
 
-export const Guide = (data: dataType) => {
+export const ShipmentGuide = ({ data }: Props) => {
+
+  if (!data) {
+    return null;
+  }
+
   return (
     <div>
       <PDFDownloadLink
-        document={<CreatePDF data={data.data} />}
-        fileName={`guia-envio-falta implementar-.pdf`}
+        document={<CreatePDF data={data} />}
+        fileName="guia-envio.pdf"
         style={{
           padding: "12px 24px",
           backgroundColor: "#1a1a1a",
@@ -23,9 +29,11 @@ export const Guide = (data: dataType) => {
         }}
       >
         {({ loading }) =>
-          loading ? "Generando PDF..." : "Descargar Guía de Envío"
+          loading
+            ? "Generando PDF..."
+            : "Descargar Guía de Envío"
         }
       </PDFDownloadLink>
     </div>
   );
-}
+};

@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  animation: opacity1 0.3s ease-in-out;
+  animation: opacity1 0.2s ease-in-out;
 }
 
 .hide {
@@ -27,7 +27,7 @@
   align-items: center;
   gap: 10px;
   opacity: 0;
-  animation: opacity2 0.3s ease-in-out;
+  animation: opacity2 0.2s ease-in-out;
 }
 
 @keyframes opacity1 {
@@ -73,8 +73,20 @@
    align-items: start;
   }
 
-  .sure_form__field {
+  .sure_form_field {
+    width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  .show {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+  }
+  .hide {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
   }
 }

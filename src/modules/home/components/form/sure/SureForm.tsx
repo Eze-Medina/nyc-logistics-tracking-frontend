@@ -22,7 +22,7 @@ export const SureForm = (props: Props) => {
             <label className={style.sure_form_label}>Valor declarado</label>
             <input className={style.sure_form_input} type='number' placeholder='Valor declarado' name='sure.declaredValue' value={props.declaredValue} onChange={props.onInputChange} />
           </div>
-          <p >Valor seguro: {Math.round(props.declaredValue * 0.05)}</p>
+          <p >Valor seguro: {Math.round(props.declaredValue * 0.05).toLocaleString('es-AR')}</p>
         </div>
       </div>
     </div>

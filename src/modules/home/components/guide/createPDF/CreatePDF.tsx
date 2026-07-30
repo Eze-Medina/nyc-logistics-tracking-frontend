@@ -1,7 +1,7 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import type { DataGuide } from '../../helpers/DataGuide';
+import type { DataGuide } from '../../../helpers/guide';
 
-import logo from '../../../assets/icon-black.png';
+import logo from '../../../../../assets/icon-black.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {

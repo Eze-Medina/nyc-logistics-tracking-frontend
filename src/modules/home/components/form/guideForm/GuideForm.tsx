@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { useForm } from '../../../hooks/useForm';
-import { createGuide } from '../../../helpers/create-guide';
 
-import type { Item } from '../../../../../interfaces/index';
+import { mapFormToDataGuide } from '../../../helpers';
+import { useForm } from '../../../hooks/useForm';
 import { formData } from '../../../data/formData';
 
-import { ItemsForm, ReceiverForm, SenderForm, SureForm } from '../index';
-import { Guide } from '../../../../../shared/components/guideShipment/Guide';
+import type { GuideDto, Item } from '../../../../../interfaces';
 
-import style from './guideform.module.css'
-import { mapFormToDataGuide } from '../../../helpers/mapFormForDataGuide';
+import { ItemsForm, ReceiverForm, SenderForm, SureForm, ShipmentGuide } from '../../';
+
+import style from './guideform.module.css';
 
 export const GuideForm = () => {
 
-  const { formState, setFormState, onInputChange, onCheckboxChange, onResetForm } = useForm(formData);
+  const {
+    formState,
+    setFormState,
+    onInputChange,
+    onCheckboxChange,
+    onResetForm
+  } = useForm(formData);
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState<GuideDto | null>(null);
 
   const handleAddItem = (newItem: Item) => {
     setFormState(prev => ({
@@ -31,24 +36,22 @@ export const GuideForm = () => {
     }));
   };
 
-  const sendForm = (event: React.SubmitEvent<HTMLFormElement>) => {
+  const sendForm = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = mapFormToDataGuide(formState)
+    const data = mapFormToDataGuide(formState);
 
-    setData({
-      ...data
-    })
+    console.log(data)
 
-    createGuide(data)
-
+    setData(data);
     onResetForm();
-  }
+  };
 
   return (
     <section className={style.container}>
-      <h2>Generar guia</h2>
-      <form className={style.forms} onSubmit={sendForm} >
+      <h2>Generar guía</h2>
+
+      <form className={style.forms} onSubmit={sendForm}>
         <SenderForm
           senderId={formState.sender.id}
           senderIdType={formState.sender.idType}
@@ -58,7 +61,8 @@ export const GuideForm = () => {
           senderAddress={formState.sender.address}
           provinceOrigin={formState.origin.province}
           cityOrigin={formState.origin.city}
-          onInputChange={onInputChange} />
+          onInputChange={onInputChange}
+        />
 
         <ReceiverForm
           receiverId={formState.receiver.id}
@@ -69,29 +73,34 @@ export const GuideForm = () => {
           receiverAddress={formState.receiver.address}
           provinceDestination={formState.destination.province}
           cityDestination={formState.destination.city}
-          onInputChange={onInputChange} />
+          onInputChange={onInputChange}
+        />
 
         <ItemsForm
           onAddItem={handleAddItem}
           onDeleteItem={handleDeleteItem}
-          items={formState.items} />
+          items={formState.items}
+        />
 
         <SureForm
           secure={formState.sure.secure}
           declaredValue={formState.sure.declaredValue}
           sureValue={formState.sure.sureValue}
           onCheckboxChange={onCheckboxChange}
-          onInputChange={onInputChange} />
+          onInputChange={onInputChange}
+        />
 
-        <div className={style.div_button} >
+        <div className={style.div_button}>
           <button
             className={style.button}
-            type='submit'>
-            Crear guia
+            type="submit"
+          >
+            Crear guía
           </button>
-          <Guide data={data} />
+
+          <ShipmentGuide data={data} />
         </div>
       </form>
-    </section >
-  )
-}
+    </section>
+  );
+};

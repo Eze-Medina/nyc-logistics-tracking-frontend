@@ -1,8 +1,12 @@
 import type { GuideDto } from "../../../interfaces";
 
-export const createGuide = async (guide: GuideDto): Promise<GuideDto | null> => {
+export interface CreateGuideResponse {
+  code: string;
+  guide: GuideDto;
+}
 
-  console.log('Esta es la informacion obtenida', guide);
+export const createGuide = async (guide: GuideDto): Promise<CreateGuideResponse | null> => {
+
 
   const resp = await fetch('http://localhost:3000/api/guides', {
     method: 'POST',
@@ -16,7 +20,21 @@ export const createGuide = async (guide: GuideDto): Promise<GuideDto | null> => 
     return null;
   }
 
-  const data: GuideDto = await resp.json();
+  const data = await resp.json();
 
-  return data;
+  const dataPDF = {
+    code: data.code,
+    guide: {
+      sender: data.sender,
+      receiver: data.receiver,
+      origin: data.origin,
+      destination: data.destination,
+      items: data.items,
+      insurance: data.insurance
+    }
+  }
+
+  console.log(dataPDF);
+
+  return dataPDF;
 };

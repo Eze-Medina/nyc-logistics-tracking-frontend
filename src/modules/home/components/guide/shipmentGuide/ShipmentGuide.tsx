@@ -5,9 +5,10 @@ import type { GuideDto } from "../../../../../interfaces";
 
 interface Props {
   data: GuideDto | null;
+  code: string | null;
 }
 
-export const ShipmentGuide = ({ data }: Props) => {
+export const ShipmentGuide = ({ data, code }: Props) => {
 
   if (!data) {
     return null;
@@ -16,8 +17,8 @@ export const ShipmentGuide = ({ data }: Props) => {
   return (
     <div>
       <PDFDownloadLink
-        document={<CreatePDF data={data} />}
-        fileName="guia-envio.pdf"
+        document={<CreatePDF data={data} code={code} />}
+        fileName={`guia-${code}.pdf`}
         style={{
           padding: "12px 24px",
           backgroundColor: "#1a1a1a",

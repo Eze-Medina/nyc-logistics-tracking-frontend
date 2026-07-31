@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { mapFormToDataGuide } from '../../../helpers';
+import { createGuide, mapFormToGuideDto } from '../../../helpers';
 import { useForm } from '../../../hooks/useForm';
 import { formData } from '../../../data/formData';
 
 import type { GuideDto, Item } from '../../../../../interfaces';
 
-import { ItemsForm, ReceiverForm, SenderForm, SureForm, ShipmentGuide } from '../../';
+import { ItemsForm, ReceiverForm, SenderForm, InsuranceForm, ShipmentGuide } from '../../';
 
 import style from './guideform.module.css';
 
@@ -21,6 +21,7 @@ export const GuideForm = () => {
   } = useForm(formData);
 
   const [data, setData] = useState<GuideDto | null>(null);
+  const [code, setCode] = useState<string | null>(null);
 
   const handleAddItem = (newItem: Item) => {
     setFormState(prev => ({
@@ -39,11 +40,17 @@ export const GuideForm = () => {
   const sendForm = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = mapFormToDataGuide(formState);
+    const data = mapFormToGuideDto(formState);
 
-    console.log(data)
+    const resp = await createGuide(data);
 
-    setData(data);
+    if (!resp) {
+      return;
+    }
+
+    setData(resp.guide);
+    setCode(resp.code);
+
     onResetForm();
   };
 
@@ -53,8 +60,8 @@ export const GuideForm = () => {
 
       <form className={style.forms} onSubmit={sendForm}>
         <SenderForm
-          senderId={formState.sender.id}
-          senderIdType={formState.sender.idType}
+          senderId={formState.sender.id_number}
+          senderIdType={formState.sender.id_type}
           senderName={formState.sender.name}
           senderEmail={formState.sender.email}
           senderPhone={formState.sender.phone}
@@ -65,8 +72,8 @@ export const GuideForm = () => {
         />
 
         <ReceiverForm
-          receiverId={formState.receiver.id}
-          receiverIdType={formState.receiver.idType}
+          receiverId={formState.receiver.id_number}
+          receiverIdType={formState.receiver.id_type}
           receiverName={formState.receiver.name}
           receiverEmail={formState.receiver.email}
           receiverPhone={formState.receiver.phone}
@@ -82,10 +89,10 @@ export const GuideForm = () => {
           items={formState.items}
         />
 
-        <SureForm
-          secure={formState.sure.secure}
-          declaredValue={formState.sure.declaredValue}
-          sureValue={formState.sure.sureValue}
+        <InsuranceForm
+          contracted={formState.insurance.contracted}
+          declaredValue={formState.insurance.declaredValue}
+          insuranceCost={formState.insurance.insuranceCost}
           onCheckboxChange={onCheckboxChange}
           onInputChange={onInputChange}
         />
@@ -98,7 +105,7 @@ export const GuideForm = () => {
             Crear guía
           </button>
 
-          <ShipmentGuide data={data} />
+          <ShipmentGuide data={data} code={code} />
         </div>
       </form>
     </section>

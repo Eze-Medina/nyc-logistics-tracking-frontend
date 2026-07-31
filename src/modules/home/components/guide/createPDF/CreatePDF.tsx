@@ -1,14 +1,17 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
 import type { GuideDto } from '../../../../../interfaces';
 
-import logo from '../../../../../assets/icon-black.png';
+import logo from '../../../../../assets/logo.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {
   data: GuideDto;
+  code: string | null;
 }
 
 export const CreatePDF = (props: dataType) => {
+
+  console.log(props.data)
 
   const totalRemainingAmount = props.data.items
     .filter(item => !item.currentAccount)
@@ -93,7 +96,7 @@ export const CreatePDF = (props: dataType) => {
               </Text>
 
               <Text style={styles.docTitle}>
-                N° 'falta implementar'
+                N° {props.code}
               </Text>
             </View>
 
@@ -129,11 +132,11 @@ export const CreatePDF = (props: dataType) => {
             </View>
 
             <View style={styles.fieldRow}>
-              <Text style={styles.fieldLabel}>{props.data.sender.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldLabel}>{props.data.sender.id_type.toUpperCase()}:{' '}</Text>
               <Text style={styles.fieldValue}>
                 {formatId(
-                  props.data.sender.id,
-                  props.data.sender.idType
+                  props.data.sender.id_number,
+                  props.data.sender.id_type
                 )}
               </Text>
             </View>
@@ -171,11 +174,11 @@ export const CreatePDF = (props: dataType) => {
             </View>
 
             <View style={styles.fieldRow}>
-              <Text style={styles.fieldLabel}>{props.data.receiver.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldLabel}>{props.data.receiver.id_type.toUpperCase()}:{' '}</Text>
               <Text style={styles.fieldValue}>
                 {formatId(
-                  props.data.receiver.id,
-                  props.data.receiver.idType
+                  props.data.receiver.id_number,
+                  props.data.receiver.id_type
                 )}
               </Text>
             </View>
@@ -314,16 +317,16 @@ export const CreatePDF = (props: dataType) => {
           <View style={styles.insuranceSection}>
             <Text style={styles.insuranceText}>
               <Text style={styles.bold}>Seguro:</Text>{' '}
-              {props.data.sure.secure ? 'Si' : 'No'}
+              {props.data.insurance.contracted ? 'Si' : 'No'}
 
-              {props.data.sure.secure && (
+              {props.data.insurance.contracted && (
                 <>
                   {'  |  '}
                   <Text style={styles.bold}>Valor declarado:</Text>{' '}
-                  $ {formatNumber(props.data.sure.declaredValue)}
+                  $ {formatNumber(props.data.insurance.declaredValue)}
                   {'  |  '}
                   <Text style={styles.bold}>Valor seguro:</Text>{' '}
-                  $ {formatNumber(props.data.sure.sureValue)}
+                  $ {formatNumber(props.data.insurance.insuranceCost)}
                 </>
               )}
             </Text>
@@ -336,7 +339,7 @@ export const CreatePDF = (props: dataType) => {
             </Text>
 
             <Text style={styles.totalToPayValue}>
-              $ {formatNumber(totalRemainingAmount + props.data.sure.sureValue)}
+              $ {formatNumber(totalRemainingAmount + props.data.insurance.insuranceCost)}
             </Text>
           </View>
 

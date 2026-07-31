@@ -3,7 +3,7 @@ import type { GuideDto } from "../../../interfaces"
 export const formData: GuideDto = {
   sender: {
     id: 41940600,
-    idType: 'dni',
+    id_type: 'dni',
     name: 'Ezequiel Medina',
     email: 'tec.medinaeze@gmail.com',
     phone: '3425502666',
@@ -11,7 +11,7 @@ export const formData: GuideDto = {
   },
   receiver: {
     id: 21416403029,
-    idType: 'cuit',
+    id_type: 'cuit',
     name: 'Pochito Lopez',
     email: 'poc.lopez@gmail.com',
     phone: '3425406333',
@@ -25,10 +25,10 @@ export const formData: GuideDto = {
     province: "Santa Fe",
     city: "Santo Tomé"
   },
-  sure: {
-    secure: true,
+  insurance: {
+    contracted: true,
     declaredValue: 50000,
-    sureValue: 2500
+    insuranceCost: 2500
   },
   items: [
     {

@@ -4,16 +4,16 @@ type IdType = 'dni' | 'cuit' | 'cuil';
 
 export interface GuideDto {
   sender: {
-    id: number | '',
-    idType: IdType,
+    id_number: number | '',
+    id_type: IdType,
     name: string,
     email: string,
     phone: string,
     address: string
   }
   receiver: {
-    id: number | '',
-    idType: IdType,
+    id_number: number | '',
+    id_type: IdType,
     name: string,
     email: string,
     phone: string,
@@ -27,10 +27,10 @@ export interface GuideDto {
     province: string,
     city: string
   }
-  sure: {
-    secure: boolean,
+  insurance: {
+    contracted: boolean,
     declaredValue: number,
-    sureValue: number
+    insuranceCost: number
   }
   items: Item[];
 }

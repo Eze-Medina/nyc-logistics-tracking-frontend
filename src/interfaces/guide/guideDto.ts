@@ -6,7 +6,7 @@ export interface GuideDto {
   code: string
   sender: {
     id_number: number | '',
-    id_type: IdType,
+    id_type: IdType | '',
     name: string,
     email: string,
     phone: string,
@@ -14,7 +14,7 @@ export interface GuideDto {
   }
   receiver: {
     id_number: number | '',
-    id_type: IdType,
+    id_type: IdType | '',
     name: string,
     email: string,
     phone: string,

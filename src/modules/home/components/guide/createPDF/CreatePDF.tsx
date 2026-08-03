@@ -6,12 +6,9 @@ import { styles } from './createPDF.styles'
 
 interface dataType {
   data: GuideDto;
-  code: string | null;
 }
 
 export const CreatePDF = (props: dataType) => {
-
-  console.log(props.data)
 
   const totalRemainingAmount = props.data.items
     .filter(item => !item.currentAccount)
@@ -96,7 +93,7 @@ export const CreatePDF = (props: dataType) => {
               </Text>
 
               <Text style={styles.docTitle}>
-                N° {props.code}
+                N° {props.data.code}
               </Text>
             </View>
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { createGuide, mapFormToGuideDto } from '../../../helpers';
 import { useForm } from '../../../hooks/useForm';
@@ -6,7 +6,7 @@ import { formData } from '../../../data/formData';
 
 import type { GuideDto, Item } from '../../../../../interfaces';
 
-import { ItemsForm, ReceiverForm, SenderForm, InsuranceForm, ShipmentGuide } from '../../';
+import { ItemsForm, ReceiverForm, SenderForm, InsuranceForm, ShipmentGuide, InputText } from '../../';
 
 import style from './guideform.module.css';
 
@@ -20,8 +20,7 @@ export const GuideForm = () => {
     onResetForm
   } = useForm(formData);
 
-  const [data, setData] = useState<GuideDto | null>(null);
-  const [code, setCode] = useState<string | null>(null);
+  const [data, setData] = useState<GuideDto>(formData);
 
   const handleAddItem = (newItem: Item) => {
     setFormState(prev => ({
@@ -37,6 +36,15 @@ export const GuideForm = () => {
     }));
   };
 
+  // temporal mientras no se habilite la creacion de guias con backend
+  useEffect(() => {
+
+    const data = mapFormToGuideDto(formState);
+    setData(data);
+
+  }, [formState]);
+
+
   const sendForm = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -48,8 +56,7 @@ export const GuideForm = () => {
       return;
     }
 
-    setData(resp.guide);
-    setCode(resp.code);
+    setData(resp);
 
     onResetForm();
   };
@@ -99,13 +106,13 @@ export const GuideForm = () => {
 
         <div className={style.div_button}>
           <button
-            className={style.button}
+            className={style.button} // display: none
             type="submit"
           >
             Crear guía
           </button>
-
-          <ShipmentGuide data={data} code={code} />
+          <InputText type='number' labelName='Número guia' name='code' placeholder='numero de guia' value={formState.code} onInputChange={onInputChange} />
+          <ShipmentGuide data={data} />
         </div>
       </form>
     </section>

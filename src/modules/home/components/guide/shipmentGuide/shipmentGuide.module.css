@@ -1,0 +1,10 @@
+.button {
+    padding: 12px 24px;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 0px solid;
+    border-radius: 6px;
+    font-family: 'JetBrainsMono';
+    font-size: 1em;
+    cursor: pointer;
+}

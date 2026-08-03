@@ -1,8 +1,9 @@
 import type { GuideDto } from "../../../interfaces"
 
 export const formData: GuideDto = {
+  code: '000001',
   sender: {
-    id: 41940600,
+    id_number: 41940600,
     id_type: 'dni',
     name: 'Ezequiel Medina',
     email: 'tec.medinaeze@gmail.com',
@@ -10,7 +11,7 @@ export const formData: GuideDto = {
     address: 'Las heras 7460',
   },
   receiver: {
-    id: 21416403029,
+    id_number: 21416403029,
     id_type: 'cuit',
     name: 'Pochito Lopez',
     email: 'poc.lopez@gmail.com',
@@ -26,9 +27,9 @@ export const formData: GuideDto = {
     city: "Santo Tomé"
   },
   insurance: {
-    contracted: true,
-    declaredValue: 50000,
-    insuranceCost: 2500
+    contracted: false,
+    declaredValue: 0,
+    insuranceCost: 0
   },
   items: [
     {
@@ -52,5 +53,6 @@ export const formData: GuideDto = {
       remainingAmount: 500,
       currentAccount: true,
     }
-  ]
+  ],
+  status: 'PENDING'
 }

@@ -3,6 +3,7 @@ import type { Item } from "./item.interface";
 type IdType = 'dni' | 'cuit' | 'cuil';
 
 export interface GuideDto {
+  code: string
   sender: {
     id_number: number | '',
     id_type: IdType,
@@ -33,4 +34,5 @@ export interface GuideDto {
     insuranceCost: number
   }
   items: Item[];
+  status: string,
 }

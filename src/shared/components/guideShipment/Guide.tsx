@@ -56,14 +56,14 @@ export const Guide = ({ data, numero }: DataType) => {
       // =========================
 
       await emailjs.send(
-        'service_tkr61ei',
-        'template_hrgwbaj',
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           guide_number: numero,
           guide_data: JSON.stringify(data, null, 2),
         },
         {
-          publicKey: 'E3Rnosq-APmm1cMRh',
+          publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
         }
       );
 

@@ -1,5 +1,5 @@
 import type { Item } from "../../../../../interfaces/guide/item.interface";
-import { useForm } from "../../../hooks/useForm";
+import { useForm } from "../../../../../shared/hooks/useForm";
 import { Checkbox } from "../../input/checkbox/Checkbox";
 import { InputText } from "../../input/text/InputText"
 import { Table } from "../../table/Table";

@@ -1,13 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { Layout } from "../shared/components/Layout";
-import { HomePage } from "../modules/home/pages/HomePage";
+import { GuideForm } from "../modules/guideForm/pages/GuideForm";
+import { GuideList } from "../modules/guideList/pages/GuideList";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <GuideForm /> },
+      { path: "guides", element: <GuideList /> },
     ],
   },
 ]);

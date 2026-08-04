@@ -1,6 +1,6 @@
 .layout_main {
   display: grid;
-  grid-template-columns: 0.05fr 1fr 0.05fr;
+  grid-template-columns: 0.02fr  0.2fr 0.8fr 0.02fr;
   background-color: #F8F9FF;
 }
 

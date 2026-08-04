@@ -1,14 +1,17 @@
 .navbar {
-  grid-column: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navbar h1 {
+  font-size: 1.8em;
 }
 
 .list {
   list-style: none;
 }
 
-.list_item a {
-  text-decoration: none;
+.list_item {
+  border-bottom: 2px solid black;
 }

@@ -10,9 +10,9 @@ interface Props {
 
 export const InputSelect = (props: Props) => {
   return (
-    <div className={style.guide_form__field}>
-      <label className={style.guide_form__label}>{props.labelName}</label>
-      <select className={style.guide_form__input} name={props.name} value={props.value} onChange={props.onInputChange} autoComplete="off">
+    <div className={style.guide_form_field}>
+      <label className={style.guide_form_label}>{props.labelName}</label>
+      <select className={style.guide_form_input} name={props.name} value={props.value} onChange={props.onInputChange} autoComplete="off">
         <option>Seleccionar</option>
         {props.list.map(element => (
           <option key={element} value={element}>

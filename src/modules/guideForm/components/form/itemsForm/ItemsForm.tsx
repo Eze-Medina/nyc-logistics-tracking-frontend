@@ -1,7 +1,6 @@
 import type { Item } from "../../../../../interfaces/guide/item.interface";
 import { useForm } from "../../../../../shared/hooks/useForm";
-import { Checkbox } from "../../input/checkbox/Checkbox";
-import { InputText } from "../../input/text/InputText"
+import { InputText, Checkbox } from '../../../../../shared/components/input';
 import { Table } from "../../table/Table";
 
 import style from './itemsForm.module.css'

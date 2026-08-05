@@ -1,0 +1,100 @@
+.table_container {
+  overflow-x: auto;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.table_tr { 
+  width: 100%;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
+  border-bottom: 1px solid #ccc;
+}
+
+.table_th { 
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0px;
+}
+
+.table_td { 
+  background-color: #F8FAFC;
+  display: flex;
+  font-family: 'geist';
+  justify-content: center;
+  align-items: center;
+  padding: 18px 0px;
+}
+
+.code {
+  background-color: #DBE9FF;
+  border-radius: 5px;
+  font-weight: 400;
+  font-family: 'JetBrainsMono';
+  color: black;
+  font-size: 0.85em;
+  margin: 0px;
+  padding: 5px;
+}
+
+/* Última fila */
+.table_tr:last-child {
+  border-bottom: none;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.inTransit {
+  background-color: #d9d1f1;
+  color: #0c5460;
+}
+
+.delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.edit_button {
+  background-color: #ffffff00;
+  border: 0px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.edit_button:hover {
+  background-color: #868686;
+}
+
+.edit_button:hover svg {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .table_container {
+    border: 2px solid #ccc;
+  }
+}

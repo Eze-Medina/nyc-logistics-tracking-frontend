@@ -1,5 +1,4 @@
 export * from './form'
 export * from './guide'
-export * from './input'
 export * from './sidebar/Sidebar'
 export * from './table/Table'

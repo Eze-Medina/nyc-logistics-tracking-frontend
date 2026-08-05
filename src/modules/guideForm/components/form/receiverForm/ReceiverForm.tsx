@@ -1,5 +1,4 @@
-import { InputText } from '../../input/text/InputText'
-import { InputSelect } from '../../input/select/InputSelect'
+import { InputText, InputSelect } from '../../../../../shared/components/input';
 
 import style from './receiverForm.module.css'
 

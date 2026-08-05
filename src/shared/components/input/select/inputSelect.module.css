@@ -1,0 +1,21 @@
+.guide_form_field {
+  display: flex;
+  flex-direction: column;
+}
+
+.guide_form_label {
+  color: rgb(41, 41, 41);
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: "Geist";
+  margin-bottom: 5px;
+}
+
+.guide_form_input {
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  font-size: 0.9em;
+}

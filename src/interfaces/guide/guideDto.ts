@@ -1,15 +1,20 @@
 import type { Item } from "./item.interface";
 
-export interface CreateGuideDto {
+type IdType = 'dni' | 'cuit' | 'cuil';
+
+export interface GuideDto {
+  code: string
   sender: {
-    id: number | '',
+    id_number: number | '',
+    id_type: IdType | '',
     name: string,
     email: string,
     phone: string,
     address: string
   }
   receiver: {
-    id: number | '',
+    id_number: number | '',
+    id_type: IdType | '',
     name: string,
     email: string,
     phone: string,
@@ -23,10 +28,11 @@ export interface CreateGuideDto {
     province: string,
     city: string
   }
-  sure: {
-    secure: boolean,
+  insurance: {
+    contracted: boolean,
     declaredValue: number,
-    sureValue: number
+    insuranceCost: number
   }
   items: Item[];
+  status: string,
 }

@@ -1,0 +1,92 @@
+.insurance {
+  border: 2px solid rgb(196, 195, 195);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.insurance h2 {
+  font-size: 1.3em;
+  margin: 0px 0px 15px;
+}
+
+.insurance_form {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.show {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: opacity1 0.2s ease-in-out;
+}
+
+.hide {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: opacity2 0.2s ease-in-out;
+}
+
+@keyframes opacity1 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity2 {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.insurance_form_field {
+  display: flex;
+  gap: 10px;
+}
+
+.insurance_form_label {
+  display: flex;
+  align-items: center;
+}
+
+.insurance_form_input {
+  outline: none;
+  border-radius: 3px;
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  font-family: "Geist";
+}
+
+@media (max-width: 768px) {
+  .insurance_form {
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+  }
+
+  .insurance_form_field {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .show {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+  }
+  .hide {
+    width: 100%;
+    flex-direction: column;
+    align-items: start;
+  }
+}

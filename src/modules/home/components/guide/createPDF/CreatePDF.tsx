@@ -1,12 +1,11 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import type { DataGuide } from '../../helpers/DataGuide';
+import type { GuideDto } from '../../../../../interfaces';
 
-import logo from '../../../assets/icon-black.png';
+import logo from '../../../../../assets/logo.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {
-  data: DataGuide;
-  numero: number;
+  data: GuideDto;
 }
 
 export const CreatePDF = (props: dataType) => {
@@ -94,7 +93,7 @@ export const CreatePDF = (props: dataType) => {
               </Text>
 
               <Text style={styles.docTitle}>
-                N° {props.numero}
+                N° {props.data.code}
               </Text>
             </View>
 
@@ -114,7 +113,7 @@ export const CreatePDF = (props: dataType) => {
 
         {/* Tracking */}
         {/* <Text style={{ fontSize: 8, marginBottom: 8, color: '#333' }}>
-          N° de Seguimiento de envío: {props.numero}
+          N° de Seguimiento de envío: 'falta implementar'
         </Text> */}
 
         {/* Origen / Destino */}
@@ -130,11 +129,11 @@ export const CreatePDF = (props: dataType) => {
             </View>
 
             <View style={styles.fieldRow}>
-              <Text style={styles.fieldLabel}>{props.data.sender.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldLabel}>{props.data.sender.id_type.toUpperCase()}:{' '}</Text>
               <Text style={styles.fieldValue}>
                 {formatId(
-                  props.data.sender.id,
-                  props.data.sender.idType
+                  props.data.sender.id_number,
+                  props.data.sender.id_type
                 )}
               </Text>
             </View>
@@ -172,11 +171,11 @@ export const CreatePDF = (props: dataType) => {
             </View>
 
             <View style={styles.fieldRow}>
-              <Text style={styles.fieldLabel}>{props.data.receiver.idType.toUpperCase()}:{' '}</Text>
+              <Text style={styles.fieldLabel}>{props.data.receiver.id_type.toUpperCase()}:{' '}</Text>
               <Text style={styles.fieldValue}>
                 {formatId(
-                  props.data.receiver.id,
-                  props.data.receiver.idType
+                  props.data.receiver.id_number,
+                  props.data.receiver.id_type
                 )}
               </Text>
             </View>
@@ -322,16 +321,16 @@ export const CreatePDF = (props: dataType) => {
           <View style={styles.insuranceSection}>
             <Text style={styles.insuranceText}>
               <Text style={styles.bold}>Seguro:</Text>{' '}
-              {props.data.sure.secure ? 'Si' : 'No'}
+              {props.data.insurance.contracted ? 'Si' : 'No'}
 
-              {props.data.sure.secure && (
+              {props.data.insurance.contracted && (
                 <>
                   {'  |  '}
                   <Text style={styles.bold}>Valor declarado:</Text>{' '}
-                  $ {formatNumber(props.data.sure.declaredValue)}
+                  $ {formatNumber(props.data.insurance.declaredValue)}
                   {'  |  '}
                   <Text style={styles.bold}>Valor seguro:</Text>{' '}
-                  $ {formatNumber(props.data.sure.sureValue)}
+                  $ {formatNumber(props.data.insurance.insuranceCost)}
                 </>
               )}
             </Text>
@@ -344,7 +343,7 @@ export const CreatePDF = (props: dataType) => {
             </Text>
 
             <Text style={styles.totalToPayValue}>
-              $ {formatNumber(totalRemainingAmount + props.data.sure.sureValue)}
+              $ {formatNumber(totalRemainingAmount + props.data.insurance.insuranceCost)}
             </Text>
           </View>
 

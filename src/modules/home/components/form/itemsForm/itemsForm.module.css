@@ -14,10 +14,17 @@
 .item_form_button { 
   border: 0px solid;
   background-color: #2e2e2e; 
+  font-family: "JetBrainsMono";
   color: #dfdfdf;
   border-radius: 5px; 
   padding: 10px;
-  margin: 0px 0px 15px 0px 
+  margin: 0px 0px 15px 0px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.item_form_button:hover {
+  background-color: #4d4d4d;
 }
 
 .items_div {

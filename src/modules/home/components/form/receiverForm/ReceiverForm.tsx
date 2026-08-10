@@ -30,8 +30,8 @@ export const ReceiverForm = (props: Props) => {
         <InputSelect labelName='Provincia' name='destination.province' value={props.provinceDestination} onInputChange={props.onInputChange} list={provinces} />
         <InputSelect labelName='Ciudad' name='destination.city' value={props.cityDestination} onInputChange={props.onInputChange} list={citys} />
         <InputText type='text' labelName='Dirección' name='receiver.address' value={props.receiverAddress} placeholder='Dirección de destinaratio' onInputChange={props.onInputChange} />
-        <InputSelect labelName='Identificación' name='receiver.idType' value={props.receiverIdType} onInputChange={props.onInputChange} list={types} />
-        <InputText type='number' labelName='DNI/CUIL/CUIT' name='receiver.id' value={props.receiverId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
+        <InputSelect labelName='Identificación' name='receiver.id_type' value={props.receiverIdType} onInputChange={props.onInputChange} list={types} />
+        <InputText type='number' labelName='DNI/CUIL/CUIT' name='receiver.id_number' value={props.receiverId} placeholder='Número de identificación' onInputChange={props.onInputChange} />
       </div>
     </div>
   )

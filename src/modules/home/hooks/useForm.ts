@@ -63,6 +63,7 @@ export const useForm = <T extends object>(initialForm: T) => {
 
   return {
     formState,
+    setFormState,
     onInputChange,
     onCheckboxChange,
     onResetForm,

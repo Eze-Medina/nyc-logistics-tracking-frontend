@@ -38,13 +38,20 @@
 
 .button {
   color: #fff;
-  background-color: #1a1a1a;
-  border: 0px solid;
+  background-color: #2a2a2b;
+  border: 1px solid white;
   border-radius: 6px;
   padding: 12px 24px;
   margin: 15px 0px 15px 0px;
   font-family: "JetBrainsMono";
   font-size: 0.95em;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  display: none;
+}
+
+.button:hover {
+  background-color: #868686;
 }
 
 @media (max-width: 768px) {

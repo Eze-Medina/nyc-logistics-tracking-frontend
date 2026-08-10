@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import type { Item } from '../../../../interfaces/item.interface'
+import type { Item } from '../../../../interfaces/guide/item.interface'
 
 import style from './table.module.css'
 
@@ -25,13 +25,13 @@ export const Table = (props: Props) => {
         <tbody>
           {props.items.map((item, idx) => (
             <tr key={idx} className={style.table_tr}>
-              <td className={style.table_td} style={{ textAlign: 'center' }}> {item.quantity} </td>
+              <td className={style.table_td}> {item.quantity} </td>
               <td className={style.table_td}> {item.description} </td>
-              <td className={style.table_td_number}> <p>$</p> {item.paid} </td>
+              <td className={style.table_td_number}> <p>$</p> {item.paid.toLocaleString('es-AR')} </td>
               <td className={style.table_td_number}>
                 {item.currentAccount
                   ? 'Cuenta corriente'
-                  : (<div> <p>$</p> {item.remainingAmount} </div>)
+                  : (<div> <p>$</p> {item.remainingAmount.toLocaleString('es-AR')} </div>)
                 }
               </td>
               <td className={style.table_td} style={{ textAlign: 'center' }}>
@@ -42,7 +42,6 @@ export const Table = (props: Props) => {
                 >
                   <X
                     width={15}
-                    color="#e21919"
                     strokeWidth="5"
                   />
                 </button>

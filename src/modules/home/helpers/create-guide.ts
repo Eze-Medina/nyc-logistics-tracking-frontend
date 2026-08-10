@@ -1,22 +1,20 @@
-import type { DataGuide } from "../../../shared/helpers/DataGuide";
+import type { GuideDto } from "../../../interfaces";
 
-export const createGuide = async (guide: DataGuide) => {
+export const createGuide = async (guide: GuideDto): Promise<GuideDto | null> => {
 
-  console.log("Objeto que se enviaría:");
-  console.log(guide);
+  const resp = await fetch('http://localhost:3000/api/guides', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(guide),
+  });
 
-  // const url = 'http://localhost:3000/api/guides';
+  if (!resp.ok) {
+    return null;
+  }
 
-  // const resp = await fetch(url, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(guide),
-  // });
+  const data = await resp.json();
 
-  // const data = await resp.json();
-  // console.log(data);
-
-  // return data;
-}
+  return data;
+};

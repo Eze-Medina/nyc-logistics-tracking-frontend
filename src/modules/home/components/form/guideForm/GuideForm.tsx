@@ -104,6 +104,11 @@ export const GuideForm = () => {
           onInputChange={onInputChange}
         />
 
+        <div className={style.text}>
+          <label className={style.text_label}>Notas</label>
+          <textarea className={style.text_area} name='note' value={formState.note} onChange={onInputChange} />
+        </div>
+
         <div className={style.div_button}>
           <button
             className={style.button} // display: none

@@ -32,5 +32,6 @@ export const formData: GuideDto = {
     insuranceCost: 0
   },
   items: [],
-  status: 'PENDING'
+  status: 'PENDING',
+  note: ''
 }

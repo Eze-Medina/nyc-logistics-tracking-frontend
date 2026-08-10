@@ -35,4 +35,5 @@ export interface GuideDto {
   }
   items: Item[];
   status: string,
+  note: string
 }

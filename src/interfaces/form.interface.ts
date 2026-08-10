@@ -28,6 +28,7 @@ export interface Form {
     declaredValue: number,
     sureValue: number
   }
+  note: string
   guia: {
     numero: number
   }

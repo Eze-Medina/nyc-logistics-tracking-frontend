@@ -308,6 +308,13 @@ export const CreatePDF = (props: dataType) => {
           </View>
         </View>
 
+        {/* Notas del envío */}
+        {props.data.note && (
+          <Text style={styles.note}>
+            <Text style={styles.bold}>Nota:</Text> {props.data.note}
+          </Text>
+        )}
+
         {/* Seguro y total a pagar */}
         <View style={styles.totalInsuranceSection}>
 

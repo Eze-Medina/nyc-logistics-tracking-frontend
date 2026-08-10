@@ -35,6 +35,7 @@ export class DataGuide implements CreateGuideDto {
     sureValue: number
   }
   items!: Item[]
+  note!: string
 
   constructor(data: CreateGuideDto) {
     Object.assign(this, data);

@@ -41,6 +41,7 @@ const formData: Form = {
     declaredValue: 0,
     sureValue: 0,
   },
+  note: '',
   guia: {
     numero: 0
   }
@@ -149,6 +150,11 @@ export const GuideForm = () => {
           sureValue={formState.sure.sureValue}
           onCheckboxChange={onCheckboxChange}
           onInputChange={onInputChange} />
+
+        <div className={style.text}>
+          <label className={style.text_label}>Notas</label>
+          <textarea className={style.text_area} name='note' value={formState.note} onChange={onInputChange} />
+        </div>
 
         <div className={style.div_button} >
           <InputText type='number' labelName='Número guia' name='guia.numero' placeholder='numero de guia' value={formState.guia.numero} onInputChange={onInputChange} />

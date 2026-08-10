@@ -242,6 +242,12 @@ export const styles = StyleSheet.create({
     fontWeight: 500,
   },
 
+  note: {
+    fontSize: 8,
+    marginTop: 6,
+    marginBottom: 6,
+  },
+
   // =========================
   // SEGURO Y TOTAL
   // =========================

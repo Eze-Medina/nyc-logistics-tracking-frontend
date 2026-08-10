@@ -16,6 +16,26 @@
   gap: 25px;   
 }
 
+.text {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(196, 195, 195);
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.text_label {
+  font-weight: 600;
+  font-size: 1.3em;
+  margin: 0px 0px 15px;
+}
+
+.text_area {
+  resize: none;
+  font-family: 'geist';
+  padding: 10px;  
+}
+
 .button {
   color: #fff;
   background-color: #1a1a1a;

@@ -6,9 +6,10 @@ import { formData } from '../data/formData';
 
 import type { GuideDto, Item } from '../../../interfaces';
 
-import { ItemsForm, ReceiverForm, SenderForm, InsuranceForm, ShipmentGuide } from '../components';
+import { ItemsForm, ReceiverForm, SenderForm, InsuranceForm } from '../components';
 
 import style from './guideform.module.css';
+import { ShipmentGuide } from '../../../shared/components/guide/shipmentGuide/ShipmentGuide';
 
 export const GuideForm = () => {
 
@@ -113,7 +114,7 @@ export const GuideForm = () => {
             <InputText type='number' labelName='Número guia' name='code' placeholder='numero de guia' value={formState.code} onInputChange={onInputChange} />
         
             */}
-            <ShipmentGuide data={data} />
+            <ShipmentGuide data={data} text='Descargar guia de envio' type='download' />
           </div>
         </form>
       </div>

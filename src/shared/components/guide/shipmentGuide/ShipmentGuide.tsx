@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { GuideDto } from "../../../../../interfaces";
+import type { GuideDto } from "../../../../interfaces";
 
 import { pdf } from "@react-pdf/renderer";
 import emailjs from "@emailjs/browser";
@@ -8,12 +8,15 @@ import emailjs from "@emailjs/browser";
 import { CreatePDF } from "../createPDF/CreatePDF";
 
 import style from "./shipmentGuide.module.css";
+import { Printer } from "lucide-react";
 
 interface Props {
   data: GuideDto;
+  text: string;
+  type: string;
 }
 
-export const ShipmentGuide = ({ data }: Props) => {
+export const ShipmentGuide = ({ data, text, type }: Props) => {
 
   const [loading, setLoading] = useState(false);
 
@@ -74,14 +77,13 @@ export const ShipmentGuide = ({ data }: Props) => {
   return (
     <div>
       <button
-        className={style.button}
+        className={`${(type == 'search') ? style.button_search : style.button_download}`}
         type="button"
         onClick={handleGenerateGuide}
         disabled={loading}
       >
-        {loading
-          ? "Generando guía..."
-          : "Descargar Guía de Envío"}
+        {(type == 'search') && <Printer height={18} />}
+        {text}
       </button>
     </div>
   );

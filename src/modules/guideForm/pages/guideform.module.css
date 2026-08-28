@@ -28,20 +28,20 @@
 }
 
 .button {
-  color: #fff;
-  background-color: #2a2a2b;
-  border: 1px solid white;
-  border-radius: 6px;
-  padding: 12px 24px;
-  margin: 15px 0px 15px 0px;
-  font-family: "JetBrainsMono";
-  font-size: 0.95em;
-  transition: all 0.4s ease-in-out;
+  border: 0px solid;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 37);
+  color: white;
+  padding: 10px 30px;
+  font-family: 'geist';
+  font-weight: 600;
   cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .button:hover {
-  background-color: #868686;
+  background-color: rgb(0, 0, 158);
 }
 
 @media (max-width: 768px) {

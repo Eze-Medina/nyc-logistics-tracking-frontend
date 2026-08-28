@@ -1,7 +1,7 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
-import type { GuideDto } from '../../../../../interfaces';
 
-import logo from '../../../../../assets/logo.png';
+import type { GuideDto } from '../../../../interfaces';
+import logo from '../../../../assets/logo.png';
 import { styles } from './createPDF.styles'
 
 interface dataType {

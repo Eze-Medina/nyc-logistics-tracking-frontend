@@ -6,4 +6,4 @@ export * from './guide/movement.interface'
 
 
 export * from './client/clientSummaryDto'
-export * from './client/Clientfilter'
+export * from './client/clientFilter'

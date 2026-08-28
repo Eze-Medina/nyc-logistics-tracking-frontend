@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import type { GuideDto } from '../../../../interfaces';
+import type { GuideDto, GuideStatus } from '../../../../interfaces';
 
-import { getGuide } from '../../helpers/get-guide';
+// import { getGuide } from '../../helpers/get-guide';
 
 import { Travel } from './travel/Travel';
 import { Client } from './client/Client';
@@ -10,7 +10,7 @@ import { Items } from './items/Items';
 import { ArrowLeft, RotateCwFadingClock } from 'lucide-react';
 
 import style from './guideDetails.module.css'
-import { ShipmentGuide } from '../../../guideForm/components';
+import { ShipmentGuide } from '../../../../shared/components/guide/shipmentGuide/ShipmentGuide';
 
 const guideData: GuideDto = {
   code: 'NYC-SFE-000001',
@@ -120,16 +120,13 @@ const guideData: GuideDto = {
   }
 }
 
-const statusClass = {
+const statusClass: Record<GuideStatus, string> = {
   PENDIENTE_RETIRO: style.pending,
   PENDIENTE_RECEPCION: style.pending,
-
   EN_CAMINO_RETIRO: style.inTransit,
   EN_POSESION: style.inTransit,
   EN_TRANSITO: style.inTransit,
-
   ENTREGADO: style.delivered,
-
   RETIRO_FALLIDO: style.cancelled,
   ENTREGA_FALLIDA: style.cancelled,
   CANCELADO: style.cancelled,
@@ -143,7 +140,10 @@ interface Props {
 
 export const GuideDetails = (data: Props) => {
 
-  const [guide, setGuide] = useState(guideData);
+  const [guide] = useState(guideData);
+
+  const lastMovement = guide.movements.at(-1)!;
+  const latestStatus = statusClass[lastMovement.status as GuideStatus];
 
   useEffect(() => {
     // const resp = getGuide(data.guide)
@@ -160,7 +160,7 @@ export const GuideDetails = (data: Props) => {
           <div className={style.basics_info}>
             <div className={style.info_content}>
               <h2 className={style.basics_code}>{guide.code}</h2>
-              <span className={`${style.status} ${statusClass[guide.movements.at(-1)?.status]}`}>
+              <span className={`${style.status} ${latestStatus}`}>
                 {guide.movements.at(-1)?.status}
               </span>
             </div>

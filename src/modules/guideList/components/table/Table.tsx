@@ -8,7 +8,7 @@ interface Props {
   items: GuideSummaryDto[];
   page: number;
   handleChangePage: React.Dispatch<React.SetStateAction<number>>;
-  handleDetail: React.Dispatch<React.SetStateAction<string | null>>;
+  handleDetail: React.Dispatch<React.SetStateAction<string | null | undefined>>;
 }
 
 const statusClass = {

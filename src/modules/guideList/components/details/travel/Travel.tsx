@@ -1,4 +1,4 @@
-import type { Movement } from '../../../../../interfaces'
+import type { GuideStatus, Movement } from '../../../../../interfaces'
 
 import { Route } from 'lucide-react'
 
@@ -8,16 +8,13 @@ interface Props {
   movements: Movement[]
 }
 
-const statusClass = {
+const statusClass: Record<GuideStatus, string> = {
   PENDIENTE_RETIRO: style.pending,
   PENDIENTE_RECEPCION: style.pending,
-
   EN_CAMINO_RETIRO: style.inTransit,
   EN_POSESION: style.inTransit,
   EN_TRANSITO: style.inTransit,
-
   ENTREGADO: style.delivered,
-
   RETIRO_FALLIDO: style.cancelled,
   ENTREGA_FALLIDA: style.cancelled,
   CANCELADO: style.cancelled,
@@ -25,6 +22,10 @@ const statusClass = {
 };
 
 export const Travel = (data: Props) => {
+
+  const lastMovement = data.movements.at(-1)!;
+  const latestStatus = statusClass[lastMovement.status as GuideStatus];
+
   return (
     <section className={style.travels}>
       <h3 className={style.title}>
@@ -46,7 +47,7 @@ export const Travel = (data: Props) => {
 
               <div className={style.timeline_content_date}>
                 <time className={style.content_date_time}>{movement.date}</time>
-                <span className={`${style.travel_status} ${statusClass[movement.status]}`}> {movement.status}</span>
+                <span className={`${style.travel_status} ${latestStatus}`}> {movement.status}</span>
               </div>
             </article>
 

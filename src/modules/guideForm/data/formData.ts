@@ -32,5 +32,15 @@ export const formData: GuideDto = {
     insuranceCost: 0
   },
   items: [],
-  status: 'PENDING'
+  movements: [],
+  next_movement: {
+    date: '',
+    status: '',
+    move: '',
+    message: '',
+    location: {
+      city: '',
+      province: '',
+    }
+  }
 }

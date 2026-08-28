@@ -1,4 +1,5 @@
 import type { Item } from "./item.interface";
+import type { Movement } from "./movement.interface";
 
 type IdType = 'dni' | 'cuit' | 'cuil';
 
@@ -34,5 +35,6 @@ export interface GuideDto {
     insuranceCost: number
   }
   items: Item[];
-  status: string,
+  movements: Movement[];
+  next_movement: Movement
 }

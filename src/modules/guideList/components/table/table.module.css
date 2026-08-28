@@ -11,25 +11,23 @@
 }
 
 .table_tr { 
-  width: 100%;
   display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
   border-bottom: 1px solid #ccc;
 }
 
 .table_th { 
-  text-align: center;
+  display: flex;
   border-bottom: 1px solid #ccc;
-  padding: 8px 0px;
+  padding: 18px 0px 18px 10px;
 }
 
 .table_td { 
-  background-color: #F8FAFC;
   display: flex;
   font-family: 'geist';
-  justify-content: center;
   align-items: center;
-  padding: 18px 0px;
+  padding: 18px 0px 18px 10px;
+  background-color: #F8FAFC;
 }
 
 .code {
@@ -43,38 +41,75 @@
   padding: 5px;
 }
 
-/* Última fila */
-.table_tr:last-child {
-  border-bottom: none;
-}
-
 .status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  font-size: 0.75rem;
   font-weight: 600;
-  text-transform: capitalize;
+  line-height: 1;
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+  color: black;
 }
 
 .pending {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: #fff8e6;
+  color: #946200;
+  border-color: #f5dfaa;
 }
 
 .inTransit {
-  background-color: #d9d1f1;
-  color: #0c5460;
+  background-color: #f1effa;
+  color: #6652a8;
+  border-color: #dcd5f2;
 }
 
 .delivered {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #edf8f0;
+  color: #287a43;
+  border-color: #ccebd4;
+}
+
+.warning {
+  background-color: #fff1e8;
+  color: #a64b20;
+  border-color: #f2d0bd;
 }
 
 .cancelled {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #fbeeee;
+  color: #a13d46;
+  border-color: #efcfd2;
+}
+
+.table_td_button {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.table_td_location {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.table_td_city {
+  font-family: 'JetBrainsMono';
+  font-weight: 600;
+}
+
+.table_td_province {
+  font-family: 'JetBrainsMono';
+  color: #979797;
+  margin: 0px;
+  font-size: 0.8em;
 }
 
 .edit_button {
@@ -91,6 +126,39 @@
 
 .edit_button:hover svg {
   color: white;
+}
+
+.table_move {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'geist';
+  padding: 18px 20px;
+}
+
+.table_actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.action_prev, .action_next {
+  background-color: #0c536000;
+  border: 1px solid #0c536000;
+  border-radius: 5px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.action_prev:hover, .action_next:hover {
+  border: 1px solid #0c53605b;
+  cursor: pointer;
+  transition: border 0.5s ease-in-out;
+}
+
+.action_span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {

@@ -11,7 +11,18 @@ interface Props {
   onReset: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const status = ['PENDING', 'TRAVEL', 'DISPATCH']
+const status = [
+  'PENDIENTE_RETIRO',
+  'PENDIENTE_RECEPCION',
+  'EN_CAMINO_RETIRO',
+  'EN_POSESION',
+  'EN_TRANSITO',
+  'ENTREGADO',
+  'RETIRO_FALLIDO',
+  'ENTREGA_FALLIDA',
+  'CANCELADO',
+  'INCIDENCIA',
+];
 const provinces = ['Santa Fe', 'Cordoba', 'Entre Rios', 'Buenos aires'];
 const citys = ['Santo Tome', 'Santa Fe', 'Rosario', 'Cordoba', 'Rafaela', 'Sunchales', 'San Francisco', 'Tacural', 'Esperanza', 'Coronda', 'CABA', 'GBA'];
 
@@ -41,8 +52,8 @@ export const Filter = ({ filter, onInputChange, onSubmit, onReset }: Props) => {
       </div>
 
       <div className={style.actions}>
-        <button type="button" onClick={onReset}>Limpiar</button>
-        <button type="submit">Buscar</button>
+        <button className={style.action_button} type="button" onClick={onReset}>Limpiar</button>
+        <button className={style.action_button} type="submit">Buscar</button>
       </div>
 
     </form>

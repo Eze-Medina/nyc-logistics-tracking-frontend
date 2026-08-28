@@ -1,0 +1,113 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.05fr 1fr 0.05fr;
+  border-top: 1px solid rgb(233, 232, 232);
+  min-height: 95vh;
+}
+
+.section {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.section_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.basics_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 0px 0px 0px;
+}
+
+.info_content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.basics_code {
+  margin: 0px;
+}
+
+.basics_p {
+  font-size: 0.9em;
+  color: rgb(87, 87, 87);
+  font-family: 'geist';
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0px;
+}
+
+.status {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.inTransit {
+  background-color: #d9d1f1;
+  color: #0c5460;
+}
+
+.delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.section_basics_action {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.action_button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 5px;
+  font-weight: 600;
+  color: rgb(82, 82, 82);
+  background-color: rgba(141, 138, 138, 0);
+  border: 1px solid rgb(196, 195, 195);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.action_button:hover {
+  background-color: rgba(97, 97, 97, 0.507);
+}
+
+.hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgb(196, 195, 195);
+  margin: 21px 0 30px 0px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 0.4fr;
+  gap: 25px;
+}
+
+.details_content {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}

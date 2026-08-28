@@ -9,6 +9,7 @@ import { Filter } from '../components/filter/Filter';
 import { Table } from '../components/table/Table';
 
 import style from './guideList.module.css';
+import { GuideDetails } from '../components/details/GuideDetails';
 
 const initialFilter: FilterType = {
   code: '',
@@ -29,6 +30,7 @@ export const GuideList = () => {
 
   const [list, setList] = useState<GuideSummaryDto[]>([]);
   const [page, setPage] = useState(1);
+  const [selectedGuideCode, setSelectedGuideCode] = useState<string | null>();
 
   const loadGuides = async (pageNumber: number) => {
     const data = await getGuideList({
@@ -54,6 +56,20 @@ export const GuideList = () => {
     loadGuides(page);
   }, [page]);
 
+  const handleReset = () => {
+    onResetForm()
+    setPage(1)
+  }
+
+  if (selectedGuideCode) {
+    return (
+      <GuideDetails
+        guide={selectedGuideCode}
+        onBack={() => setSelectedGuideCode(null)}
+      />
+    );
+  }
+
   return (
     <section className={style.container}>
       <div className={style.section}>
@@ -63,12 +79,13 @@ export const GuideList = () => {
           filter={formState}
           onInputChange={onInputChange}
           onSubmit={handleSearch}
-          onReset={onResetForm}
+          onReset={handleReset}
         />
         <Table
           items={list}
           page={page}
           handleChangePage={setPage}
+          handleDetail={setSelectedGuideCode}
         />
       </div>
     </section>

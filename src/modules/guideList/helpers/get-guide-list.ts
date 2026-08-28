@@ -34,84 +34,153 @@ export const getGuideList = async (data: GetGuideList): Promise<GuideSummaryDto[
 
   return [
     {
-      "code": "NYC-SFE-000002",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
+      code: 'NYC-SFE-000002',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'PENDIENTE_RECEPCION',
     },
+
     {
-      "code": "NYC-SFE-000001",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Buenos Aires, Mar del Plata",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
+      code: 'NYC-SFE-000001',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Buenos Aires',
+        city: 'Mar del Plata',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'PENDIENTE_RETIRO',
     },
+
     {
-      "code": "NYC-SFE-000003",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "TRANSITO"
+      code: 'NYC-SFE-000003',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'EN_CAMINO_RETIRO',
     },
+
     {
-      "code": "NYC-SFE-000004",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "TRANSITO"
+      code: 'NYC-SFE-000004',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'EN_POSESION',
     },
+
     {
-      "code": "NYC-SFE-000005",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "CANCELADO"
+      code: 'NYC-SFE-000005',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'CANCELADO',
     },
+
     {
-      "code": "NYC-SFE-000006",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
+      code: 'NYC-SFE-000006',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'EN_TRANSITO',
     },
+
     {
-      "code": "NYC-SFE-000007",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
+      code: 'NYC-SFE-000007',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'ENTREGADO',
     },
+
     {
-      "code": "NYC-SFE-000008",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
+      code: 'NYC-SFE-000008',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'RETIRO_FALLIDO',
     },
+
     {
-      "code": "NYC-SFE-000009",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "ENTREGADO"
+      code: 'NYC-SFE-000009',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'ENTREGA_FALLIDA',
     },
+
     {
-      "code": "NYC-SFE-000010",
-      "sender": "Ezequiel Medina",
-      "receiver": "Pochito Lopez",
-      "origin": "Santa Fe, Santa Fe",
-      "destination": "Santa Fe, Santo Tomé",
-      "status": "PENDIENTE"
-    }
+      code: 'NYC-SFE-000010',
+      sender: 'Ezequiel Medina',
+      receiver: 'Pochito Lopez',
+      origin: {
+        province: 'Santa Fe',
+        city: 'Santa Fe',
+      },
+      destination: {
+        province: 'Santa Fe',
+        city: 'Santo Tomé',
+      },
+      status: 'INCIDENCIA',
+    },
   ];
 };

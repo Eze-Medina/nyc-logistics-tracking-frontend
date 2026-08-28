@@ -1,7 +1,7 @@
 .container {
   display: grid;
   grid-template-columns: 0.05fr 1fr 0.05fr;
-  border-top: 2px solid rgb(233, 232, 232);
+  border-top: 1px solid rgb(233, 232, 232);
 }
 
 .section {

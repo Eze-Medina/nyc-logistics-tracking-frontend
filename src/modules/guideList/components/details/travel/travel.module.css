@@ -1,0 +1,155 @@
+.travels {
+  grid-column: 1;
+  background-color: white;
+  border: 1px solid rgb(196, 195, 195);
+  border-radius: 5px;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.title {
+  margin: 10px;
+  font-family: 1.2em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.travel_hr {
+  border-top: 1px solid #ccc;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 30px;
+  margin: 20px 20px 0px 50px;
+}
+
+.timeline_item {
+  position: relative;
+  display: flex;
+  min-height: 100px;
+}
+
+.timeline_item::before {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 10px;
+  bottom: -10px;
+  width: 3px;
+  background-color: #ececec;
+}
+
+.timeline_item:last-child::before {
+  display: none;
+}
+
+.timeline_dot {
+  position: absolute;
+  left: -25px;
+  top: 14px;
+
+  width: 5px;
+  height: 5px;
+
+  background-color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 2px #b4b4b4;
+  z-index: 1;
+}
+
+.timeline_dot.active {
+  background-color: #5B2572;
+  box-shadow: 0 0 0 2px #5B2572;
+}
+
+.timeline_content {
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+
+.content_data_move {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.content_data_location {
+  margin: 5px 0;
+  color: #a7a7a7;
+  font-size: 0.8em;
+}
+
+.content_data_message {
+  font-size: 0.8rem;
+  color: #292929;
+}
+
+.timeline_content_date {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: start;
+  gap: 5px;
+}
+
+.content_date_time {
+  font-size: 0.8em;
+  color: #858585;
+}
+
+.travel_status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 10px;
+  border-radius: 5px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+  color: black;
+}
+
+.pending {
+  background-color: #fff8e6;
+  color: #946200;
+  border-color: #f5dfaa;
+}
+
+.inTransit {
+  background-color: #f1effa;
+  color: #6652a8;
+  border-color: #dcd5f2;
+}
+
+.delivered {
+  background-color: #edf8f0;
+  color: #287a43;
+  border-color: #ccebd4;
+}
+
+.warning {
+  background-color: #fff1e8;
+  color: #a64b20;
+  border-color: #f2d0bd;
+}
+
+.cancelled {
+  background-color: #fbeeee;
+  color: #a13d46;
+  border-color: #efcfd2;
+}

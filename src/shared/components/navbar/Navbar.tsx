@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router'
 import style from './navbar.module.css'
-import { Package, Truck } from 'lucide-react'
+import { Package, Truck, Users } from 'lucide-react'
 
 export const Navbar = () => {
   return (
@@ -13,7 +13,7 @@ export const Navbar = () => {
               isActive ? style.navbar_link_active : style.navbar_link
             }
           >
-            <Truck /> Crear guía
+            <Truck height={18} /> Crear guía
           </NavLink>
         </li>
         <li className={style.list_item}>
@@ -23,7 +23,17 @@ export const Navbar = () => {
               isActive ? style.navbar_link_active : style.navbar_link
             }
           >
-            <Package /> Consultar guías
+            <Package height={18} /> Consultar guías
+          </NavLink>
+        </li>
+        <li className={style.list_item}>
+          <NavLink
+            to="/clients"
+            className={({ isActive }) =>
+              isActive ? style.navbar_link_active : style.navbar_link
+            }
+          >
+            <Users height={18} /> Consultar clientes
           </NavLink>
         </li>
       </ul>

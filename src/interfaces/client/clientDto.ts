@@ -1,9 +1,6 @@
-export type ClientIdType =
-  | "DNI"
-  | "CUIT"
-  | "CUIL"
+import type { ClientIdType } from "./clientSummaryDto";
 
-export interface ClientSummaryDto {
+export interface ClientDto {
   id: string,
   id_number: string,
   id_type: ClientIdType | '',

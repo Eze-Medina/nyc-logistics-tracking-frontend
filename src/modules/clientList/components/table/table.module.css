@@ -1,0 +1,75 @@
+.table_container {
+  overflow-x: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.table_th { 
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding: 18px 0px 18px 10px;
+}
+
+.table_tr { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+}
+
+.table_tr_item:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 158, 0.274);
+}
+
+.table_td { 
+  display: flex;
+  font-family: 'geist';
+  align-items: center;
+  padding: 18px 0px 18px 10px;
+}
+
+.table_move {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'geist';
+  padding: 18px 20px;
+}
+
+.table_actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.action_prev, .action_next {
+  background-color: #0c536000;
+  border: 1px solid #0c536000;
+  border-radius: 5px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.action_prev:hover, .action_next:hover {
+  border: 1px solid #0c53605b;
+  cursor: pointer;
+  transition: border 0.5s ease-in-out;
+}
+
+.action_span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .table_container {
+    border: 2px solid #ccc;
+  }
+}

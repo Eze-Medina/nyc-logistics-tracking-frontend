@@ -1,14 +1,13 @@
 .navbar {
-  grid-column: 2;
   background-color: #EEF4FF;
   display: flex;
   justify-content: center;
-  border: 2px solid rgb(233, 232, 232);
+  border: 1px solid rgb(233, 232, 232);
+  min-height: 100vh;
 }
 
 .list {
   list-style: none;
-  width: 80%;
   padding: 0px;
 }
 
@@ -17,14 +16,16 @@
 }
 
 .navbar_link, .navbar_link_active {
-text-decoration: none;
+  text-decoration: none;
   display: flex;
   align-items: center;
   padding: 10px;
   color: black;
   border-radius: 5px;
   gap: 10px;
+  font-size: 0.9em;
 }
+
 .navbar_link_active {
   background-color: #DBE9FF;
   transition: all 0.3s ease-in-out;

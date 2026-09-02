@@ -154,7 +154,7 @@ export const ClientModal = (data: Props) => {
                 <th className={style.table_th}>Identificacion</th>
                 <th className={style.table_th}>DNI/CUIL/CUIT</th>
                 <th className={style.table_th}>Email</th>
-                <th className={style.table_th}>Phone</th>
+                <th className={style.table_th}>Telefono</th>
               </tr>
             </thead>
 

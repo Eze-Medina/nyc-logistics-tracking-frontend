@@ -7,3 +7,4 @@ export * from './guide/movement.interface'
 
 export * from './client/clientSummaryDto'
 export * from './client/clientFilter'
+export * from './client/clientDto'

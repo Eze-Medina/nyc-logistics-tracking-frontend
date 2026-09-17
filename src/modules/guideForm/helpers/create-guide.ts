@@ -5,7 +5,7 @@ export const createGuide = async (guide: GuideForm): Promise<GuideDto | null> =>
 
   console.log(guide);
 
-  const resp = await fetch('http://localhost:3000/api/guides', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/guides`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

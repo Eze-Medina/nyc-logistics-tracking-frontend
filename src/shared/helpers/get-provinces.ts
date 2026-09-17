@@ -2,7 +2,7 @@ import type { ProvinceDto } from "../../interfaces";
 
 export const getProvinces = async (): Promise<ProvinceDto[]> => {
   const response = await fetch(
-    'http://localhost:3000/api/locations/provinces'
+    `${import.meta.env.VITE_API_URL}/api/locations/provinces`
   );
 
   if (!response.ok) {

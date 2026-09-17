@@ -7,7 +7,7 @@ export interface NextMovementData {
 
 export const updateNextMovement = async (code: string, movement: NextMovementData): Promise<void> => {
 
-  const response = await fetch('http://localhost:3000/api/guides/', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/guides/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

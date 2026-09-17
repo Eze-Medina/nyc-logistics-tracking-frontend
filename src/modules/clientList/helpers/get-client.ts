@@ -2,7 +2,7 @@ import type { ClientDto } from "../../../interfaces";
 
 export const getClient = async (id: number): Promise<ClientDto> => {
 
-  const resp = await fetch('http://localhost:3000/api/clients/find', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/clients/find`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

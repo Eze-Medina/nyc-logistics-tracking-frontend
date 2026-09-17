@@ -13,7 +13,7 @@ export const deleteItem = async (
     deleteItemIds: [itemId],
   };
 
-  const resp = await fetch('http://localhost:3000/api/guides', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/guides`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

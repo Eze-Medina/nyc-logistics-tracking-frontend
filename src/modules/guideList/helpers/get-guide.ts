@@ -2,7 +2,7 @@ import type { GuideDto, Movement } from "../../../interfaces";
 
 export const getGuide = async (code: string): Promise<GuideDto> => {
 
-  const resp = await fetch('http://localhost:3000/api/guides/find', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/guides/find`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

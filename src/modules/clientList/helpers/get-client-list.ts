@@ -48,7 +48,7 @@ export const getClientList = async (data: GetClientList): Promise<ClientSummaryD
   };
 
   const resp = await fetch(
-    'http://localhost:3000/api/clients/summary',
+    `${import.meta.env.VITE_API_URL}/api/clients/summary`,
     {
       method: 'POST',
       headers: {

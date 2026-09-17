@@ -6,7 +6,7 @@ export const updateClient = async (client: ClientDto) => {
   //   Object.entries(client).filter(([key, value]) => key === 'id' || value !== '')
   // );
 
-  const response = await fetch('http://localhost:3000/api/clients/', {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/clients/`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',

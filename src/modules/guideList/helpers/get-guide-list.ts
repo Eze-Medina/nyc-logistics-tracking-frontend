@@ -48,7 +48,7 @@ export const getGuideList = async (data: GetGuideList): Promise<GuideSummaryDto[
 
   console.log(guide);
 
-  const resp = await fetch('http://localhost:3000/api/guides/summary', {
+  const resp = await fetch(`${import.meta.env.VITE_API_URL}/api/guides/summary`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -1,117 +1,73 @@
-import type { ClientSummaryDto, ClientFilter } from "../../../interfaces";
+import type { ClientFilter, ClientSummaryDto } from "../../../interfaces";
 
 interface GetClientList {
-  filter: ClientFilter,
-  page: number
+  filter: ClientFilter;
+  page: number;
+  offset: number;
 }
 
 export const getClientList = async (data: GetClientList): Promise<ClientSummaryDto[]> => {
 
-  const cleanFilter = Object.fromEntries(
-    Object.entries(data.filter).filter(
-      ([_, value]) => value !== ''
-    )
-  );
+  const cleanObject = (obj: object): Record<string, unknown> => {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .map(([key, value]) => {
+
+          if (value === "" || value === undefined || value === null) {
+            return null;
+          }
+
+          if (
+            typeof value === "object" &&
+            !Array.isArray(value)
+          ) {
+            const cleaned = cleanObject(value);
+
+            if (Object.keys(cleaned).length === 0) {
+              return null;
+            }
+
+            return [key, cleaned];
+          }
+
+          return [key, value];
+        })
+        .filter(
+          (entry): entry is [string, unknown] =>
+            entry !== null
+        )
+    );
+  };
+
+  const cleanFilter = cleanObject(data.filter);
 
   const client = {
-    ...cleanFilter,
-    page: data.page
+    data: { ...cleanFilter },
+    page: data.page,
+    offset: data.offset
+  };
+
+  const resp = await fetch(
+    'http://localhost:3000/api/clients/summary',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(client),
+    }
+  );
+
+  if (!resp.ok) {
+    const error = await resp.text();
+
+    console.error('STATUS:', resp.status);
+    console.error('ERROR:', error);
+
+    return [];
   }
 
-  console.log(client);
+  const respuesta = await resp.json();
 
-  // const resp = await fetch('http://localhost:3000/api/clients/search', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(guide),
-  // });
-
-  // if (!resp.ok) {
-  //   return [];
-  // }
-
-  return [
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    },
-    {
-      id: '001239',
-      id_number: '41940644',
-      id_type: 'DNI',
-      name: 'Ezequiel Medina',
-      email: 'tec.medinaeze@gmail.com',
-      phone: '3452403944'
-    }
-  ]
-}
+  return respuesta;
+};

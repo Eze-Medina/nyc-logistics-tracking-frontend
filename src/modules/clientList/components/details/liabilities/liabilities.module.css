@@ -29,54 +29,93 @@
 }
 
 .client_data_list {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;  
-  height: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-top: 20px;
 }
 
-.client_list {
-  list-style: none;
+/* Columna izquierda */
+
+.summary {
   display: flex;
   flex-direction: column;
-  padding: 0px;
+  justify-content: space-between;
   gap: 25px;
 }
 
-.client_item {
+.summary_item {
   display: flex;
-  font-size: 0.8em;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .item_amount {
-  font-size: 2em;
-  color: rgb(0, 2, 104);
-}
-
-.item_p {
   font-size: 1.3em;
+  color: rgb(0, 2, 104);
   margin: 3px;
-  color: rgb(161, 161, 161);
 }
 
 .item_span {
-  font-size: 1.3em;
+  font-size: 1em;
   padding: 0px;
   margin: 0px;
 }
 
-.actions {
-  display: flex;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15px;
+.item_p {
+  font-size: 1em;
+  margin: 3px;
+  color: rgb(161, 161, 161);
 }
 
-.action_button {
-  justify-self: end;
+/* Columna derecha */
+
+.guides {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guides_list {
   width: 100%;
-  border: 0px solid;
+  max-height: 100px;
+  overflow-y: auto;
+  border: 1px solid rgb(220, 220, 220);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.guide_item {
+  padding: 8px 10px;
+  font-size: 0.9em;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+
+.guide_item:last-child {
+  border-bottom: none;
+}
+
+/* Scrollbar */
+
+.guides_list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.guides_list::-webkit-scrollbar-thumb {
+  background-color: rgb(190, 190, 190);
+  border-radius: 5px;
+}
+
+.guides_list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Botón */
+
+.action_button {
+  grid-column: 1 / -1;
+  width: 100%;
+  border: 0px;
   border-radius: 5px;
   background-color: rgb(0, 0, 37);
   color: white;
@@ -89,4 +128,16 @@
 
 .action_button:hover {
   background-color: rgb(0, 0, 158);
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+  .client_data_list {
+    grid-template-columns: 1fr;
+  }
+
+  .action_button {
+    grid-column: 1;
+  }
 }

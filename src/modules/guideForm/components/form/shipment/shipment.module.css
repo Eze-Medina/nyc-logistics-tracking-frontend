@@ -1,0 +1,59 @@
+.shipment {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid rgb(196, 195, 195);
+  border-radius: 10px;
+  padding: 15px;
+  height: fit-content;
+}
+
+.shipment_title {
+  font-size: 1.3em;
+  margin: 0px 0px 15px;
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 15px 0px 15px 0px;
+}
+
+.error_message {
+  display: block;
+  color: #dc2626;
+  margin-bottom: 1.5em;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.text {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text_label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.text_area {
+  width: 100%;
+  min-height: 40px;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  resize: vertical;
+  font: inherit;
+  box-sizing: border-box;
+}
+
+.text_area:focus {
+  outline: none;
+  border-color: #2563eb;
+}

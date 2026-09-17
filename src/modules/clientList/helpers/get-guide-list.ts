@@ -2,110 +2,68 @@ import type { Filter, GuideSummaryDto } from "../../../interfaces";
 
 interface GetGuideList {
   filter: Filter,
-  page: number
+  page: number,
+  offset: number
 }
 
-export const getGuideList = async (data: GetGuideList): Promise<GuideSummaryDto[]> => {
+export const getGuideList = async (data: GetGuideList): Promise<GuideSummaryDto[]> => { // getGuideList -> getSummaryGuideList
 
-  const cleanFilter = Object.fromEntries(
-    Object.entries(data.filter).filter(
-      ([_, value]) => value !== ""
-    )
-  );
+  const cleanObject = (obj: object): Record<string, unknown> => {
+    return Object.fromEntries(
+      Object.entries(obj)
+        .map(([key, value]) => {
+          if (value === "" || value === undefined || value === null || value === 0) {
+            return null;
+          }
+
+          if (typeof value === "object" && !Array.isArray(value)) {
+            const cleaned = cleanObject(value);
+
+            if (Object.keys(cleaned).length === 0) {
+              return null;
+            }
+
+            return [key, cleaned];
+          }
+
+          if (key === "sender" || key === "receiver") {
+            return [key, Number(value)];
+          }
+
+          return [key, value];
+        })
+        .filter(
+          (entry): entry is [string, unknown] => entry !== null
+        )
+    );
+  };
+
+  const cleanFilter = cleanObject(data.filter);
 
   const guide = {
-    ...cleanFilter,
-    page: data.page
+    data: { ...cleanFilter },
+    page: data.page,
+    offset: data.offset
   }
 
-  console.log(guide);
-
-  // const resp = await fetch('http://localhost:3000/api/guides/search', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(guide),
-  // });
-
-  // if (!resp.ok) {
-  //   return [];
-  // }
-
-  return [
-    {
-      code: 'NYC-SFE-000002',
-      sender: 'Ezequiel Medina',
-      receiver: 'Pochito Lopez',
-      origin: {
-        province: 'Santa Fe',
-        city: 'Santa Fe',
-      },
-      destination: {
-        province: 'Santa Fe',
-        city: 'Santo Tomé',
-      },
-      status: 'PENDIENTE_RECEPCION',
+  const resp = await fetch('http://localhost:3000/api/guides/summary', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(guide),
+  });
 
-    {
-      code: 'NYC-SFE-000001',
-      sender: 'Ezequiel Medina',
-      receiver: 'Pochito Lopez',
-      origin: {
-        province: 'Buenos Aires',
-        city: 'Mar del Plata',
-      },
-      destination: {
-        province: 'Santa Fe',
-        city: 'Santo Tomé',
-      },
-      status: 'PENDIENTE_RETIRO',
-    },
+  if (!resp.ok) {
+    const error = await resp.text();
 
-    {
-      code: 'NYC-SFE-000003',
-      sender: 'Ezequiel Medina',
-      receiver: 'Pochito Lopez',
-      origin: {
-        province: 'Santa Fe',
-        city: 'Santa Fe',
-      },
-      destination: {
-        province: 'Santa Fe',
-        city: 'Santo Tomé',
-      },
-      status: 'EN_CAMINO_RETIRO',
-    },
+    console.error('STATUS:', resp.status);
+    console.error('ERROR:', error);
 
-    {
-      code: 'NYC-SFE-000004',
-      sender: 'Ezequiel Medina',
-      receiver: 'Pochito Lopez',
-      origin: {
-        province: 'Santa Fe',
-        city: 'Santa Fe',
-      },
-      destination: {
-        province: 'Santa Fe',
-        city: 'Santo Tomé',
-      },
-      status: 'EN_POSESION',
-    },
+    return [];
+  }
 
-    {
-      code: 'NYC-SFE-000005',
-      sender: 'Ezequiel Medina',
-      receiver: 'Pochito Lopez',
-      origin: {
-        province: 'Santa Fe',
-        city: 'Santa Fe',
-      },
-      destination: {
-        province: 'Santa Fe',
-        city: 'Santo Tomé',
-      },
-      status: 'CANCELADO',
-    }
-  ];
-};
+  const respuesta = await resp.json();
+
+  return respuesta;
+}

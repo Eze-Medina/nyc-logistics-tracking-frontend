@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { GuideDto } from "../../../../interfaces";
+import type { GuideDto, GuideForm } from "../../../../interfaces";
 
 import { pdf } from "@react-pdf/renderer";
 import emailjs from "@emailjs/browser";
@@ -12,11 +12,12 @@ import { Printer } from "lucide-react";
 
 interface Props {
   data: GuideDto;
+  email?: GuideForm;
   text: string;
   type: string;
 }
 
-export const ShipmentGuide = ({ data, text, type }: Props) => {
+export const ShipmentGuide = ({ data, email, text, type }: Props) => {
 
   const [loading, setLoading] = useState(false);
 
@@ -54,8 +55,7 @@ export const ShipmentGuide = ({ data, text, type }: Props) => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
-          guide_number: data.code,
-          guide_data: JSON.stringify(data, null, 2),
+          guide_data: JSON.stringify(email, null, 2),
         },
         {
           publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,

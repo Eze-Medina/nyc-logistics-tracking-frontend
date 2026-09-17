@@ -4,7 +4,7 @@ export type ClientIdType =
   | "CUIL"
 
 export interface ClientSummaryDto {
-  id: string,
+  id: number,
   id_number: string,
   id_type: ClientIdType | '',
   name: string,

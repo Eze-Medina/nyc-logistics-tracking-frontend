@@ -3,13 +3,18 @@ import style from './client.module.css'
 import { ClientModal } from '../modal/client/ClientModal'
 import { useState } from 'react'
 
+type ClientRole = 'REMITENTE' | 'DESTINATARIO';
+
+
 interface Client {
-  role: string
+  role: ClientRole
   name: string
   id_type: string
   id_number: number | ''
   email: string
-  phone: string
+  phone: string,
+  code: string,
+  onUpdated: () => void
 }
 
 export const Client = (data: Client) => {
@@ -49,7 +54,7 @@ export const Client = (data: Client) => {
         </div>
       </div>
       {
-        modal && <ClientModal setModal={setModal} role={data.role} />
+        modal && <ClientModal setModal={setModal} role={data.role} code={data.code} onUpdated={data.onUpdated} />
       }
     </section>
   )

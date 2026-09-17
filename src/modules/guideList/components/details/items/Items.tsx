@@ -1,19 +1,23 @@
-import { Package, Pen, Plus } from 'lucide-react'
+import { Package, Pen, Plus, Trash2 } from 'lucide-react'
 import style from './items.module.css'
 import type { Item } from '../../../../../interfaces'
 import { useState } from 'react'
 import { ItemModal } from '../modal/item/ItemModal'
+import { deleteItem } from '../../../helpers/delete-item'
 
 interface Props {
-  items: Item[]
+  items: Item[],
+  code: string,
+  onItemUpdated: () => void;
 }
 
 const itemInitializer: Item = {
-  quantity: '',
+  quantity: 0,
   description: '',
-  paid: '',
-  remainingAmount: '',
-  currentAccount: false,
+  paid: 0,
+  remaining_amount: 0,
+  current_account: false,
+  id: 0
 };
 
 export const Items = (data: Props) => {
@@ -24,6 +28,16 @@ export const Items = (data: Props) => {
   const onEditItem = (itemSelected: Item) => {
     setItem(itemSelected);
     setModal(true)
+  }
+
+  const onDeleteItem = async (itemId: number) => {
+    const success = await deleteItem(data.code, itemId);
+
+    if (!success) {
+      return;
+    }
+
+    data.onItemUpdated();
   }
 
   return (
@@ -41,6 +55,7 @@ export const Items = (data: Props) => {
             <th className={style.table_th}>DESCRIPCION</th>
             <th className={style.table_th}>PAGADO</th>
             <th className={style.table_th}>A COBRAR</th>
+            <th className={style.table_th}>CUENTA CORRIENTE</th>
             <th className={style.table_th}></th>
           </tr>
         </thead>
@@ -50,11 +65,12 @@ export const Items = (data: Props) => {
             <tr key={idx} className={style.table_tr}>
               <td className={style.table_td}> {item.quantity} </td>
               <td className={style.table_td}> {item.description} </td>
-              <td className={style.table_td_number}> <p>$</p> {item.paid.toLocaleString('es-AR')} </td>
+              <td className={style.table_td_number}> <p>$</p> {item.paid} </td>
+              <td className={style.table_td_number}> <p>$</p> {item.remaining_amount} </td>
               <td className={style.table_td_number}>
-                {item.currentAccount
-                  ? 'Cuenta corriente'
-                  : (<div> <p>$</p> {item.remainingAmount.toLocaleString('es-AR')} </div>)
+                {item.current_account
+                  ? 'Si'
+                  : 'No'
                 }
               </td>
               <td className={`${style.table_td} ${style.table_td_button}`} style={{ textAlign: 'center' }}>
@@ -67,13 +83,20 @@ export const Items = (data: Props) => {
                     width={15}
                   />
                 </button>
+                <button
+                  className={style.edit_button}
+                  onClick={() => onDeleteItem(item.id!)}
+                  type="button"
+                >
+                  <Trash2 width={15} />
+                </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
       {
-        modal && <ItemModal item={item} setModal={setModal} />
+        modal && <ItemModal item={item} code={data.code} setModal={setModal} onItemUpdated={data.onItemUpdated} />
       }
     </section>
   )

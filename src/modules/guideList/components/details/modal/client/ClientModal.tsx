@@ -7,21 +7,27 @@ import { InputSelect, InputText } from '../../../../../../shared/components/inpu
 import { useForm } from '../../../../../../shared/hooks/useForm';
 import { getClientList } from '../../../../helpers/get-client-list';
 
+import { updateClient } from '../../../../helpers/update-client';
+
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 import style from './clientModal.module.css'
 
+type ClientRole = 'REMITENTE' | 'DESTINATARIO';
+
 interface Props {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  role: string
+  role: ClientRole,
+  code: string,
+  onUpdated: () => void
 }
 
 const clientFilter: ClientFilter = {
-  id_number: '',
+  id_number: 0,
   id_type: '',
   name: '',
   email: '',
-  phone: '',
+  phone: 0,
 };
 
 const id_types = ['DNI', 'CUIL', 'CUIT']
@@ -53,6 +59,7 @@ export const ClientModal = (data: Props) => {
   const loadClients = async (pageNumber: number) => {
     const data = await getClientList({
       filter: formState,
+      offset: 5,
       page: pageNumber,
     });
 
@@ -85,9 +92,11 @@ export const ClientModal = (data: Props) => {
   }
 
   const nextPage = () => {
-    setPage(page + 1)
-    setClient(null)
-    setIndex(undefined)
+    if (list.length == 5) {
+      setPage(page + 1)
+      setClient(null)
+      setIndex(undefined)
+    }
   }
 
   const prevPage = () => {
@@ -106,13 +115,25 @@ export const ClientModal = (data: Props) => {
     }
     setClient(client)
     setIndex(idx)
-
-    console.log(client)
   }
 
-  const updateClient = () => {
-    if (client) closeModal();
-  }
+  const handleUpdate = async () => {
+    if (!client) return;
+
+    const success = await updateClient(
+      data.code,
+      data.role,
+      {
+        id: client.id,
+        name: client.name,
+      }
+    );
+
+    if (!success) return;
+
+    data.onUpdated();
+    closeModal();
+  };
 
   return (
     <div
@@ -133,9 +154,9 @@ export const ClientModal = (data: Props) => {
             <legend>Datos cliente</legend>
             <InputText type="text" labelName="Nombre" name="name" value={formState.name} placeholder="Nombre del cliente" onInputChange={onInputChange} />
             <InputSelect labelName="Identificación" name="id_type" value={formState.id_type} list={id_types} onInputChange={onInputChange} />
-            <InputText type="text" labelName="DNI/CUIL/CUIT" name="id_number" value={formState.id_number} placeholder="Número de identificación" onInputChange={onInputChange} />
+            <InputText type="number" labelName="DNI/CUIL/CUIT" name="id_number" value={formState.id_number === 0 ? '' : formState.id_number} placeholder="Número de identificación" onInputChange={onInputChange} />
             <InputText type="text" labelName="Email" name="email" value={formState.email} placeholder="correo electronico" onInputChange={onInputChange} />
-            <InputText type="number" labelName="Telefono" name="phone" value={formState.phone} placeholder="Número de telefono" onInputChange={onInputChange} />
+            <InputText type="tel" labelName="Telefono" name="phone" value={formState.phone === 0 ? '' : formState.phone} placeholder="Número de telefono" onInputChange={onInputChange} />
           </fieldset>
           <div className={style.form_modal_actions}>
             <button className={style.modal_action} type='button' onClick={handleReset}>
@@ -182,7 +203,7 @@ export const ClientModal = (data: Props) => {
                   </div>
                   <button
                     className={`${client ? style.modal_action : style.client_disable}`}
-                    onClick={updateClient}
+                    onClick={handleUpdate}
                   >Actualizar Cliente</button>
                 </td>
               </tr>

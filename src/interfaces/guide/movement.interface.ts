@@ -1,10 +1,11 @@
 export interface Movement {
-  date: string,
   status: string,
-  move: string,
-  message: string,
-  location: {
+  sequence: number,
+  city?: {
     city: string,
     province: string,
   }
+  move: string,
+  message: string,
+  date: string,
 }

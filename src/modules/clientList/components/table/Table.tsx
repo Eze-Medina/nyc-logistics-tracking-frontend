@@ -8,13 +8,16 @@ interface Props {
   clients: ClientSummaryDto[];
   page: number;
   handleChangePage: React.Dispatch<React.SetStateAction<number>>;
-  handleDetail: React.Dispatch<React.SetStateAction<string | undefined | null>>;
+  handleDetail: React.Dispatch<React.SetStateAction<number | undefined | null>>;
+  offset: number
 }
 
 export const Table = (props: Props) => {
 
   const nextPage = () => {
-    props.handleChangePage(props.page + 1)
+    if (props.clients.length == props.offset) {
+      props.handleChangePage(props.page + 1)
+    }
   }
 
   const prevPage = () => {
@@ -27,6 +30,7 @@ export const Table = (props: Props) => {
       <table className={style.table}>
         <thead>
           <tr className={style.table_tr}>
+            <th className={style.table_th}>ID</th>
             <th className={style.table_th}>NOMBRE</th>
             <th className={style.table_th}>EMAIL</th>
             <th className={style.table_th}>DNI/CUIL/CUIT</th>
@@ -37,6 +41,7 @@ export const Table = (props: Props) => {
         <tbody>
           {props.clients.map((client, idx) => (
             <tr key={idx} className={`${style.table_tr} ${style.table_tr_item}`} onClick={() => props.handleDetail(client.id)}>
+              <td className={style.table_td}> {client.id} </td>
               <td className={style.table_td}> {client.name} </td>
               <td className={style.table_td}> {client.email} </td>
               <td className={style.table_td}> {client.id_number} </td>

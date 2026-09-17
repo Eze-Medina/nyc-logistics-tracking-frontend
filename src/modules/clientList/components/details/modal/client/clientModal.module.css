@@ -56,6 +56,15 @@
   width: 100%;
 }
 
+.error_message {
+  display: block;
+  color: #dc2626;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+}
+
 .modal_action, .client_disable {
   border: 0px solid;
   border-radius: 5px;

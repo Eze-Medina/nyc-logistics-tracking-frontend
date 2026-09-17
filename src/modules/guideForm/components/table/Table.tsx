@@ -29,9 +29,9 @@ export const Table = (props: Props) => {
               <td className={style.table_td}> {item.description} </td>
               <td className={style.table_td_number}> <p>$</p> {item.paid.toLocaleString('es-AR')} </td>
               <td className={style.table_td_number}>
-                {item.currentAccount
+                {item.current_account
                   ? 'Cuenta corriente'
-                  : (<div> <p>$</p> {item.remainingAmount.toLocaleString('es-AR')} </div>)
+                  : (<div> <p>$</p> {item.remaining_amount.toLocaleString('es-AR')} </div>)
                 }
               </td>
               <td className={style.table_td} style={{ textAlign: 'center' }}>

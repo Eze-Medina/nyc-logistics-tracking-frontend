@@ -8,10 +8,16 @@ import { getGuideList } from '../../../helpers/get-guide-list';
 
 const initialFilter: FilterType = {
   code: '',
-  sender: '',
-  receiver: '',
-  origin: '',
-  destination: '',
+  sender: 0,
+  receiver: 0,
+  origin: {
+    city: '',
+    province: ''
+  },
+  destination: {
+    city: '',
+    province: ''
+  },
   status: '',
 };
 
@@ -32,16 +38,28 @@ const statusClass = {
   INCIDENCIA: style.cancelled,
 };
 
-export const GuidesTable = () => {
+interface Props {
+  sender: number,
+  receiver: number,
+  role: string,
+}
+
+export const GuidesTable = ({ sender, receiver, role }: Props) => {
 
   const [list, setList] = useState<GuideSummaryDto[]>([]);
   const [page, setPage] = useState(1);
+  const [offset] = useState(5);
 
 
   const loadGuides = async (pageNumber: number) => {
     const data = await getGuideList({
-      filter: initialFilter,
+      filter: {
+        ...initialFilter,
+        sender,
+        receiver
+      },
       page: pageNumber,
+      offset: offset,
     });
 
     setList(data);
@@ -52,7 +70,9 @@ export const GuidesTable = () => {
   }, [page])
 
   const nextPage = () => {
-    setPage(page + 1)
+    if (list.length == offset) {
+      setPage(page + 1)
+    }
   }
 
   const prevPage = () => {
@@ -62,11 +82,12 @@ export const GuidesTable = () => {
 
   return (
     <div className={style.table_container}>
+
       <table className={style.table}>
         <thead>
           <tr className={style.table_tr}>
             <th className={style.table_th}>CODIGO</th>
-            <th className={style.table_th}>DESTINATARIO</th>
+            <th className={style.table_th}>{role}</th>
             <th className={style.table_th}>ORIGEN</th>
             <th className={style.table_th}>DESTINO</th>
             <th className={style.table_th}>ESTADO</th>

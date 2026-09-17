@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { GuideDto, GuideStatus } from '../../../../interfaces';
 
-// import { getGuide } from '../../helpers/get-guide';
-
 import { Travel } from './travel/Travel';
 import { Client } from './client/Client';
 import { Move } from './move/Move';
@@ -11,114 +9,10 @@ import { ArrowLeft, RotateCwFadingClock } from 'lucide-react';
 
 import style from './guideDetails.module.css'
 import { ShipmentGuide } from '../../../../shared/components/guide/shipmentGuide/ShipmentGuide';
+import { getGuide } from '../../helpers/get-guide';
+import { Paid } from './paid/Paid';
+import { Info } from './info/Info';
 
-const guideData: GuideDto = {
-  code: 'NYC-SFE-000001',
-  sender: {
-    id_number: 41940600,
-    id_type: 'dni',
-    name: 'Ezequiel Medina',
-    email: 'tec.medinaeze@gmail.com',
-    phone: '3425502666',
-    address: 'Las heras 7460'
-  },
-  'receiver': {
-    id_number: 21416403029,
-    id_type: 'cuit',
-    name: 'Pochito Lopez',
-    email: 'poc.lopez@gmail.com',
-    phone: '3425406333',
-    address: 'Los granitos 1430'
-  },
-  origin: {
-    province: 'Buenos Aires',
-    city: 'Mar del Plata'
-  },
-  destination: {
-    province: 'Santa Fe',
-    city: 'Santo Tomé'
-  },
-  insurance: {
-    contracted: true,
-    declaredValue: 50000,
-    insuranceCost: 2500
-  },
-  items: [
-    {
-      quantity: 10,
-      description: 'Item 1',
-      paid: 10000,
-      remainingAmount: 4500,
-      currentAccount: false
-    },
-    {
-      quantity: 10,
-      description: 'Item 2',
-      paid: 14000,
-      remainingAmount: 5050,
-      currentAccount: false
-    },
-    {
-      quantity: 10,
-      description: 'Item 3',
-      paid: 3000,
-      remainingAmount: 500,
-      currentAccount: true
-    }
-  ],
-  movements: [
-    {
-      date: '2026-08-25 09:15',
-      status: 'PENDIENTE_RETIRO',
-      move: 'Creación de orden',
-      message: 'La orden ha sido creada y está pendiente de retiro.',
-      location: {
-        city: 'Santo Tomé',
-        province: 'Santa Fe',
-      },
-    },
-    {
-      date: '2026-08-25 11:30',
-      status: 'EN_CAMINO_RETIRO',
-      move: 'Inicio del retiro',
-      message: 'El vehículo se encuentra en camino a la ubicación de retiro.',
-      location: {
-        city: 'Santo Tomé',
-        province: 'Santa Fe',
-      },
-    },
-    {
-      date: '2026-08-26 08:45',
-      status: 'EN_POSESION',
-      move: 'Paquete retirado',
-      message: 'El paquete ha sido retirado y se encuentra en posesión de la empresa.',
-      location: {
-        city: 'Cordoba',
-        province: 'Cordoba',
-      },
-    },
-    {
-      date: '2026-08-26 09:00',
-      status: 'EN_TRANSITO',
-      move: 'Inicio del traslado',
-      message: 'El paquete ha iniciado su traslado directo hacia el destino.',
-      location: {
-        city: 'Cordoba',
-        province: 'Cordoba',
-      },
-    }
-  ],
-  next_movement: {
-    date: '',
-    status: 'ENTREGADO',
-    move: 'Entrega realizada',
-    message: 'El paquete ha sido entregado correctamente en el destino.',
-    location: {
-      city: 'Santa Fe',
-      province: 'Santa Fe',
-    }
-  }
-}
 
 const statusClass: Record<GuideStatus, string> = {
   PENDIENTE_RETIRO: style.pending,
@@ -140,17 +34,31 @@ interface Props {
 
 export const GuideDetails = (data: Props) => {
 
-  const [guide] = useState(guideData);
-
-  const lastMovement = guide.movements.at(-1)!;
-  const latestStatus = statusClass[lastMovement.status as GuideStatus];
+  const [guide, setGuide] = useState<GuideDto>();
 
   useEffect(() => {
-    // const resp = getGuide(data.guide)
+    const fetchGuide = async () => {
+      const resp = await getGuide(data.guide);
 
-    // setGuide(resp)
+      setGuide(resp);
 
-  }, [])
+    };
+
+    fetchGuide();
+  }, [data.guide]);
+
+  if (!guide) {
+    return <p>Cargando...</p>;
+  }
+
+  const refreshGuide = async () => {
+    const resp = await getGuide(data.guide);
+    setGuide(resp);
+  };
+
+  const lastMovement = guide.movements.at(-1)!;
+  var latestStatus = statusClass[lastMovement.status as GuideStatus];
+
 
   return (
     <section className={style.container}>
@@ -163,22 +71,29 @@ export const GuideDetails = (data: Props) => {
               <span className={`${style.status} ${latestStatus}`}>
                 {guide.movements.at(-1)?.status}
               </span>
+              <span
+                className={`${style.status} ${guide.paid ? style.payment_paid : style.payment_pending
+                  }`}
+              >
+                {guide.paid ? 'PAGADO' : 'PENDIENTE DE PAGO'}
+              </span>
             </div>
-            <p className={style.basics_p}> <RotateCwFadingClock width={18} /> actualizado: 2026-10-26 14:30</p>
+            <p className={style.basics_p}> <RotateCwFadingClock width={18} /> actualizado: {lastMovement.date}</p>
           </div>
 
           <div className={style.section_basics_action}>
             <button className={style.action_button} onClick={data.onBack}>
               <ArrowLeft height={18} /> Volver
             </button>
-            <ShipmentGuide data={guideData} text={'PDF'} type='search' />
+            <ShipmentGuide data={guide} text={'PDF'} type='search' />
           </div>
 
         </div>
         <hr className={style.hr} />
         <div className={style.details}>
           <div className={style.details_content}>
-            <Items items={guide.items} />
+            <Info guide={guide} />
+            <Items items={guide.items} code={guide.code} onItemUpdated={refreshGuide} />
             <Travel movements={guide.movements} />
           </div>
           <div className={style.details_content}>
@@ -189,18 +104,32 @@ export const GuideDetails = (data: Props) => {
               id_number={guide.sender.id_number}
               email={guide.sender.email}
               phone={guide.sender.phone}
+              code={guide.code}
+              onUpdated={refreshGuide}
             />
             <Client
               role='DESTINATARIO'
-              name={guide.sender.name}
-              id_type={guide.sender.id_type}
-              id_number={guide.sender.id_number}
-              email={guide.sender.email}
-              phone={guide.sender.phone}
+              name={guide.receiver.name}
+              id_type={guide.receiver.id_type}
+              id_number={guide.receiver.id_number}
+              email={guide.receiver.email}
+              phone={guide.receiver.phone}
+              code={guide.code}
+              onUpdated={refreshGuide}
             />
-            <Move
-              nextMove={guide.next_movement}
-            />
+            {guide.next_movement && typeof guide.next_movement === 'object' && (
+              <Move
+                next_movement={guide.next_movement}
+                routeType={guide.route_type}
+                currentSequence={
+                  guide.movements[guide.movements.length - 1].sequence
+                }
+                city={guide.origin.city}
+                code={guide.code}
+                onUpdated={refreshGuide}
+              />
+            )}
+            {!guide.paid && (<Paid items={guide.items} code={guide.code} onUpdated={refreshGuide} />)}
           </div>
         </div>
       </div>

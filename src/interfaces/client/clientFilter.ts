@@ -1,9 +1,9 @@
 import type { ClientIdType } from "./clientSummaryDto";
 
 export interface ClientFilter {
-  id_number: string,
+  id_number: number,
   id_type: ClientIdType | '',
   name: string,
   email: string,
-  phone: string
+  phone: number
 }

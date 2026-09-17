@@ -7,9 +7,10 @@ import { ClientModal } from '../modal/client/ClientModal';
 
 interface Props {
   client: ClientDto;
+  onUpdate: () => Promise<void>
 }
 
-export const Data = ({ client }: Props) => {
+export const Data = ({ client, onUpdate }: Props) => {
 
   const [modal, setModal] = useState(false)
 
@@ -30,14 +31,6 @@ export const Data = ({ client }: Props) => {
       <div className={style.client_data_list}>
         <ul className={style.client_list}>
           <li className={style.client_item}>
-            <span className={style.item_span}>Email:</span>
-            <p className={style.item_p}>{client.email}</p>
-          </li>
-          <li className={style.client_item}>
-            <span className={style.item_span}>Telefono:</span>
-            <p className={style.item_p}>{client.phone}</p>
-          </li>
-          <li className={style.client_item}>
             <span className={style.item_span}>DNI/CUIL/CUIT:</span>
             <p className={style.item_p}>{client.id_type}</p>
           </li>
@@ -46,13 +39,17 @@ export const Data = ({ client }: Props) => {
             <p className={style.item_p}>{client.id_number}</p>
           </li>
           <li className={style.client_item}>
+            <span className={style.item_span}>Email:</span>
+            <p className={style.item_p}>{client.email}</p>
+          </li>
+          <li className={style.client_item}>
             <span className={style.item_span}>Telefono:</span>
             <p className={style.item_p}>{client.phone}</p>
           </li>
         </ul>
       </div>
       {
-        modal && <ClientModal client={client} setModal={setModal} />
+        modal && <ClientModal client={client} setModal={setModal} onUpdate={onUpdate} />
       }
     </section >
   );

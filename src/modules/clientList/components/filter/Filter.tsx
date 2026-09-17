@@ -17,10 +17,10 @@ export const Filter = ({ filter, onInputChange, onSubmit, onReset }: filter) => 
     <form className={style.form} onSubmit={onSubmit}>
       <p className={style.form_p}>Identificar cliente</p>
       <div className={style.client_form}>
-        <InputText type='text' labelName='Nombre' name='filter.name' value={filter.name} placeholder='Nombre completo o empresa' onInputChange={onInputChange} />
-        <InputText type='text' labelName='Email' name='filter.email' value={filter.id_number} placeholder='Correo electronico' onInputChange={onInputChange} />
-        <InputText type='text' labelName='DNI/CUIL/CUIT' name='filter.id_number' value={filter.id_number} placeholder='Número de identificación' onInputChange={onInputChange} />
-        <InputText type='text' labelName='Telefono' name='filter.phone' value={filter.id_number} placeholder='Número de telefono' onInputChange={onInputChange} />
+        <InputText type='text' labelName='Nombre' name='name' value={filter.name} placeholder='Nombre completo o empresa' onInputChange={onInputChange} />
+        <InputText type='text' labelName='Email' name='email' value={filter.email} placeholder='Correo electronico' onInputChange={onInputChange} />
+        <InputText type='number' labelName='DNI/CUIL/CUIT' name='id_number' value={filter.id_number === 0 ? '' : filter.id_number} placeholder='Número de identificación' onInputChange={onInputChange} />
+        <InputText type='tel' labelName='Telefono' name='phone' value={filter.phone === 0 ? '' : filter.phone} placeholder='Número de telefono' onInputChange={onInputChange} />
       </div>
 
       <div className={style.actions}>

@@ -8,7 +8,7 @@ interface Props {
   items: GuideSummaryDto[];
   page: number;
   handleChangePage: React.Dispatch<React.SetStateAction<number>>;
-  handleDetail: React.Dispatch<React.SetStateAction<string | null | undefined>>;
+  handleDetail: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const statusClass = {
@@ -30,7 +30,9 @@ const statusClass = {
 export const Table = (props: Props) => {
 
   const nextPage = () => {
-    props.handleChangePage(props.page + 1)
+    if (props.items.length == 10) {
+      props.handleChangePage(props.page + 1)
+    }
   }
 
   const prevPage = () => {

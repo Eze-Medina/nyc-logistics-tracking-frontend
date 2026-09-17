@@ -1,8 +1,8 @@
 import { Document, Image, Page, Text, View } from '@react-pdf/renderer';
 
-import type { GuideDto } from '../../../../interfaces';
 import logo from '../../../../assets/logo.png';
 import { styles } from './createPDF.styles'
+import type { GuideDto } from '../../../../interfaces';
 
 interface dataType {
   data: GuideDto;
@@ -11,10 +11,10 @@ interface dataType {
 export const CreatePDF = (props: dataType) => {
 
   const totalRemainingAmount = props.data.items
-    .filter(item => !item.currentAccount)
+    .filter(item => !item.current_account)
     .reduce(
       (acc, item) =>
-        acc + Number(item.remainingAmount),
+        acc + Number(item.remaining_amount),
       0
     );
 
@@ -141,7 +141,7 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.sender.address}
+                {props.data.origin.address}
               </Text>
             </View>
 
@@ -183,7 +183,7 @@ export const CreatePDF = (props: dataType) => {
             <View style={styles.fieldRow}>
               <Text style={styles.fieldLabel}>Domicilio:</Text>
               <Text style={styles.fieldValue}>
-                {props.data.receiver.address}
+                {props.data.destination.address}
               </Text>
             </View>
 
@@ -249,7 +249,7 @@ export const CreatePDF = (props: dataType) => {
               </View>
 
               <View style={[styles.td, styles.colImp, styles.price, styles.lastColumn]}>
-                {item.currentAccount ? (
+                {item.current_account ? (
                   <Text style={styles.currentAccount}>
                     Cuenta corriente
                   </Text>
@@ -260,7 +260,7 @@ export const CreatePDF = (props: dataType) => {
                     </Text>
 
                     <Text style={styles.currencyValue}>
-                      {formatNumber(item.remainingAmount)}
+                      {formatNumber(item.remaining_amount)}
                     </Text>
                   </>
                 )}
@@ -320,10 +320,10 @@ export const CreatePDF = (props: dataType) => {
                 <>
                   {'  |  '}
                   <Text style={styles.bold}>Valor declarado:</Text>{' '}
-                  $ {formatNumber(props.data.insurance.declaredValue)}
+                  $ {formatNumber(props.data.insurance.declared_value)}
                   {'  |  '}
                   <Text style={styles.bold}>Valor seguro:</Text>{' '}
-                  $ {formatNumber(props.data.insurance.insuranceCost)}
+                  $ {formatNumber(props.data.insurance.insurance_cost)}
                 </>
               )}
             </Text>
@@ -336,7 +336,7 @@ export const CreatePDF = (props: dataType) => {
             </Text>
 
             <Text style={styles.totalToPayValue}>
-              $ {formatNumber(totalRemainingAmount + props.data.insurance.insuranceCost)}
+              $ {formatNumber(totalRemainingAmount + props.data.insurance.insurance_cost)}
             </Text>
           </View>
 

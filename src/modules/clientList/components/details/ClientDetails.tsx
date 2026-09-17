@@ -1,31 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 import type { ClientDto } from '../../../../interfaces';
 
-import { ArrowLeft } from 'lucide-react';
+import { getClient } from '../../helpers/get-client';
 import { Data } from './data/data';
 import { Liabilities } from './liabilities/Liabilities';
 
-import style from './clientDetails.module.css'
 import { GuidesTable } from './guidesTable/GuidesTable';
-
-const clientData: ClientDto = {
-  id: '000001',
-  id_number: '41940644',
-  id_type: 'DNI',
-  name: 'Ezequiel Medina',
-  email: 'tec.medinaeze@gmail.com',
-  phone: '03425502666',
-}
+import style from './clientDetails.module.css'
 
 interface Props {
-  client_id: string,
+  client_id: number,
   onBack: () => void;
 }
 
 export const ClientDetails = (data: Props) => {
 
-  const [client] = useState(clientData);
+  const [client, setClient] = useState<ClientDto>();
+
+  const loadClient = async () => {
+    const resp = await getClient(data.client_id);
+    setClient(resp);
+  };
+
+  useEffect(() => {
+    const fetchGuide = async () => {
+      const resp = await getClient(data.client_id);
+
+      setClient(resp);
+
+    };
+
+    fetchGuide();
+  }, [data.client_id]);
+
+  if (!client) {
+    return <p>Cargando...</p>;
+  }
 
   return (
     <section className={style.container}>
@@ -42,11 +54,14 @@ export const ClientDetails = (data: Props) => {
       </div>
       <hr className={style.hr} />
       <div className={style.details}>
-        <Data client={client} />
-        <Liabilities />
+        <Data client={client} onUpdate={loadClient} />
+        <Liabilities sender={data.client_id} data={client} />
       </div>
       <div className={style.guides}>
-        <GuidesTable />
+        <p className={style.guide_title}>Envíos realizados</p>
+        <GuidesTable sender={data.client_id} receiver={0} role={'DESTINATARIO'} />
+        <p className={style.guide_title}>Envíos recibidos</p>
+        <GuidesTable sender={0} receiver={data.client_id} role={'REMITENTE'} />
       </div>
     </section >
   )

@@ -1,6 +1,13 @@
-import type { GuideDto } from "../../../interfaces";
+import type { GuideForm } from "../../../interfaces/guide/guideForm";
 
-export const mapFormToGuideDto = (formState: GuideDto): GuideDto => {
+export const mapFormToGuideDto = (formState: GuideForm): GuideForm => {
+
+  const hasPendingPayment = formState.items.some(
+    item =>
+      item.current_account === true ||
+      Number(item.remaining_amount || 0) !== 0
+  );
+
   return {
     ...formState,
 
@@ -12,17 +19,20 @@ export const mapFormToGuideDto = (formState: GuideDto): GuideDto => {
       ...formState.receiver,
     },
 
+    paid: hasPendingPayment ? false : formState.paid,
+
     items: formState.items.map(item => ({
       ...item,
       quantity: Number(item.quantity),
       paid: Number(item.paid),
-      remainingAmount: Number(item.remainingAmount),
+      remainingAmount: Number(item.remaining_amount),
     })),
 
     insurance: {
       ...formState.insurance,
-      insuranceCost: formState.insurance.contracted
-        ? formState.insurance.declaredValue * 0.05
+      declared_value: Number(formState.insurance.declared_value),
+      insurance_cost: formState.insurance.contracted
+        ? formState.insurance.declared_value * 0.05
         : 0,
     },
   };

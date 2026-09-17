@@ -1,27 +1,25 @@
 import type { ClientDto } from "../../../interfaces";
 
-export const getClient = async (code: string): Promise<ClientDto | null> => {
+export const getClient = async (id: number): Promise<ClientDto> => {
 
-  console.log(code);
+  const resp = await fetch('http://localhost:3000/api/clients/find', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id }),
+  });
 
-  // const resp = await fetch('http://localhost:3000/api/guides/search', {
-  //   method: 'GET',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(code),
-  // });
+  if (!resp.ok) {
+    const error = await resp.text();
 
-  // if (!resp.ok) {
-  //   return [];
-  // }
+    console.error('STATUS:', resp.status);
+    console.error('ERROR:', error);
 
-  return {
-    "id": "string",
-    "id_number": "string",
-    "id_type": "DNI",
-    "name": "string",
-    "email": "string",
-    "phone": "string"
+    throw new Error('Error getting client');
   }
+
+  const respuesta = await resp.json();
+
+  return respuesta;
 };

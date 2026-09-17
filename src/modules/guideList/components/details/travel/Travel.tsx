@@ -41,7 +41,7 @@ export const Travel = (data: Props) => {
             <article className={style.timeline_content}>
               <div className={style.content_data}>
                 <h3 className={style.content_data_move}>{movement.move}</h3>
-                <p className={style.content_data_location}>{movement.location.city}, {movement.location.province}</p>
+                <p className={style.content_data_location}>{movement.city?.city}, {movement.city?.province}</p>
                 <span className={style.content_data_message}>{movement.message}</span>
               </div>
 

@@ -13,9 +13,9 @@ import style from './clientList.module.css';
 const initialFilter: ClientFilter = {
   name: '',
   id_type: '',
-  id_number: '',
+  id_number: 0,
   email: '',
-  phone: ''
+  phone: 0
 };
 
 export const ClientList = () => {
@@ -28,11 +28,13 @@ export const ClientList = () => {
 
   const [list, setList] = useState<ClientSummaryDto[]>([]);
   const [page, setPage] = useState(1);
-  const [selectedClient, setSelectedClient] = useState<string | undefined | null>();
+  const [offset] = useState(10);
+  const [selectedClient, setSelectedClient] = useState<number | undefined | null>();
 
   const loadClient = async (pageNumber: number) => {
     const data = await getClientList({
       filter: formState,
+      offset: offset,
       page: pageNumber,
     });
 
@@ -85,6 +87,7 @@ export const ClientList = () => {
             page={page}
             handleChangePage={setPage}
             handleDetail={setSelectedClient}
+            offset={offset}
           />
         </div>
       </div>

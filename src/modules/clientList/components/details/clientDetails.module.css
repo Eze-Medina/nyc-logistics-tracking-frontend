@@ -76,3 +76,8 @@
   display: grid;
   grid-template-columns: 1fr 0.4fr;
 }
+
+.guide_title {
+  grid-column: 1;
+  margin: 0px 0px 15px 0px;
+}

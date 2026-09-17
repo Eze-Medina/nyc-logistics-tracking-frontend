@@ -43,6 +43,35 @@
   margin: 0px;
 }
 
+.basics_travel {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.travel_info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.travel_data {
+  display: flex;
+  flex-direction: column;
+}
+
+.info_city {
+  font-family: 'JetBrainsMono';
+  font-weight: 600;
+}
+
+.info_province {
+  font-family: 'JetBrainsMono';
+  color: #979797;
+  margin: 0px;
+  font-size: 0.8em;
+}
+
 .status {
   padding: 5px;
   border-radius: 5px;
@@ -67,6 +96,16 @@
 .cancelled {
   background-color: #f8d7da;
   color: #721c24;
+}
+
+.payment_paid {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.payment_pending {
+  background-color: #e2e8f0;
+  color: #475569;
 }
 
 .section_basics_action {

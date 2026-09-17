@@ -11,7 +11,6 @@ export interface GuideDto {
     name: string,
     email: string,
     phone: string,
-    address: string
   }
   receiver: {
     id_number: number | '',
@@ -19,22 +18,30 @@ export interface GuideDto {
     name: string,
     email: string,
     phone: string,
-    address: string
   }
   origin: {
+    address: string,
     province: string,
     city: string
   }
   destination: {
+    address: string,
     province: string,
     city: string
   }
   insurance: {
     contracted: boolean,
-    declaredValue: number,
-    insuranceCost: number
+    declared_value: number,
+    insurance_cost: number
   }
+  route_type: string,
   items: Item[];
   movements: Movement[];
-  next_movement: Movement
+  next_movement: {
+    status: string,
+    move: string,
+    message: string
+  }
+  note: string
+  paid: boolean
 }

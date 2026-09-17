@@ -1,7 +1,8 @@
 export interface Item {
-  quantity: number | '';
+  quantity: number;
   description: string;
-  paid: number | '';
-  remainingAmount: number | '';
-  currentAccount: boolean,
+  paid: number;
+  remaining_amount: number;
+  current_account: boolean,
+  id?: number
 }

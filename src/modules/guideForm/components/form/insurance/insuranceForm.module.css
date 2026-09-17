@@ -1,92 +1,143 @@
 .insurance {
-  border: 2px solid rgb(196, 195, 195);
+  padding: 1.25rem;
+  border: 1px solid #e2e4e8;
   border-radius: 10px;
-  padding: 15px;
+  background: #fff;
 }
 
-.insurance h2 {
-  font-size: 1.3em;
-  margin: 0px 0px 15px;
-}
-
-.insurance_form {
+.header {
   display: flex;
   align-items: center;
-  gap: 25px;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.show {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: opacity1 0.2s ease-in-out;
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
 }
 
-.hide {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.toggle {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  width: 0;
+  height: 0;
   opacity: 0;
-  animation: opacity2 0.2s ease-in-out;
 }
 
-@keyframes opacity1 {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.toggle_slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: #d1d5db;
+  transition: 0.2s;
 }
 
-@keyframes opacity2 {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.toggle_slider::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  top: 3px;
+  left: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  transition: 0.2s;
 }
 
-.insurance_form_field {
+.toggle input:checked + .toggle_slider {
+  background: #2563eb;
+}
+
+.toggle input:checked + .toggle_slider::before {
+  transform: translateX(18px);
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.details_hidden {
+  display: none;
+}
+
+.field {
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.insurance_form_label {
-  display: flex;
-  align-items: center;
-}
-
-.insurance_form_input {
-  outline: none;
-  border-radius: 3px;
-  border: 1px solid rgb(190, 190, 190);
-  padding: 10px;
+.label {
+  color: rgb(41, 41, 41);
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 1px;
   font-family: "Geist";
 }
 
-@media (max-width: 768px) {
-  .insurance_form {
-   display: flex;
-   flex-direction: column;
-   align-items: start;
-  }
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+}
 
-  .insurance_form_field {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
+.currency {
+  padding-left: 0.75rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
 
-  .show {
-    width: 100%;
-    flex-direction: column;
-    align-items: start;
-  }
-  .hide {
-    width: 100%;
-    flex-direction: column;
-    align-items: start;
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 0 0.6rem;
+  border: none;
+  outline: none;
+  font: inherit;
+}
+
+.cost {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.cost_label {
+   color: rgb(41, 41, 41);
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: "Geist";
+}
+
+.cost_value {
+  margin-top: 0.15rem;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+@media (max-width: 1500px) {
+  .details {
+    grid-template-columns: 1fr;
   }
 }

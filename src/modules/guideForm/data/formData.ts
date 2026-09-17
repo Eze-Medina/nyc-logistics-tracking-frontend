@@ -1,46 +1,37 @@
-import type { GuideDto } from "../../../interfaces"
+import type { GuideForm } from "../../../interfaces/guide/guideForm";
 
-export const formData: GuideDto = {
-  code: '',
+export const formData: GuideForm = {
   sender: {
-    id_number: '',
+    id_number: 0,
     id_type: '',
     name: '',
     email: '',
     phone: '',
-    address: '',
   },
   receiver: {
-    id_number: '',
+    id_number: 0,
     id_type: '',
     name: '',
     email: '',
     phone: '',
-    address: '',
   },
   origin: {
+    address: '',
     province: '',
     city: '',
   },
   destination: {
+    address: '',
     province: '',
     city: '',
   },
   insurance: {
     contracted: false,
-    declaredValue: 0,
-    insuranceCost: 0
+    declared_value: 0,
+    insurance_cost: 0
   },
   items: [],
-  movements: [],
-  next_movement: {
-    date: '',
-    status: '',
-    move: '',
-    message: '',
-    location: {
-      city: '',
-      province: '',
-    }
-  }
+  route_type: '',
+  note: '',
+  paid: true,
 }

@@ -13,10 +13,16 @@ import { GuideDetails } from '../components/details/GuideDetails';
 
 const initialFilter: FilterType = {
   code: '',
-  sender: '',
-  receiver: '',
-  origin: '',
-  destination: '',
+  sender: 0,
+  receiver: 0,
+  origin: {
+    province: '',
+    city: ''
+  },
+  destination: {
+    province: '',
+    city: ''
+  },
   status: '',
 };
 
@@ -30,12 +36,13 @@ export const GuideList = () => {
 
   const [list, setList] = useState<GuideSummaryDto[]>([]);
   const [page, setPage] = useState(1);
-  const [selectedGuideCode, setSelectedGuideCode] = useState<string | null>();
+  const [selectedGuideCode, setSelectedGuideCode] = useState<string | null>(null);
 
   const loadGuides = async (pageNumber: number) => {
     const data = await getGuideList({
       filter: formState,
       page: pageNumber,
+      offset: 10,
     });
 
     setList(data);
